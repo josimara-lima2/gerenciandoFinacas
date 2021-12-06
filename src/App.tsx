@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { AppBar, Box, IconButton, Toolbar, useTheme } from '@mui/material';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from 'store';
+import { fetchAllPosts, postsSelector } from 'store/reducers/posts';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import useChangeTheme from 'hooks/useChangeTheme';
 
-function App() {
+const App = () => {
+  const dispatch = useAppDispatch();
+  const { posts } = useAppSelector(postsSelector);
+
+  const theme = useTheme();
+  const changeTheme = useChangeTheme();
+
+  const toggleTheme = () => {
+    const nextPaletteType = theme.palette.mode === 'dark' ? 'light' : 'dark';
+    changeTheme({ type: 'CHANGE', payload: { paletteType: nextPaletteType } });
+  };
+
+  useEffect(() => {
+    dispatch(fetchAllPosts());
+  }, [dispatch]);
+
+  console.log('[POSTS]:', posts);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Box>
+      <AppBar position="static" color="transparent">
+        <Toolbar>
+          <Box flexGrow={1}>Projeto Base ReactJS</Box>
+          <IconButton onClick={toggleTheme}>
+            <LightModeIcon color="warning" />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+    </Box>
   );
-}
+};
 
 export default App;
