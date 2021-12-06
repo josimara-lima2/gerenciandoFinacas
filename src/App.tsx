@@ -21,6 +21,7 @@ const App = () => {
     dispatch(fetchAllPosts());
   }, [dispatch]);
 
+  // eslint-disable-next-line no-console
   console.log('[POSTS]:', posts);
 
   return (
