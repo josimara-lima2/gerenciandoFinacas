@@ -1,9 +1,12 @@
-import { AppBar, Box, IconButton, Toolbar, useTheme } from '@mui/material';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { useTheme } from '@mui/material';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from 'store';
 import { fetchAllPosts, postsSelector } from 'store/reducers/posts';
-import LightModeIcon from '@mui/icons-material/LightMode';
 import useChangeTheme from 'hooks/useChangeTheme';
+import CustomRoutes from 'routes';
+import { BrowserRouter } from 'react-router-dom';
+import Layout from 'components/Layout';
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -22,19 +25,13 @@ const App = () => {
   }, [dispatch]);
 
   // eslint-disable-next-line no-console
-  console.log('[POSTS]:', posts);
 
   return (
-    <Box>
-      <AppBar position="static" color="transparent">
-        <Toolbar>
-          <Box flexGrow={1}>Projeto Base ReactJS</Box>
-          <IconButton onClick={toggleTheme}>
-            <LightModeIcon color="warning" />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-    </Box>
+    <BrowserRouter>
+      <Layout>
+        <CustomRoutes />
+      </Layout>
+    </BrowserRouter>
   );
 };
 

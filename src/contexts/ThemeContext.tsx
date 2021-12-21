@@ -74,6 +74,10 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
 
       palette: {
         mode: paletteType,
+        background: {
+          paper: paletteType === 'dark' ? '#36393f' : '#fff',
+          default: paletteType === 'dark' ? '#2f3136' : '#f2f3f5',
+        },
         // ...
       },
       typography: {
