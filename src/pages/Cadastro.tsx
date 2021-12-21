@@ -27,7 +27,7 @@ export default function Cadastro() {
 
   return (
     <div>
-      <Modal title="Cadastre-se">
+      <Modal title="Cadastre-se" cadastrar={handleClick}>
         <Box>
           <TextField
             id="nome"
@@ -59,8 +59,6 @@ export default function Cadastro() {
           />
         </Box>
       </Modal>
-
-      <Button onClick={handleClick}>Cadastrar</Button>
     </div>
   );
 }

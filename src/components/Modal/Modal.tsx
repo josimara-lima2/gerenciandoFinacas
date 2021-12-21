@@ -10,9 +10,10 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 type Props = {
   title: string;
   children: any;
+  cadastrar?: () => void;
 };
 
-export default function Modal({ children, title }: Props) {
+export default function Modal({ children, title, cadastrar }: Props) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -20,6 +21,9 @@ export default function Modal({ children, title }: Props) {
   };
 
   const handleClose = () => {
+    if (cadastrar) {
+      cadastrar();
+    }
     setOpen(false);
   };
 
