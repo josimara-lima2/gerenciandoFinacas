@@ -22,7 +22,6 @@ const Box = styled(MuiBox)(({ theme }) => ({
 
 const TextField = styled(MuiTextField)(({ theme }) => ({
   margin: '5px',
-  backgroundColor: 'tranparent',
   width: '40%',
   borderRadius: '20px',
   color: theme.palette.mode === 'dark' ? '#000' : '#fafafa',
