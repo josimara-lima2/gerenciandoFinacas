@@ -3,11 +3,15 @@ import {
   Button as MuiButton,
   styled,
   Typography,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
 } from '@mui/material';
 import { Link as MuiLink } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import SettingsIcon from '@mui/icons-material/Settings';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 
 const Box = styled(MuiBox)(({ theme }) => ({
   width: theme.spacing(30), // spacing de 1 corresponde a 8px
@@ -38,8 +42,12 @@ export default function Sidebar() {
     <Box>
       <Button>
         <Link to="/">
-          <HomeIcon color="action" sx={{ marginRight: '10px' }} />
-          <Typography>Home</Typography>
+          <ListItem button>
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText primary="Home" />
+          </ListItem>
         </Link>
       </Button>
       <Button>
