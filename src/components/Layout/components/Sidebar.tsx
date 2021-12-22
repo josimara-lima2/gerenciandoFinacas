@@ -46,26 +46,28 @@ export default function Sidebar() {
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>
-            <ListItemText primary="Home" />
+            <Typography>Home</Typography>
+          </ListItem>
+        </Link>
+      </Button>
+      <Button>
+        <Link to="/cadastro">
+          <ListItem button>
+            <ListItemIcon>
+              <HowToRegIcon />
+            </ListItemIcon>
+            <Typography>Cadastro</Typography>
           </ListItem>
         </Link>
       </Button>
       <Button>
         <Link to="/settings">
-          <SettingsIcon color="action" sx={{ marginRight: '10px' }} />
-          <Typography>Settings</Typography>
-        </Link>
-      </Button>
-      <Button>
-        <Link to="/cadastro">
-          <HowToRegIcon color="action" sx={{ marginRight: '10px' }} />
-          <Typography>Cadastro</Typography>
-        </Link>
-      </Button>
-      <Button>
-        <Link to="/login">
-          <HowToRegIcon color="action" sx={{ marginRight: '10px' }} />
-          <Typography>Login</Typography>
+          <ListItem button>
+            <ListItemIcon>
+              <SettingsIcon />
+            </ListItemIcon>
+            <Typography>Settings</Typography>
+          </ListItem>
         </Link>
       </Button>
     </Box>

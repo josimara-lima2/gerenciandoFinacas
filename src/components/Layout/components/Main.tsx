@@ -7,9 +7,10 @@ type MainProps = {
 
 const Box = styled(MuiBox)(({ theme }) => ({
   flexGrow: 1,
+  width: '100%',
   padding: theme.spacing(2),
-  height: `calc(100vh - 96px)`,
-  backgroundColor: theme.palette.background.default,
+  height: `100vh`,
+  backgroundColor: 'red',
 }));
 
 export default function Main({ children }: MainProps) {

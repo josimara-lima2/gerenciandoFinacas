@@ -28,9 +28,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <Layout>
-        <CustomRoutes />
-      </Layout>
+      <CustomRoutes />
     </BrowserRouter>
   );
 };

@@ -106,17 +106,6 @@ export default function Header() {
   };
 
   return (
-    // <AppBar elevation={0} position="relative">
-    //   <Toolbar>
-    //     <Box flexGrow={1}>Finanças</Box>
-    //     <IconButton onClick={toggleTheme}>
-    //       {mode === 'light' ? <LightModeIcon /> : <DarkModeIcon />}
-    //     </IconButton>
-    //     <IconButton onClick={handleLogout}>
-    //       <LogoutIcon />
-    //     </IconButton>
-    //   </Toolbar>
-    // </AppBar>
     <div>
       <AppBar position="absolute" open={open}>
         <Toolbar
@@ -136,8 +125,14 @@ export default function Header() {
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" noWrap sx={{ flexGrow: 1 }}>
-            Pokemons
+            Finanças
           </Typography>
+          <IconButton onClick={toggleTheme}>
+            {mode === 'light' ? <LightModeIcon /> : <DarkModeIcon />}
+          </IconButton>
+          <IconButton onClick={handleLogout}>
+            <LogoutIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -155,12 +150,7 @@ export default function Header() {
         </Toolbar>
         <Divider />
 
-        <ListItem button>
-          <ListItemIcon>
-            <DashboardIcon />
-          </ListItemIcon>
-          <ListItemText primary="Dashboard" />
-        </ListItem>
+        <Sidebar />
       </Drawer>
     </div>
   );
