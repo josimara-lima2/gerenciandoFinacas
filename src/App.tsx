@@ -6,7 +6,7 @@ import { fetchAllPosts, postsSelector } from 'store/reducers/posts';
 import useChangeTheme from 'hooks/useChangeTheme';
 import CustomRoutes from 'routes';
 import { BrowserRouter } from 'react-router-dom';
-import Layout from 'components/Layout';
+import Layout from './components/Layout';
 
 const App = () => {
   const dispatch = useAppDispatch();
