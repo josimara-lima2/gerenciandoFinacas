@@ -20,7 +20,7 @@ const initialState = {
   isLoading: false,
 } as ListClientInterface;
 
-export const fetchApi = createAsyncThunk('clients/fetch', async () => {
+export const fetchApi = createAsyncThunk('clients/fetchApi', async () => {
   const response = await apiUser.get('/clients');
   return response.data;
 });
@@ -34,7 +34,7 @@ export const fetchApiDelete = createAsyncThunk(
 );
 
 export const fetchApiPost = createAsyncThunk(
-  'clients/fetchApiDelete',
+  'clients/fetchApiPost',
   async (client: Partial<ClientInterface>) => {
     const response = await apiUser.post('/clients', client);
     return response.data;
@@ -64,6 +64,18 @@ const ClientSlice = createSlice({
       state.clients = action.payload;
     });
     builder.addCase(fetchApi.rejected, state => {
+      state.isLoading = false;
+    });
+
+    builder.addCase(fetchApiPost.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchApiPost.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.clients = action.payload;
+    });
+
+    builder.addCase(fetchApiPost.rejected, state => {
       state.isLoading = false;
     });
   },

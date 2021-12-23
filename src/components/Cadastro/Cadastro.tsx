@@ -44,7 +44,8 @@ export default function Cadastro() {
         if (statusCode === 200) {
           dispatch(addClient({ name, email, telephone, cpf }));
         }
-      });
+      })
+      .catch(e => e.message);
   };
   const TextField = styled(MuiTextField)(({ theme }) => ({
     margin: '5px',
