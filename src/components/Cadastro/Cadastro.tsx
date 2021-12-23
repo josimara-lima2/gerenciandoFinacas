@@ -58,7 +58,9 @@ export default function Cadastro() {
             variant="outlined"
             required
             value={name}
-            onChange={e => setName(e.target.value)}
+            onChange={e => {
+              setName(e.target.value);
+            }}
           />
           <TextField
             id="email"

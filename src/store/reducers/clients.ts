@@ -4,6 +4,7 @@ import { apiUser } from '../../services/apiUser';
 
 export declare interface ClientInterface {
   id: string;
+
   name: string;
   email: string;
   telephone: string;
@@ -50,9 +51,14 @@ const ClientSlice = createSlice({
       state.clients = state.clients.filter(item => item.id !== id);
     },
     addClient(state, action: PayloadAction<Partial<ClientInterface>>) {
-      const client = action.payload as ClientInterface;
-
-      state.clients = [...state.clients, client];
+      const name = action.payload.name as string;
+      const email = action.payload.email as string;
+      const telephone = action.payload.telephone as string;
+      const cpf = action.payload.cpf as string;
+      state.clients = [
+        ...state.clients,
+        { name, email, telephone, cpf, id: 'teste' },
+      ];
     },
   },
   extraReducers(builder) {
@@ -64,18 +70,6 @@ const ClientSlice = createSlice({
       state.clients = action.payload;
     });
     builder.addCase(fetchApi.rejected, state => {
-      state.isLoading = false;
-    });
-
-    builder.addCase(fetchApiPost.pending, state => {
-      state.isLoading = true;
-    });
-    builder.addCase(fetchApiPost.fulfilled, (state, action) => {
-      state.isLoading = false;
-      state.clients = action.payload;
-    });
-
-    builder.addCase(fetchApiPost.rejected, state => {
       state.isLoading = false;
     });
   },

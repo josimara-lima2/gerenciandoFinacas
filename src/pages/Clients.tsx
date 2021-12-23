@@ -15,18 +15,23 @@ import {
 import { DeleteOutline } from '@mui/icons-material';
 import SearchIcon from '@mui/icons-material/Search';
 import { useAppDispatch, useAppSelector } from 'store';
-
+import { fetchApiList, UserSelector } from 'store/reducers/user';
+import { useSelector } from 'react-redux';
 import {
   ClientSelector,
   deleteClient,
   fetchApi,
   fetchApiDelete,
+  ClientInterface,
 } from 'store/reducers/clients';
 import { useEffect } from 'react';
 
 export default function Clients() {
   const dispatch = useAppDispatch();
   const clients = useAppSelector(ClientSelector);
+
+  const tokenString = localStorage.getItem('token');
+  const token = tokenString?.replace(/^"(.*)"$/, '$1');
 
   const handleDelete = (id: string) => {
     dispatch(fetchApiDelete(id));
@@ -35,6 +40,9 @@ export default function Clients() {
   useEffect(() => {
     dispatch(fetchApi());
   }, [dispatch]);
+
+  const list: ClientInterface[] = [];
+  clients.clients.map(item => list.push(item));
 
   return (
     <Box
@@ -69,7 +77,7 @@ export default function Clients() {
           />
         </FormControl>
       </Box>
-      <Box sx={{ marginTop: '5%' }}>
+      <Box sx={{ marginTop: '4%' }}>
         <title>Lista de Cadastrados</title>
         <Table size="small">
           <TableHead>
@@ -78,24 +86,29 @@ export default function Clients() {
               <TableCell>Email</TableCell>
               <TableCell>Telefone</TableCell>
               <TableCell>Cpf</TableCell>
+
               <TableCell>Ações</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {!clients.isLoading &&
-              clients.clients.map(item => (
-                <TableRow key={item.id}>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.email}</TableCell>
-                  <TableCell>{item.telephone}</TableCell>
-                  <TableCell>{item.cpf}</TableCell>
-                  <TableCell>
-                    <IconButton onClick={() => handleDelete(item.id)}>
-                      <DeleteOutline />
-                    </IconButton>
-                  </TableCell>
-                </TableRow>
-              ))}
+              list.map(item => {
+                const id = item.id ? item.id : 'twstw';
+                return (
+                  <TableRow key={id}>
+                    <TableCell>{item.name}</TableCell>
+                    <TableCell>{item.email}</TableCell>
+                    <TableCell>{item.telephone}</TableCell>
+                    <TableCell>{item.cpf}</TableCell>
+
+                    <TableCell>
+                      <IconButton onClick={() => handleDelete(item.id)}>
+                        <DeleteOutline />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
           </TableBody>
         </Table>
       </Box>

@@ -6,7 +6,7 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 import { useAppDispatch } from 'store';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import { fetchApi } from '../store/reducers/user';
 import imgLogin from '../assets/images/login.png';
 
@@ -31,7 +31,7 @@ const Button = styled(MuiButton)(() => ({
   margin: '15px',
   border: 'none',
   backgroundColor: '#1E90FF',
-  width: '15%',
+  width: '13%',
   color: '#fafafa',
   height: '5%px',
 }));
@@ -87,9 +87,11 @@ export default function TelaCadastro() {
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'center',
-          marginRight: '10%',
+          marginRight: '6%',
         }}
       >
+        <RouterLink to="/login">Login</RouterLink>
+
         <Button onClick={handleClick} sx={{ marginLeft: '5%' }}>
           Cadastrar-se
         </Button>

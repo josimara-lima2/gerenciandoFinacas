@@ -9,7 +9,7 @@ import { Box as MuiBox, styled, Dialog } from '@mui/material';
 
 type Props = {
   title: string;
-  children: any;
+  children: unknown;
   cadastrar?: () => void;
 };
 const Box = styled(MuiBox)(() => ({
