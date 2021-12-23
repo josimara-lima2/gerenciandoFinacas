@@ -6,6 +6,7 @@ import {
   ListItem,
   ListItemText,
   ListItemIcon,
+  Icon,
 } from '@mui/material';
 import { Link as MuiLink } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
@@ -14,7 +15,7 @@ import HowToRegIcon from '@mui/icons-material/HowToReg';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 
 const Box = styled(MuiBox)(({ theme }) => ({
-  width: theme.spacing(30), // spacing de 1 corresponde a 8px
+  // spacing de 1 corresponde a 8px
   display: 'flex',
   flexDirection: 'column',
   backgroundColor: theme.palette.background.paper,
@@ -31,6 +32,7 @@ const Link = styled(MuiLink)(({ theme }) => ({
       : theme.palette.grey[900],
   display: 'flex',
   justifyContent: 'start',
+  alignItems: 'space-between',
   padding: '3px',
 }));
 
@@ -40,36 +42,32 @@ const Button = styled(MuiButton)(({ theme }) => ({
 export default function Sidebar() {
   return (
     <Box>
-      <Button>
+      <ListItem button>
         <Link to="/">
-          <ListItem button>
-            <ListItemIcon>
-              <HomeIcon />
-            </ListItemIcon>
-            <Typography>Home</Typography>
-          </ListItem>
+          <ListItemIcon>
+            <HomeIcon />
+          </ListItemIcon>
+          <Typography>Home</Typography>
         </Link>
-      </Button>
-      <Button>
-        <Link to="/cadastro">
-          <ListItem button>
-            <ListItemIcon>
-              <HowToRegIcon />
-            </ListItemIcon>
-            <Typography>Cadastro</Typography>
-          </ListItem>
+      </ListItem>
+
+      <ListItem button>
+        <Link to="/clients">
+          <ListItemIcon>
+            <HowToRegIcon />
+          </ListItemIcon>
+          <Typography>Clients</Typography>
         </Link>
-      </Button>
-      <Button>
+      </ListItem>
+
+      <ListItem button>
         <Link to="/settings">
-          <ListItem button>
-            <ListItemIcon>
-              <SettingsIcon />
-            </ListItemIcon>
-            <Typography>Settings</Typography>
-          </ListItem>
+          <ListItemIcon>
+            <SettingsIcon />
+          </ListItemIcon>
+          <Typography>Settings</Typography>
         </Link>
-      </Button>
+      </ListItem>
     </Box>
   );
 }

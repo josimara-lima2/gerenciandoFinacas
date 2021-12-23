@@ -1,50 +1,99 @@
-import Cadastro from 'components/Cadastro/Cadastro';
 import {
-  Box,
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  IconButton,
-  TableBody,
+  styled,
+  TextField as MuiTextField,
+  Button as MuiButton,
+  Box as MuiBox,
 } from '@mui/material';
-import { DeleteOutline } from '@mui/icons-material';
+import { useState, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from 'store';
-import { fetchApiList, UserSelector } from 'store/reducers/user';
-import { useSelector } from 'react-redux';
+import { useNavigate, Link } from 'react-router-dom';
+import { fetchApi, UserSelector } from '../store/reducers/user';
+import imgLogin from '../assets/images/login.png';
 
+const Box = styled(MuiBox)(({ theme }) => ({
+  width: '100%',
+  height: '70%',
+  marginTop: '40px',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+}));
+
+const TextField = styled(MuiTextField)(({ theme }) => ({
+  margin: '5px',
+  width: '40%',
+  borderRadius: '20px',
+  color: theme.palette.mode === 'dark' ? '#000' : '#fafafa',
+}));
+
+const Button = styled(MuiButton)(({ theme }) => ({
+  margin: '15px',
+  border: 'none',
+  backgroundColor: '#1E90FF',
+  width: '15%',
+  color: '#fafafa',
+  height: '5%px',
+}));
 export default function TelaCadastro() {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const user = useAppSelector(UserSelector);
-  const tokenString = localStorage.getItem('token');
-  const token = tokenString?.replace(/^"(.*)"$/, '$1');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfirmation, setPasswordConfirmation] = useState('');
+  const handleClick = () => {
+    dispatch(fetchApi({ name, email, password, passwordConfirmation }));
+    navigate('/login');
+  };
 
   return (
-    <>
-      <Cadastro />
-      <Box>
-        <title>Lista de Cadastrados</title>
-        <Table size="small">
-          <TableHead>
-            <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell>Ações</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            <TableRow>
-              <TableCell />
-              <TableCell />
-              <TableCell>
-                <IconButton>
-                  <DeleteOutline />
-                </IconButton>
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
+    <Box>
+      <img src={imgLogin} alt="login" width="30%" />
+      <TextField
+        id="name"
+        label="Name"
+        variant="outlined"
+        value={name}
+        required
+        onChange={e => setName(e.target.value)}
+      />
+      <TextField
+        id="email"
+        label="Email"
+        variant="outlined"
+        value={email}
+        required
+        onChange={e => setEmail(e.target.value)}
+      />
+      <TextField
+        id="password"
+        label="Password"
+        variant="outlined"
+        value={password}
+        required
+        onChange={e => setPassword(e.target.value)}
+      />
+      <TextField
+        id="passwordConfirmation"
+        label="Password_Confirmation"
+        variant="outlined"
+        value={passwordConfirmation}
+        required
+        onChange={e => setPasswordConfirmation(e.target.value)}
+      />
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          marginRight: '10%',
+        }}
+      >
+        <Button onClick={handleClick} sx={{ marginLeft: '5%' }}>
+          Cadastrar-se
+        </Button>
       </Box>
-    </>
+    </Box>
   );
 }

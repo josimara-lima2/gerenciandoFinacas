@@ -4,10 +4,10 @@ import {
   Button as MuiButton,
   Box as MuiBox,
 } from '@mui/material';
-import { useState } from 'react';
-import { useAppDispatch } from 'store';
-import { useNavigate } from 'react-router-dom';
-import { fetchApiLogin } from '../store/reducers/user';
+import { useState, useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from 'store';
+import { useNavigate, Link } from 'react-router-dom';
+import { fetchApiLogin, UserSelector } from '../store/reducers/user';
 import imgLogin from '../assets/images/login.png';
 
 const Box = styled(MuiBox)(({ theme }) => ({
@@ -42,11 +42,17 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  function handleLogin() {
+  useEffect(() => {
     dispatch(fetchApiLogin({ email, password }));
-    if (localStorage.token) {
-      navigate('/cadastro');
-    }
+  }, [dispatch]);
+
+  function handleLogin() {
+    dispatch(fetchApiLogin({ email, password }))
+      .unwrap()
+      .then(response => {
+        const { token } = response;
+        if (token) navigate('/clients');
+      });
   }
 
   return (
@@ -68,7 +74,19 @@ export default function Login() {
         required
         onChange={e => setPassword(e.target.value)}
       />
-      <Button onClick={() => handleLogin()}>Login</Button>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          marginRight: '10%',
+        }}
+      >
+        <Link to="/cadastro">Cadastre-se</Link>
+        <Button onClick={() => handleLogin()} sx={{ marginLeft: '5%' }}>
+          Login
+        </Button>
+      </Box>
     </Box>
   );
 }

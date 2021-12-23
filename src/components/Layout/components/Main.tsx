@@ -10,7 +10,7 @@ const Box = styled(MuiBox)(({ theme }) => ({
   width: '100%',
   padding: theme.spacing(2),
   height: `100vh`,
-  backgroundColor: 'red',
+  backgroundColor: theme.palette.background.paper,
 }));
 
 export default function Main({ children }: MainProps) {

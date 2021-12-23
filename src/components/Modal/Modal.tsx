@@ -25,10 +25,13 @@ export default function Modal({ children, title, cadastrar }: Props) {
   };
 
   const handleClose = () => {
+    setOpen(false);
+  };
+  const handleCloseCad = () => {
     if (cadastrar) {
       cadastrar();
     }
-    setOpen(false);
+    handleClose();
   };
 
   return (
@@ -43,10 +46,20 @@ export default function Modal({ children, title, cadastrar }: Props) {
           {children}
         </DialogContent>
         <DialogActions>
-          <Button variant="contained" color="error" onClick={handleClose}>
+          <Button
+            variant="contained"
+            color="error"
+            onClick={handleClose}
+            sx={{ marginBottom: '15px', marginRight: '10px' }}
+          >
             Cancelar
           </Button>
-          <Button variant="contained" color="success" onClick={handleClose}>
+          <Button
+            variant="contained"
+            color="success"
+            onClick={handleCloseCad}
+            sx={{ marginBottom: '15px', marginRight: '10px' }}
+          >
             Salvar
           </Button>
         </DialogActions>

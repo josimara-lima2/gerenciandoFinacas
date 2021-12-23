@@ -18,6 +18,14 @@ export declare interface LoginInterface {
   password: string;
 }
 
+export declare interface LoginState {
+  isLoggedIn: boolean;
+}
+
+export declare interface UserState {
+  user: UserInterface;
+  isLoggedIn: boolean;
+}
 const initialState = {
   name: '',
   email: '',
@@ -37,7 +45,6 @@ export const fetchApiLogin = createAsyncThunk(
   'auth/signin/fetchApiLogin',
   async (login: LoginInterface) => {
     const response = await apiUser.post('auth/signin', login);
-
     return response.data;
   },
 );
@@ -68,16 +75,13 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    logout() {
-      return localStorage.setItem('token', '');
-    },
+    logout: () => localStorage.setItem('token', ''),
   },
 
   extraReducers(builder) {
     builder.addCase(fetchApiLogin.fulfilled, (state, action) => {
       const t = action.payload;
       const { token } = t;
-
       localStorage.setItem('token', JSON.stringify(token.replace('"')));
     });
   },

@@ -1,5 +1,6 @@
 import Home from 'pages/Home';
 import Settings from 'pages/Settings';
+import Clients from 'pages/Clients';
 import TelaCadastro from 'pages/TelaCadastro';
 import { Route, Routes } from 'react-router-dom';
 import PrivateRouter from 'PrivateRoutes';
@@ -9,7 +10,7 @@ import Cadastro from 'components/Cadastro/Cadastro';
 export default function CustomRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<Login />} />
       <Route
         path="/settings"
         element={
@@ -19,13 +20,14 @@ export default function CustomRoutes() {
         }
       />
       <Route
-        path="/cadastro"
+        path="/clients"
         element={
           <PrivateRouter>
-            <TelaCadastro />
+            <Clients />
           </PrivateRouter>
         }
       />
+      <Route path="/cadastro" element={<TelaCadastro />} />
       <Route path="*" element={<Home />} />
       <Route path="/login" element={<Login />} />
     </Routes>

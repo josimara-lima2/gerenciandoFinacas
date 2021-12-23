@@ -8,11 +8,15 @@ import {
   Input,
 } from '@mui/material';
 import Modal from 'components/Modal/Modal';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from 'store';
 import SearchIcon from '@mui/icons-material/Search';
-import { fetchApi, UserSelector } from '../../store/reducers/user';
+import {
+  fetchApiPost,
+  ClientSelector,
+  addClient,
+} from '../../store/reducers/clients';
 
 const Box = styled(MuiBox)(() => ({
   display: 'flex',
@@ -22,15 +26,25 @@ const Box = styled(MuiBox)(() => ({
 
 export default function Cadastro() {
   const dispatch = useAppDispatch();
-  const user = useSelector(UserSelector);
+  const user = useSelector(ClientSelector);
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirmation, setPasswordConfirmation] = useState('');
+  const [telephone, setTelephone] = useState('');
+  const [cpf, setCpf] = useState('');
+  useEffect(() => {
+    dispatch(fetchApiPost({ name, email, telephone, cpf }));
+  }, [dispatch]);
 
   const handleClick = () => {
-    dispatch(fetchApi({ name, email, password, passwordConfirmation }));
+    dispatch(fetchApiPost({ name, email, telephone, cpf }))
+      .unwrap()
+      .then(response => {
+        const { statusCode } = response;
+        if (statusCode === 200) {
+          dispatch(addClient({ name, email, telephone, cpf }));
+        }
+      });
   };
   const TextField = styled(MuiTextField)(({ theme }) => ({
     margin: '5px',
@@ -67,38 +81,23 @@ export default function Cadastro() {
             onChange={e => setEmail(e.target.value)}
           />
           <TextField
-            id="password"
-            label="Password"
+            id="telephone"
+            label="Telephone"
             variant="outlined"
             required
-            value={password}
-            onChange={e => setPassword(e.target.value)}
+            value={telephone}
+            onChange={e => setTelephone(e.target.value)}
           />
           <TextField
-            id="passwordConfirmation"
-            label="Password"
+            id="cpf"
+            label="Cpf"
             variant="outlined"
             required
-            value={passwordConfirmation}
-            onChange={e => setPasswordConfirmation(e.target.value)}
+            value={cpf}
+            onChange={e => setCpf(e.target.value)}
           />
         </Box>
       </Modal>
-
-      <FormControl variant="outlined">
-        <InputLabel variant="standard" htmlFor="search">
-          Search user
-        </InputLabel>
-        <Input
-          id="search"
-          endAdornment={
-            <InputAdornment position="end">
-              <SearchIcon />
-            </InputAdornment>
-          }
-          sx={{ borderRadius: '10px' }}
-        />
-      </FormControl>
     </MuiBox>
   );
 }

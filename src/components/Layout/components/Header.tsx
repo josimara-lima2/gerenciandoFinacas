@@ -64,7 +64,9 @@ const Drawer = styled(MuiDrawer, {
     position: 'relative',
     whiteSpace: 'nowrap',
     width: drawerWidth,
-    backgroundColor: '#e0bf6c',
+
+    padding: 0,
+    backgroundColor: '#1976d2',
 
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
@@ -106,7 +108,7 @@ export default function Header() {
   };
 
   return (
-    <div>
+    <Box>
       <AppBar position="absolute" open={open}>
         <Toolbar
           sx={{
@@ -152,6 +154,6 @@ export default function Header() {
 
         <Sidebar />
       </Drawer>
-    </div>
+    </Box>
   );
 }
