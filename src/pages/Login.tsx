@@ -4,13 +4,13 @@ import {
   Button as MuiButton,
   Box as MuiBox,
 } from '@mui/material';
-import { useState, useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from 'store';
+import { useState } from 'react';
+import { useAppDispatch } from 'store';
 import { useNavigate, Link } from 'react-router-dom';
-import { fetchApiLogin, UserSelector } from '../store/reducers/user';
+import { fetchApiLogin } from '../store/reducers/user';
 import imgLogin from '../assets/images/login.png';
 
-const Box = styled(MuiBox)(({ theme }) => ({
+const Box = styled(MuiBox)(() => ({
   width: '100%',
   height: '70%',
   marginTop: '40px',
@@ -27,7 +27,7 @@ const TextField = styled(MuiTextField)(({ theme }) => ({
   color: theme.palette.mode === 'dark' ? '#000' : '#fafafa',
 }));
 
-const Button = styled(MuiButton)(({ theme }) => ({
+const Button = styled(MuiButton)(() => ({
   margin: '15px',
   border: 'none',
   backgroundColor: '#1E90FF',
@@ -41,10 +41,6 @@ export default function Login() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  useEffect(() => {
-    dispatch(fetchApiLogin({ email, password }));
-  }, [dispatch]);
 
   function handleLogin() {
     dispatch(fetchApiLogin({ email, password }))

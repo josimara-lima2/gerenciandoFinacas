@@ -15,8 +15,7 @@ import {
 import { DeleteOutline } from '@mui/icons-material';
 import SearchIcon from '@mui/icons-material/Search';
 import { useAppDispatch, useAppSelector } from 'store';
-import { fetchApiList, UserSelector } from 'store/reducers/user';
-import { useSelector } from 'react-redux';
+
 import {
   ClientSelector,
   deleteClient,
@@ -29,9 +28,6 @@ export default function Clients() {
   const dispatch = useAppDispatch();
   const clients = useAppSelector(ClientSelector);
 
-  const tokenString = localStorage.getItem('token');
-  const token = tokenString?.replace(/^"(.*)"$/, '$1');
-
   const handleDelete = (id: string) => {
     dispatch(fetchApiDelete(id));
     dispatch(deleteClient({ id }));
@@ -41,7 +37,14 @@ export default function Clients() {
   }, [dispatch]);
 
   return (
-    <>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'space-between',
+        justifyContent: 'center',
+      }}
+    >
       <Box
         className="container"
         sx={{
@@ -66,7 +69,7 @@ export default function Clients() {
           />
         </FormControl>
       </Box>
-      <Box>
+      <Box sx={{ marginTop: '5%' }}>
         <title>Lista de Cadastrados</title>
         <Table size="small">
           <TableHead>
@@ -80,7 +83,7 @@ export default function Clients() {
           </TableHead>
           <TableBody>
             {!clients.isLoading &&
-              clients.clients.map((item, index) => (
+              clients.clients.map(item => (
                 <TableRow key={item.id}>
                   <TableCell>{item.name}</TableCell>
                   <TableCell>{item.email}</TableCell>
@@ -96,6 +99,6 @@ export default function Clients() {
           </TableBody>
         </Table>
       </Box>
-    </>
+    </Box>
   );
 }
