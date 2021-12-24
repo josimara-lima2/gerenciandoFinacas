@@ -11,12 +11,14 @@ import {
   InputLabel,
   Input,
   InputAdornment,
+  List,
+  TextField,
 } from '@mui/material';
 import { DeleteOutline } from '@mui/icons-material';
 import SearchIcon from '@mui/icons-material/Search';
 import { useAppDispatch, useAppSelector } from 'store';
 import { fetchApiList, UserSelector } from 'store/reducers/user';
-import { useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
 import {
   ClientSelector,
   deleteClient,
@@ -24,7 +26,8 @@ import {
   fetchApiDelete,
   ClientInterface,
 } from 'store/reducers/clients';
-import { useEffect } from 'react';
+import Modal from 'components/Modal/Modal';
+import ListSearch from '../components/ListSeacrh/ListSearch';
 
 export default function Clients() {
   const dispatch = useAppDispatch();
@@ -32,11 +35,13 @@ export default function Clients() {
 
   const tokenString = localStorage.getItem('token');
   const token = tokenString?.replace(/^"(.*)"$/, '$1');
-
+  const [clientsSearch, setClientsSearch] = useState<ClientInterface[]>([]);
+  const [nameSearch, setNameSearch] = useState('');
   const handleDelete = (id: string) => {
     dispatch(fetchApiDelete(id));
     dispatch(deleteClient({ id }));
   };
+
   useEffect(() => {
     dispatch(fetchApi());
   }, [dispatch]);
@@ -62,20 +67,8 @@ export default function Clients() {
         }}
       >
         <Cadastro />
-        <FormControl variant="outlined">
-          <InputLabel variant="standard" htmlFor="search">
-            Search user
-          </InputLabel>
-          <Input
-            id="search"
-            endAdornment={
-              <InputAdornment position="end">
-                <SearchIcon />
-              </InputAdornment>
-            }
-            sx={{ borderRadius: '10px' }}
-          />
-        </FormControl>
+
+        <ListSearch />
       </Box>
       <Box sx={{ marginTop: '4%' }}>
         <title>Lista de Cadastrados</title>
@@ -93,7 +86,7 @@ export default function Clients() {
           <TableBody>
             {!clients.isLoading &&
               list.map(item => {
-                const id = item.id ? item.id : 'twstw';
+                const id = Math.random();
                 return (
                   <TableRow key={id}>
                     <TableCell>{item.name}</TableCell>

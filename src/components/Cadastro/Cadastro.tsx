@@ -6,6 +6,7 @@ import {
 import Modal from 'components/Modal/Modal';
 import { useState } from 'react';
 import { useAppDispatch } from 'store';
+import HowToRegIcon from '@mui/icons-material/HowToReg';
 
 import { fetchApiPost, addClient } from '../../store/reducers/clients';
 
@@ -34,16 +35,16 @@ export default function Cadastro() {
       })
       .catch(e => e.message);
   };
-  const TextField = styled(MuiTextField)(({ theme }) => ({
+  const styleTextField = {
     margin: '5px',
-
     width: '80%',
     borderRadius: '20px',
-    color: theme.palette.mode === 'dark' ? '#000' : '#fafafa',
-  }));
+  };
   return (
     <MuiBox
+      component="form"
       className="container"
+      noValidate
       sx={{
         display: 'flex',
         alignItems: 'center',
@@ -52,7 +53,7 @@ export default function Cadastro() {
     >
       <Modal title="Cadastre-se" cadastrar={handleClick}>
         <Box>
-          <TextField
+          <MuiTextField
             id="nome"
             label="Nome"
             variant="outlined"
@@ -61,30 +62,34 @@ export default function Cadastro() {
             onChange={e => {
               setName(e.target.value);
             }}
+            sx={styleTextField}
           />
-          <TextField
+          <MuiTextField
             id="email"
             label="Email"
             variant="outlined"
             required
             value={email}
             onChange={e => setEmail(e.target.value)}
+            sx={styleTextField}
           />
-          <TextField
+          <MuiTextField
             id="telephone"
             label="Telephone"
             variant="outlined"
             required
             value={telephone}
             onChange={e => setTelephone(e.target.value)}
+            sx={styleTextField}
           />
-          <TextField
+          <MuiTextField
             id="cpf"
             label="Cpf"
             variant="outlined"
             required
             value={cpf}
             onChange={e => setCpf(e.target.value)}
+            sx={styleTextField}
           />
         </Box>
       </Modal>

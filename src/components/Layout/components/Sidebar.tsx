@@ -15,6 +15,7 @@ const Box = styled(MuiBox)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   backgroundColor: theme.palette.background.paper,
+  height: `calc(100vh - 65px)`,
 }));
 
 const Link = styled(MuiLink)(({ theme }) => ({

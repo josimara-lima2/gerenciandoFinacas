@@ -9,7 +9,7 @@ const Box = styled(MuiBox)(({ theme }) => ({
   flexGrow: 1,
   width: '100%',
   padding: theme.spacing(2),
-  height: `100vh`,
+  height: `calc(100vh - 50px)`,
   backgroundColor: theme.palette.background.paper,
 }));
 
