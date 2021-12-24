@@ -1,13 +1,8 @@
 import {
   Box as MuiBox,
-  TextField as MuiTextField,
-  styled,
-  Typography,
   FormControl,
   InputLabel,
   Input,
-  List,
-  ListItemText,
   Table,
   TableHead,
   TableBody,
@@ -15,29 +10,12 @@ import {
   TableCell,
 } from '@mui/material';
 import Modal from 'components/Modal/Modal';
-import { useState, useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from 'store';
-import HowToRegIcon from '@mui/icons-material/HowToReg';
+import { useState } from 'react';
+import { useAppSelector } from 'store';
 import SearchIcon from '@mui/icons-material/Search';
-import { UserSelector } from 'store/reducers/user';
-import {
-  ClientSelector,
-  deleteClient,
-  fetchApi,
-  fetchApiDelete,
-  ClientInterface,
-  fetchApiPost,
-  addClient,
-} from 'store/reducers/clients';
-
-const Box = styled(MuiBox)(() => ({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-}));
+import { ClientSelector, ClientInterface } from 'store/reducers/clients';
 
 export default function ListSearch() {
-  const dispatch = useAppDispatch();
   const clients = useAppSelector(ClientSelector);
   const [nameSearch, setNameSearch] = useState('');
 

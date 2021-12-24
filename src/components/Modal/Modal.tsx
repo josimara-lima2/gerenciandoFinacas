@@ -7,8 +7,6 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { Box as MuiBox, styled, Dialog, Typography } from '@mui/material';
-import { JsxElement } from 'typescript';
-import HowToRegIcon from '@mui/icons-material/HowToReg';
 
 type Props = {
   title: string;

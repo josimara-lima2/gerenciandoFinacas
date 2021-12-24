@@ -5,7 +5,6 @@ import TelaCadastro from 'pages/TelaCadastro';
 import { Route, Routes } from 'react-router-dom';
 import PrivateRouter from 'PrivateRoutes';
 import Login from 'pages/Login';
-import Cadastro from 'components/Cadastro/Cadastro';
 
 export default function CustomRoutes() {
   return (

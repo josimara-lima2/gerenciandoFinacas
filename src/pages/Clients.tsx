@@ -7,18 +7,10 @@ import {
   TableCell,
   IconButton,
   TableBody,
-  FormControl,
-  InputLabel,
-  Input,
-  InputAdornment,
-  List,
-  TextField,
 } from '@mui/material';
 import { DeleteOutline } from '@mui/icons-material';
-import SearchIcon from '@mui/icons-material/Search';
 import { useAppDispatch, useAppSelector } from 'store';
-import { fetchApiList, UserSelector } from 'store/reducers/user';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import {
   ClientSelector,
   deleteClient,
@@ -26,8 +18,7 @@ import {
   fetchApiDelete,
   ClientInterface,
 } from 'store/reducers/clients';
-import Modal from 'components/Modal/Modal';
-import ListSearch from '../components/ListSeacrh/ListSearch';
+import ListSearch from '../components/ListSearch/ListSearch';
 
 export default function Clients() {
   const dispatch = useAppDispatch();
@@ -35,8 +26,7 @@ export default function Clients() {
 
   const tokenString = localStorage.getItem('token');
   const token = tokenString?.replace(/^"(.*)"$/, '$1');
-  const [clientsSearch, setClientsSearch] = useState<ClientInterface[]>([]);
-  const [nameSearch, setNameSearch] = useState('');
+
   const handleDelete = (id: string) => {
     dispatch(fetchApiDelete(id));
     dispatch(deleteClient({ id }));

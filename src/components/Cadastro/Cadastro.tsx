@@ -6,7 +6,6 @@ import {
 import Modal from 'components/Modal/Modal';
 import { useState } from 'react';
 import { useAppDispatch } from 'store';
-import HowToRegIcon from '@mui/icons-material/HowToReg';
 
 import { fetchApiPost, addClient } from '../../store/reducers/clients';
 
