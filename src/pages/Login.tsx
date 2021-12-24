@@ -79,7 +79,11 @@ export default function Login() {
         }}
       >
         <Link to="/cadastro">Cadastre-se</Link>
-        <Button onClick={() => handleLogin()} sx={{ marginLeft: '5%' }}>
+        <Button
+          variant="contained"
+          onClick={() => handleLogin()}
+          sx={{ marginLeft: '5%' }}
+        >
           Login
         </Button>
       </Box>

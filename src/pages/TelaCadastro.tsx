@@ -92,7 +92,11 @@ export default function TelaCadastro() {
       >
         <RouterLink to="/login">Login</RouterLink>
 
-        <Button onClick={handleClick} sx={{ marginLeft: '5%' }}>
+        <Button
+          variant="contained"
+          onClick={handleClick}
+          sx={{ marginLeft: '5%' }}
+        >
           Cadastrar-se
         </Button>
       </Box>
