@@ -6,7 +6,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { Box as MuiBox, styled, Dialog } from '@mui/material';
+import { Box as MuiBox, styled, Dialog, Typography } from '@mui/material';
 import { JsxElement } from 'typescript';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 
@@ -21,6 +21,7 @@ const Box = styled(MuiBox)(({ theme }) => ({
   display: 'flex',
   marginRight: '50px',
   backgroundColor: theme.palette.background.paper,
+  marginTop: '25px',
 }));
 
 export default function Modal({
@@ -70,19 +71,22 @@ export default function Modal({
               marginRight: '10px',
             }}
           >
-            Cancelar
+            <Typography>{list ? 'Fechar' : 'Cancelar'}</Typography>
           </Button>
-          <Button
-            variant="contained"
-            color="success"
-            onClick={handleCloseCad}
-            sx={{
-              marginBottom: '15px',
-              marginRight: '10px',
-            }}
-          >
-            Salvar
-          </Button>
+
+          {cadastrar && (
+            <Button
+              variant="contained"
+              color="success"
+              onClick={handleCloseCad}
+              sx={{
+                marginBottom: '15px',
+                marginRight: '10px',
+              }}
+            >
+              Salvar
+            </Button>
+          )}
         </DialogActions>
       </Dialog>
     </Box>

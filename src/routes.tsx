@@ -10,7 +10,14 @@ import Cadastro from 'components/Cadastro/Cadastro';
 export default function CustomRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
+      <Route
+        path="/"
+        element={
+          <PrivateRouter>
+            <Home />
+          </PrivateRouter>
+        }
+      />
       <Route
         path="/settings"
         element={

@@ -57,7 +57,7 @@ export default function ListSearch() {
       component="form"
       className="container"
       noValidate
-      sx={{ marginTop: '15px' }}
+      sx={{ marginTop: '15px', display: 'flex' }}
     >
       <FormControl
         sx={{
@@ -78,7 +78,6 @@ export default function ListSearch() {
       <Modal
         title="Lista de Clientes"
         buttonIcon={<SearchIcon />}
-        cadastrar={() => teste()}
         list={() => teste()}
       >
         <Table size="small">
