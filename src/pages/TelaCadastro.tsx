@@ -13,7 +13,7 @@ import imgLogin from '../assets/images/login.png';
 const Box = styled(MuiBox)(() => ({
   width: '100%',
   height: '70%',
-  marginTop: '40px',
+  marginTop: '20px',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
