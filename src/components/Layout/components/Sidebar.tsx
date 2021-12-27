@@ -56,7 +56,7 @@ export default function Sidebar() {
       </ListItem>
 
       <ListItem button>
-        <Link to="/cartoes">
+        <Link to="/credit-card">
           <ListItemIcon>
             <CreditCardIcon />
           </ListItemIcon>

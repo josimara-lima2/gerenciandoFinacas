@@ -1,4 +1,3 @@
-import Cadastro from 'components/Cadastro/Cadastro';
 import {
   Box,
   Table,
@@ -7,44 +6,27 @@ import {
   TableCell,
   IconButton,
   TableBody,
+  Tooltip,
+  cardActionsClasses,
 } from '@mui/material';
 import { DeleteOutline } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from 'store';
 import { useEffect } from 'react';
-import {
-  ClientSelector,
-  deleteClient,
-  fetchApi,
-  fetchApiDelete,
-  ClientInterface,
-  editClient,
-} from 'store/reducers/clients';
+import { cardSelector, fetchApi, CardInterface } from 'store/reducers/cards';
 import CreateIcon from '@mui/icons-material/Create';
+import CadastroCard from 'components/CadastroCard/CadastroCard';
+import AddCardIcon from '@mui/icons-material/AddCard';
 import ListSearch from '../components/ListSearch/ListSearch';
 
 export default function Cartao() {
   const dispatch = useAppDispatch();
-  const clients = useAppSelector(ClientSelector);
+  const { cards, isLoading } = useAppSelector(cardSelector);
 
-  const tokenString = localStorage.getItem('token');
-  const token = tokenString?.replace(/^"(.*)"$/, '$1');
-
-  const handleDelete = (id: string) => {
-    dispatch(fetchApiDelete(id));
-    dispatch(deleteClient({ id }));
-  };
-  const EditarClient = (id: string) => {
-    dispatch(
-      editClient({ id, name: 'f', email: 'f', telephone: 'f', cpf: 'f' }),
-    );
-  };
   useEffect(() => {
     dispatch(fetchApi());
   }, [dispatch]);
 
-  const list: ClientInterface[] = [];
-  clients.clients.map(item => list.push(item));
-
+  const list = cards;
   return (
     <Box
       sx={{
@@ -62,7 +44,7 @@ export default function Cartao() {
           justifyContent: 'space-between',
         }}
       >
-        <Cadastro />
+        <CadastroCard />
 
         <ListSearch />
       </Box>
@@ -72,32 +54,39 @@ export default function Cartao() {
           <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell>Telefone</TableCell>
-              <TableCell>Cpf</TableCell>
+              <TableCell>Flag</TableCell>
+              <TableCell>Titular</TableCell>
+              <TableCell>Limite</TableCell>
+              <TableCell>Limite Disponivel</TableCell>
+              <TableCell>Number</TableCell>
 
               <TableCell>Ações</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {!clients.isLoading &&
+            {!isLoading &&
               list.map(item => {
                 const id = Math.random();
                 return (
                   <TableRow key={id}>
                     <TableCell>{item.name}</TableCell>
-                    <TableCell>{item.email}</TableCell>
-                    <TableCell>{item.telephone}</TableCell>
-                    <TableCell>{item.cpf}</TableCell>
-
-                    <TableCell>
-                      <IconButton onClick={() => handleDelete(item.id)}>
-                        <DeleteOutline />
-                      </IconButton>
-                      <IconButton onClick={() => EditarClient(item.id)}>
-                        <CreateIcon />
-                      </IconButton>
-                    </TableCell>
+                    <TableCell>{item.flag}</TableCell>
+                    <TableCell>{item.cardHolderName}</TableCell>
+                    <TableCell>{item.limit}</TableCell>
+                    <TableCell>{item.availableLimit}</TableCell>
+                    <TableCell>{item.number}</TableCell>
+                    {/* <TableCell>
+                      <Tooltip title="Delete">
+                        <IconButton onClick={() => handleDelete(item.id)}>
+                          <DeleteOutline />
+                        </IconButton>
+                      </Tooltip>
+                      <Tooltip title="Edit">
+                        <IconButton onClick={() => EditarClient(item.id)}>
+                          <CreateIcon />
+                        </IconButton>
+                      </Tooltip>
+                    </TableCell> */}
                   </TableRow>
                 );
               })}

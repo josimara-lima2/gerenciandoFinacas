@@ -2,8 +2,6 @@ import {
   Box as MuiBox,
   TextField as MuiTextField,
   styled,
-  Button,
-  IconButton,
 } from '@mui/material';
 import Modal from 'components/Modal/Modal';
 import { useState } from 'react';
@@ -42,7 +40,7 @@ export default function Editar({ client }: Props) {
         if (statusCode === 200) {
           dispatch(editClient({ id, name, email, telephone, cpf }));
         } else {
-          console.log(statusCode);
+          alert(statusCode);
         }
       })
       .catch(e => e.message);
@@ -62,6 +60,9 @@ export default function Editar({ client }: Props) {
         alignItems: 'center',
         justifyContent: 'space-between',
         marginBottom: '25px',
+        marginTop: 0,
+        marginRight: 0,
+        marginLeft: '-30%',
       }}
     >
       <Modal

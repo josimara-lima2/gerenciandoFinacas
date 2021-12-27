@@ -18,19 +18,13 @@ import {
   fetchApi,
   fetchApiDelete,
   ClientInterface,
-  editClient,
-  fetchApiPut,
 } from 'store/reducers/clients';
-import CreateIcon from '@mui/icons-material/Create';
 import Editar from 'components/Editar/Editar';
 import ListSearch from '../components/ListSearch/ListSearch';
 
 export default function Clients() {
   const dispatch = useAppDispatch();
   const clients = useAppSelector(ClientSelector);
-
-  const tokenString = localStorage.getItem('token');
-  const token = tokenString?.replace(/^"(.*)"$/, '$1');
 
   const handleDelete = (id: string) => {
     dispatch(fetchApiDelete(id));
@@ -75,7 +69,7 @@ export default function Clients() {
               <TableCell>Telefone</TableCell>
               <TableCell>Cpf</TableCell>
 
-              <TableCell align="center">Ações</TableCell>
+              <TableCell>Ações</TableCell>
               <TableCell />
             </TableRow>
           </TableHead>
@@ -91,13 +85,17 @@ export default function Clients() {
                     <TableCell>{item.cpf}</TableCell>
 
                     <TableCell>
-                      <IconButton onClick={() => handleDelete(item.id)}>
-                        <DeleteOutline />
-                      </IconButton>
+                      <Tooltip title="Delete">
+                        <IconButton onClick={() => handleDelete(item.id)}>
+                          <DeleteOutline />
+                        </IconButton>
+                      </Tooltip>
                     </TableCell>
-                    <TableCell>
-                      <Editar client={item} />
-                    </TableCell>
+                    <Tooltip title="Edit">
+                      <TableCell>
+                        <Editar client={item} />
+                      </TableCell>
+                    </Tooltip>
                   </TableRow>
                 );
               })}

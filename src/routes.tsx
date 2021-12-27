@@ -35,7 +35,7 @@ export default function CustomRoutes() {
         }
       />
       <Route
-        path="/cartoes"
+        path="/credit-card"
         element={
           <PrivateRouter>
             <Cartao />
