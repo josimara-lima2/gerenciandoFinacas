@@ -5,6 +5,7 @@ import TelaCadastro from 'pages/TelaCadastro';
 import { Route, Routes } from 'react-router-dom';
 import PrivateRouter from 'PrivateRoutes';
 import Login from 'pages/Login';
+import Cartao from './pages/Cartoes';
 
 export default function CustomRoutes() {
   return (
@@ -30,6 +31,14 @@ export default function CustomRoutes() {
         element={
           <PrivateRouter>
             <Clients />
+          </PrivateRouter>
+        }
+      />
+      <Route
+        path="/cartoes"
+        element={
+          <PrivateRouter>
+            <Cartao />
           </PrivateRouter>
         }
       />

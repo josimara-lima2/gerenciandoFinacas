@@ -9,6 +9,7 @@ import { Link as MuiLink } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import SettingsIcon from '@mui/icons-material/Settings';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
+import CreditCardIcon from '@mui/icons-material/CreditCard';
 
 const Box = styled(MuiBox)(({ theme }) => ({
   // spacing de 1 corresponde a 8px
@@ -54,6 +55,14 @@ export default function Sidebar() {
         </Link>
       </ListItem>
 
+      <ListItem button>
+        <Link to="/cartoes">
+          <ListItemIcon>
+            <CreditCardIcon />
+          </ListItemIcon>
+          <Typography>Cartoes</Typography>
+        </Link>
+      </ListItem>
       <ListItem button>
         <Link to="/settings">
           <ListItemIcon>

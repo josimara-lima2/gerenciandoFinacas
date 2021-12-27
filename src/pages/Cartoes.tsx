@@ -7,7 +7,6 @@ import {
   TableCell,
   IconButton,
   TableBody,
-  Tooltip,
 } from '@mui/material';
 import { DeleteOutline } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from 'store';
@@ -19,13 +18,11 @@ import {
   fetchApiDelete,
   ClientInterface,
   editClient,
-  fetchApiPut,
 } from 'store/reducers/clients';
 import CreateIcon from '@mui/icons-material/Create';
-import Editar from 'components/Editar/Editar';
 import ListSearch from '../components/ListSearch/ListSearch';
 
-export default function Clients() {
+export default function Cartao() {
   const dispatch = useAppDispatch();
   const clients = useAppSelector(ClientSelector);
 
@@ -36,7 +33,11 @@ export default function Clients() {
     dispatch(fetchApiDelete(id));
     dispatch(deleteClient({ id }));
   };
-
+  const EditarClient = (id: string) => {
+    dispatch(
+      editClient({ id, name: 'f', email: 'f', telephone: 'f', cpf: 'f' }),
+    );
+  };
   useEffect(() => {
     dispatch(fetchApi());
   }, [dispatch]);
@@ -66,7 +67,7 @@ export default function Clients() {
         <ListSearch />
       </Box>
       <Box sx={{ marginTop: '4%' }}>
-        <title>Lista de Cadastrados</title>
+        <title>Lista de Cartões</title>
         <Table size="small">
           <TableHead>
             <TableRow>
@@ -75,8 +76,7 @@ export default function Clients() {
               <TableCell>Telefone</TableCell>
               <TableCell>Cpf</TableCell>
 
-              <TableCell align="center">Ações</TableCell>
-              <TableCell />
+              <TableCell>Ações</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -94,9 +94,9 @@ export default function Clients() {
                       <IconButton onClick={() => handleDelete(item.id)}>
                         <DeleteOutline />
                       </IconButton>
-                    </TableCell>
-                    <TableCell>
-                      <Editar client={item} />
+                      <IconButton onClick={() => EditarClient(item.id)}>
+                        <CreateIcon />
+                      </IconButton>
                     </TableCell>
                   </TableRow>
                 );

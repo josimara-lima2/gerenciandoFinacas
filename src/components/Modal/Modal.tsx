@@ -6,13 +6,20 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { Box as MuiBox, styled, Dialog, Typography } from '@mui/material';
+import {
+  Box as MuiBox,
+  styled,
+  Dialog,
+  Typography,
+  IconButton,
+} from '@mui/material';
+import { ClientInterface } from 'store/reducers/clients';
 
 type Props = {
   title: string;
   children: React.ReactNode;
   buttonIcon?: React.ReactNode;
-  cadastrar?: () => void;
+  cadastrar?: (id?: string) => void;
   list?: () => void;
 };
 const Box = styled(MuiBox)(({ theme }) => ({
@@ -50,9 +57,9 @@ export default function Modal({
 
   return (
     <Box>
-      <Button variant="text" onClick={handleClickOpen} sx={{ width: '10px' }}>
+      <IconButton onClick={handleClickOpen}>
         {buttonIcon || <AddCircleIcon />}
-      </Button>
+      </IconButton>
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
         <DialogTitle>{title}</DialogTitle>
         <DialogContent>

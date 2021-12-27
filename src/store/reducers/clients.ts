@@ -34,6 +34,14 @@ export const fetchApiDelete = createAsyncThunk(
   },
 );
 
+export const fetchApiPut = createAsyncThunk(
+  'clients/id/fetchApiPut',
+  async (client: ClientInterface) => {
+    const response = await apiUser.put(`clients/${client.id}`, client);
+    return response.data;
+  },
+);
+
 export const fetchApiPost = createAsyncThunk(
   'clients/fetchApiPost',
   async (client: Partial<ClientInterface>) => {
@@ -60,6 +68,28 @@ const ClientSlice = createSlice({
         { name, email, telephone, cpf, id: 'teste' },
       ];
     },
+    editClient(
+      state,
+      action: PayloadAction<{
+        id: string;
+        name: string;
+        email: string;
+        telephone: string;
+        cpf: string;
+      }>,
+    ) {
+      const { id } = action.payload;
+      state.clients.map(item => {
+        if (item.id === id) {
+          item.name = action.payload.name;
+          item.telephone = action.payload.telephone;
+          item.cpf = action.payload.cpf;
+          item.email = action.payload.email;
+        }
+
+        return state.clients;
+      });
+    },
   },
   extraReducers(builder) {
     builder.addCase(fetchApi.pending, state => {
@@ -75,6 +105,6 @@ const ClientSlice = createSlice({
   },
 });
 
-export const { deleteClient, addClient } = ClientSlice.actions;
+export const { deleteClient, addClient, editClient } = ClientSlice.actions;
 export const ClientSelector = (state: RootState) => state.clients;
 export default ClientSlice.reducer;
