@@ -17,6 +17,7 @@ import {
   deleteClient,
   fetchApi,
   fetchApiDelete,
+  ListClientInterface,
   ClientInterface,
 } from 'store/reducers/clients';
 import Editar from 'components/Editar/Editar';
@@ -24,7 +25,9 @@ import ListSearch from '../components/ListSearch/ListSearch';
 
 export default function Clients() {
   const dispatch = useAppDispatch();
-  const clients = useAppSelector(ClientSelector);
+  const { clients, isLoading } = useAppSelector(
+    ClientSelector,
+  ) as ListClientInterface;
 
   const handleDelete = (id: string) => {
     dispatch(fetchApiDelete(id));
@@ -34,9 +37,6 @@ export default function Clients() {
   useEffect(() => {
     dispatch(fetchApi());
   }, [dispatch]);
-
-  const list: ClientInterface[] = [];
-  clients.clients.map(item => list.push(item));
 
   return (
     <Box
@@ -59,7 +59,7 @@ export default function Clients() {
 
         <ListSearch />
       </Box>
-      <Box sx={{ marginTop: '4%' }}>
+      <Box sx={{ marginTop: '4%', maxHeight: '100vh', overflow: 'auto' }}>
         <title>Lista de Cadastrados</title>
         <Table size="small">
           <TableHead>
@@ -74,8 +74,8 @@ export default function Clients() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {!clients.isLoading &&
-              list.map(item => {
+            {!isLoading &&
+              clients.map(item => {
                 const id = Math.random();
                 return (
                   <TableRow key={id}>

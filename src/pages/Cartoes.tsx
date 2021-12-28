@@ -4,29 +4,46 @@ import {
   TableHead,
   TableRow,
   TableCell,
-  IconButton,
   TableBody,
   Tooltip,
-  cardActionsClasses,
+  IconButton,
+  List,
+  ListItem,
 } from '@mui/material';
 import { DeleteOutline } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from 'store';
 import { useEffect } from 'react';
-import { cardSelector, fetchApi, CardInterface } from 'store/reducers/cards';
+import {
+  CardSelector,
+  fetchApi,
+  CardInterface,
+  ListCardInterface,
+  deleteCard,
+  fetchApiDelete,
+} from 'store/reducers/cards';
 import CreateIcon from '@mui/icons-material/Create';
 import CadastroCard from 'components/CadastroCard/CadastroCard';
-import AddCardIcon from '@mui/icons-material/AddCard';
+import ListSearchCard from 'components/ListSearchCard/ListSearchCard';
 import ListSearch from '../components/ListSearch/ListSearch';
 
 export default function Cartao() {
   const dispatch = useAppDispatch();
-  const { cards, isLoading } = useAppSelector(cardSelector);
+  const { cards, isLoading } = useAppSelector(
+    CardSelector,
+  ) as ListCardInterface;
 
   useEffect(() => {
     dispatch(fetchApi());
   }, [dispatch]);
 
-  const list = cards;
+  const deleteCardId = (code: string) => {
+    const idr = cards.filter(card => card.code === code);
+    if (idr[0].id) {
+      dispatch(fetchApiDelete(idr[0].id));
+
+      dispatch(deleteCard({ code }));
+    }
+  };
   return (
     <Box
       sx={{
@@ -46,26 +63,25 @@ export default function Cartao() {
       >
         <CadastroCard />
 
-        <ListSearch />
+        <ListSearchCard />
       </Box>
       <Box sx={{ marginTop: '4%' }}>
-        <title>Lista de Cartões</title>
-        <Table size="small">
+        <Table sx={{ maxHeight: '100vh', overflow: 'auto' }}>
           <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>
               <TableCell>Flag</TableCell>
               <TableCell>Titular</TableCell>
               <TableCell>Limite</TableCell>
-              <TableCell>Limite Disponivel</TableCell>
-              <TableCell>Number</TableCell>
+              <TableCell>Limite Disponível</TableCell>
+              <TableCell>Numero</TableCell>
 
               <TableCell>Ações</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {!isLoading &&
-              list.map(item => {
+              cards.map(item => {
                 const id = Math.random();
                 return (
                   <TableRow key={id}>
@@ -75,18 +91,18 @@ export default function Cartao() {
                     <TableCell>{item.limit}</TableCell>
                     <TableCell>{item.availableLimit}</TableCell>
                     <TableCell>{item.number}</TableCell>
-                    {/* <TableCell>
+                    <TableCell>
                       <Tooltip title="Delete">
-                        <IconButton onClick={() => handleDelete(item.id)}>
+                        <IconButton onClick={() => deleteCardId(item.code)}>
                           <DeleteOutline />
                         </IconButton>
                       </Tooltip>
                       <Tooltip title="Edit">
-                        <IconButton onClick={() => EditarClient(item.id)}>
+                        <IconButton>
                           <CreateIcon />
                         </IconButton>
                       </Tooltip>
-                    </TableCell> */}
+                    </TableCell>
                   </TableRow>
                 );
               })}

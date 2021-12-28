@@ -75,7 +75,7 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    logout: () => localStorage.setItem('token', ''),
+    logout: () => localStorage.removeItem('token'),
   },
 
   extraReducers(builder) {

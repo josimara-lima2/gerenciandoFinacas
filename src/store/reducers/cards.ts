@@ -26,14 +26,24 @@ const initialState = {
   isLoading: false,
 } as ListCardInterface;
 
-export const fetchApi = createAsyncThunk('/credit-card/fetchApi', async () => {
-  const response = await apiUser.get('/credit-card');
+export const fetchApi = createAsyncThunk('credit-card/fetchApi', async () => {
+  const response = await apiUser.get('credit-card');
+  console.log(response.data);
   return response.data;
 });
 export const fetchApiPost = createAsyncThunk(
-  '/credit-card/fetchApi',
-  async (card: Partial<CardInterface>) => {
-    const response = await apiUser.post('/credit-card', card);
+  'credit-card/fetchApiPost',
+  async (card: CardInterface) => {
+    const response = await apiUser.post('credit-card', card);
+    console.log(response.data);
+    return response.data;
+  },
+);
+export const fetchApiDelete = createAsyncThunk(
+  'credit-card/id/fetchApiPost',
+  async (id: string) => {
+    const response = await apiUser.delete(`credit-card/${id}`);
+    console.log(response.data);
     return response.data;
   },
 );
@@ -55,6 +65,7 @@ const CardSlice = createSlice({
       state.cards = [
         ...state.cards,
         {
+          id: 'teste',
           name,
           flag,
           cardHolderName,
@@ -64,9 +75,13 @@ const CardSlice = createSlice({
           number,
           code,
           dueDate,
-          id: 'teste',
         },
       ];
+    },
+    deleteCard(state, action: PayloadAction<{ code: string }>) {
+      state.cards = state.cards.filter(
+        card => card.code !== action.payload.code,
+      );
     },
   },
   extraReducers(builder) {
@@ -78,11 +93,11 @@ const CardSlice = createSlice({
       state.cards = action.payload;
     });
     builder.addCase(fetchApi.rejected, state => {
-      state.isLoading = true;
+      state.isLoading = false;
     });
   },
 });
 
-export const { addCard } = CardSlice.actions;
-export const cardSelector = (state: RootState) => state.cards;
+export const { addCard, deleteCard } = CardSlice.actions;
+export const CardSelector = (state: RootState) => state.cards;
 export default CardSlice.reducer;

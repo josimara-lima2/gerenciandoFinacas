@@ -1,8 +1,10 @@
 import { Box as MuiBox, TextField, styled } from '@mui/material';
 import Modal from 'components/Modal/Modal';
-import { useState } from 'react';
+import { useState, ChangeEventHandler } from 'react';
 import { useAppDispatch } from 'store';
-import { addCard, fetchApiPost } from 'store/reducers/cards';
+import { addCard, fetchApiPost, fetchApi } from 'store/reducers/cards';
+import InputMask from 'react-input-mask';
+import AddCardIcon from '@mui/icons-material/AddCard';
 
 const styleTextField = {
   margin: '5px',
@@ -14,6 +16,22 @@ const Box = styled(MuiBox)(() => ({
   flexDirection: 'column',
   alignItems: 'center',
 }));
+type Props = {
+  value: string;
+  onChange?: ChangeEventHandler<HTMLInputElement> | undefined;
+  placeholder?: string;
+};
+
+const Input2 = ({ value, onChange, placeholder }: Props) => {
+  return (
+    <InputMask
+      mask="9999 9999 9999 9999"
+      value={value}
+      placeholder={placeholder}
+      onChange={onChange}
+    />
+  );
+};
 
 const CadastroCard = () => {
   const dispatch = useAppDispatch();
@@ -30,6 +48,7 @@ const CadastroCard = () => {
   const cadastrar = () => {
     dispatch(
       fetchApiPost({
+        id: 'teste',
         name,
         flag,
         cardHolderName,
@@ -44,11 +63,11 @@ const CadastroCard = () => {
       .unwrap()
       .then(response => {
         const { statusCode } = response;
-        console.log(statusCode);
+
         if (statusCode === 200) {
+          dispatch(fetchApi());
           dispatch(
             addCard({
-              id: 'teste',
               name,
               flag,
               cardHolderName,
@@ -61,12 +80,16 @@ const CadastroCard = () => {
             }),
           );
         }
-      });
+      })
+      .catch(e => e.message);
   };
-
   return (
     <MuiBox component="form">
-      <Modal title="Cadastre o cartão" cadastrar={cadastrar}>
+      <Modal
+        title="Cadastre o cartão"
+        cadastrar={cadastrar}
+        buttonIcon={<AddCardIcon />}
+      >
         <Box>
           <TextField
             id="nome"
@@ -134,15 +157,23 @@ const CadastroCard = () => {
             value={invoiceClosing}
             sx={styleTextField}
           />
-          <TextField
-            id="number"
-            label="Numero do cartao"
+
+          <MuiBox sx={styleTextField}>
+            <Input2
+              placeholder="Número do cartão"
+              value={number}
+              onChange={e => setNumber(e.target.value)}
+            />
+          </MuiBox>
+          {/* <TextField
+            id="teste"
+            label="código"
             variant="outlined"
             required
             onChange={e => setNumber(e.target.value)}
             value={number}
             sx={styleTextField}
-          />
+          /> */}
           <TextField
             id="code"
             label="código"

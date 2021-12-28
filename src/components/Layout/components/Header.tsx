@@ -8,10 +8,6 @@ import {
   Drawer as MuiDrawer,
   Typography,
   Divider,
-  Link,
-  ListItem,
-  ListItemText,
-  ListItemIcon,
 } from '@mui/material';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
@@ -22,7 +18,6 @@ import { useAppDispatch } from 'store';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import MenuIcon from '@mui/icons-material/Menu';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
-import DashboardIcon from '@mui/icons-material/Dashboard';
 import { logout } from '../../../store/reducers/user';
 import Sidebar from './Sidebar';
 
@@ -30,14 +25,6 @@ interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
 }
 const drawerWidth = 240;
-
-const AppBar2 = styled(MuiAppBar)(({ theme }) => ({
-  backgroundColor: theme.palette.background.paper,
-  color:
-    theme.palette.mode === 'dark'
-      ? theme.palette.grey[100]
-      : theme.palette.grey[900],
-}));
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: prop => prop !== 'open',

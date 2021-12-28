@@ -10,6 +10,7 @@ const Box = styled(MuiBox)(({ theme }) => ({
   width: '100%',
   padding: theme.spacing(2),
   height: `calc(100vh - 50px)`,
+  overflow: 'auto',
   backgroundColor: theme.palette.background.paper,
 }));
 

@@ -47,7 +47,7 @@ export default function Login() {
       .unwrap()
       .then(response => {
         const { token } = response;
-        if (token) navigate('/clients');
+        if (token) navigate('/');
       });
   }
 

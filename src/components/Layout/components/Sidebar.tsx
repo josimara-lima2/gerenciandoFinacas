@@ -42,7 +42,7 @@ export default function Sidebar() {
           <ListItemIcon>
             <HomeIcon />
           </ListItemIcon>
-          <Typography>Home</Typography>
+          <Typography>Inicio</Typography>
         </Link>
       </ListItem>
 
@@ -51,7 +51,7 @@ export default function Sidebar() {
           <ListItemIcon>
             <HowToRegIcon />
           </ListItemIcon>
-          <Typography>Clients</Typography>
+          <Typography>Clientes</Typography>
         </Link>
       </ListItem>
 
@@ -60,7 +60,7 @@ export default function Sidebar() {
           <ListItemIcon>
             <CreditCardIcon />
           </ListItemIcon>
-          <Typography>Cartoes</Typography>
+          <Typography>Cartões</Typography>
         </Link>
       </ListItem>
       <ListItem button>
@@ -68,7 +68,7 @@ export default function Sidebar() {
           <ListItemIcon>
             <SettingsIcon />
           </ListItemIcon>
-          <Typography>Settings</Typography>
+          <Typography>Configurações</Typography>
         </Link>
       </ListItem>
     </Box>

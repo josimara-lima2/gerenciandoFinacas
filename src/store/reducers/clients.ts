@@ -22,7 +22,16 @@ const initialState = {
 } as ListClientInterface;
 
 export const fetchApi = createAsyncThunk('clients/fetchApi', async () => {
-  const response = await apiUser.get('/clients');
+  const token = localStorage.getItem('token') as string;
+  const tokenValid = token.replace(/^"(.*)"$/, '$1');
+  const config = {
+    headers: {
+      Authorization: 'Bearer '.concat(tokenValid),
+      'content-type': 'application/json',
+    },
+  };
+  const response = await apiUser.get('clients', config);
+  console.log(response.data);
   return response.data;
 });
 
@@ -45,7 +54,7 @@ export const fetchApiPut = createAsyncThunk(
 export const fetchApiPost = createAsyncThunk(
   'clients/fetchApiPost',
   async (client: Partial<ClientInterface>) => {
-    const response = await apiUser.post('/clients', client);
+    const response = await apiUser.post('clients', client);
     return response.data;
   },
 );
