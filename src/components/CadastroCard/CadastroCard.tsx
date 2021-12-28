@@ -5,6 +5,7 @@ import { useAppDispatch } from 'store';
 import { addCard, fetchApiPost, fetchApi } from 'store/reducers/cards';
 import InputMask from 'react-input-mask';
 import AddCardIcon from '@mui/icons-material/AddCard';
+import MaterialInput from '@material-ui/core/Input';
 
 const styleTextField = {
   margin: '5px',
@@ -19,19 +20,27 @@ const Box = styled(MuiBox)(() => ({
 type Props = {
   value: string;
   onChange?: ChangeEventHandler<HTMLInputElement> | undefined;
-  placeholder?: string;
 };
 
-const Input2 = ({ value, onChange, placeholder }: Props) => {
+const Input2 = ({ value, onChange }: Props) => {
   return (
     <InputMask
       mask="9999 9999 9999 9999"
       value={value}
-      placeholder={placeholder}
+      maskPlaceholder="0"
       onChange={onChange}
     />
   );
 };
+
+// Will work fine
+function Input3({ value, onChange }: Props) {
+  return (
+    <InputMask mask="99/99/9999" value={value} onChange={onChange}>
+      <MaterialInput />
+    </InputMask>
+  );
+}
 
 const CadastroCard = () => {
   const dispatch = useAppDispatch();
@@ -83,6 +92,13 @@ const CadastroCard = () => {
       })
       .catch(e => e.message);
   };
+  function mcc(v: string) {
+    v = v.replace(/\D/g, '');
+    v = v.replace(/^(\d{4})(\d)/g, '$1 $2');
+    v = v.replace(/^(\d{4})\s(\d{4})(\d)/g, '$1 $2 $3');
+    v = v.replace(/^(\d{4})\s(\d{4})\s(\d{4})(\d)/g, '$1 $2 $3 $4');
+    return v;
+  }
   return (
     <MuiBox component="form">
       <Modal
@@ -158,22 +174,15 @@ const CadastroCard = () => {
             sx={styleTextField}
           />
 
-          <MuiBox sx={styleTextField}>
-            <Input2
-              placeholder="Número do cartão"
-              value={number}
-              onChange={e => setNumber(e.target.value)}
-            />
-          </MuiBox>
-          {/* <TextField
+          <TextField
             id="teste"
-            label="código"
+            label="numero"
             variant="outlined"
             required
-            onChange={e => setNumber(e.target.value)}
+            onChange={e => setNumber(mcc(e.target.value))}
             value={number}
             sx={styleTextField}
-          /> */}
+          />
           <TextField
             id="code"
             label="código"
