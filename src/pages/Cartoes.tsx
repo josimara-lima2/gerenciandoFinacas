@@ -7,8 +7,6 @@ import {
   TableBody,
   Tooltip,
   IconButton,
-  List,
-  ListItem,
 } from '@mui/material';
 import { DeleteOutline } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from 'store';
@@ -24,7 +22,6 @@ import {
 import CreateIcon from '@mui/icons-material/Create';
 import CadastroCard from 'components/CadastroCard/CadastroCard';
 import ListSearchCard from 'components/ListSearchCard/ListSearchCard';
-import ListSearch from '../components/ListSearch/ListSearch';
 
 export default function Cartao() {
   const dispatch = useAppDispatch();
