@@ -31,7 +31,6 @@ export const fetchApi = createAsyncThunk('clients/fetchApi', async () => {
     },
   };
   const response = await apiUser.get('clients', config);
-  console.log(response.data);
   return response.data;
 });
 

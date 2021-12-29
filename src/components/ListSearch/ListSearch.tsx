@@ -15,20 +15,16 @@ export default function ListSearch() {
   const [nameSearch, setNameSearch] = useState('');
   const [clientsSearch, setClientsSearch] = useState<ClientInterface[]>([]);
 
-  const handleSearch = (list: ClientInterface[]) => {
-    setClientsSearch(list);
-  };
-
-  const teste = () => {
+  const searchNameClient = () => {
     const list = clients.clients.filter(item => item.name === nameSearch);
-    handleSearch(list);
+    setClientsSearch(list);
   };
   const onChange = (e: any) => {
     setNameSearch(e.target.value);
   };
 
   return (
-    <Search listar={teste} onChange={onChange}>
+    <Search listar={searchNameClient} onChange={onChange}>
       <Table size="small">
         <TableHead>
           <TableRow>

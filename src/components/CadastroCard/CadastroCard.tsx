@@ -5,7 +5,6 @@ import { useAppDispatch } from 'store';
 import { addCard, fetchApiPost, fetchApi } from 'store/reducers/cards';
 import InputMask from 'react-input-mask';
 import AddCardIcon from '@mui/icons-material/AddCard';
-import MaterialInput from '@material-ui/core/Input';
 
 const styleTextField = {
   margin: '5px',
@@ -27,20 +26,11 @@ const Input2 = ({ value, onChange }: Props) => {
     <InputMask
       mask="9999 9999 9999 9999"
       value={value}
-      maskPlaceholder="0"
+      maskPlaceholder="*"
       onChange={onChange}
     />
   );
 };
-
-// Will work fine
-function Input3({ value, onChange }: Props) {
-  return (
-    <InputMask mask="99/99/9999" value={value} onChange={onChange}>
-      <MaterialInput />
-    </InputMask>
-  );
-}
 
 const CadastroCard = () => {
   const dispatch = useAppDispatch();
@@ -97,6 +87,7 @@ const CadastroCard = () => {
     v = v.replace(/^(\d{4})(\d)/g, '$1 $2');
     v = v.replace(/^(\d{4})\s(\d{4})(\d)/g, '$1 $2 $3');
     v = v.replace(/^(\d{4})\s(\d{4})\s(\d{4})(\d)/g, '$1 $2 $3 $4');
+
     return v;
   }
   return (
@@ -172,6 +163,11 @@ const CadastroCard = () => {
             onChange={e => setInvoiceClosing(+e.target.value)}
             value={invoiceClosing}
             sx={styleTextField}
+          />
+
+          <Input2
+            value={number}
+            onChange={e => setNumber(mcc(e.target.value))}
           />
 
           <TextField

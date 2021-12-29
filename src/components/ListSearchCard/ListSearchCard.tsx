@@ -20,13 +20,9 @@ export default function ListSearchCard() {
 
   const [cardsSearch, setCardsSearch] = useState<CardInterface[]>([]);
 
-  const handleSearch = (list: CardInterface[]) => {
-    setCardsSearch(list);
-  };
-
-  const teste = () => {
+  const searchNameCard = () => {
     const list = cards.filter(item => item.name === nameSearch);
-    handleSearch(list);
+    setCardsSearch(list);
   };
 
   const onChange = (e: any) => {
@@ -34,7 +30,7 @@ export default function ListSearchCard() {
   };
 
   return (
-    <Search onChange={onChange} listar={teste}>
+    <Search onChange={onChange} listar={searchNameCard}>
       <Table size="small">
         <TableHead>
           <TableRow>

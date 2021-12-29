@@ -80,8 +80,8 @@ const userSlice = createSlice({
 
   extraReducers(builder) {
     builder.addCase(fetchApiLogin.fulfilled, (state, action) => {
-      const t = action.payload;
-      const { token } = t;
+      const login = action.payload;
+      const { token } = login;
       localStorage.setItem('token', JSON.stringify(token.replace('"')));
     });
   },

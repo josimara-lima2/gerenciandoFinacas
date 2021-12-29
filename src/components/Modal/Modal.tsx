@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unused-prop-types */
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import DialogActions from '@mui/material/DialogActions';
@@ -13,7 +12,6 @@ import {
   Typography,
   IconButton,
 } from '@mui/material';
-import { ClientInterface } from 'store/reducers/clients';
 
 type Props = {
   title: string;

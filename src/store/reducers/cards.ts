@@ -1,6 +1,5 @@
 import { RootState } from 'store/rootReducer';
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-
 import { apiUser } from '../../services/apiUser';
 
 export declare interface CardInterface {
@@ -28,14 +27,12 @@ const initialState = {
 
 export const fetchApi = createAsyncThunk('credit-card/fetchApi', async () => {
   const response = await apiUser.get('credit-card');
-  console.log(response.data);
   return response.data;
 });
 export const fetchApiPost = createAsyncThunk(
   'credit-card/fetchApiPost',
   async (card: CardInterface) => {
     const response = await apiUser.post('credit-card', card);
-    console.log(response.data);
     return response.data;
   },
 );
@@ -43,7 +40,6 @@ export const fetchApiDelete = createAsyncThunk(
   'credit-card/id/fetchApiPost',
   async (id: string) => {
     const response = await apiUser.delete(`credit-card/${id}`);
-    console.log(response.data);
     return response.data;
   },
 );
