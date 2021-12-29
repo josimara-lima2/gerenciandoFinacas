@@ -2,19 +2,18 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from 'store/rootReducer';
 import { apiUser } from '../../services/apiUser';
 import { CardInterface } from './cards';
-import { ClientInterface } from './clients';
 
-export declare interface PageCliente {
+export declare interface PageCard {
   totalCount: number;
   page: string;
   limite: string;
   totalPage: number;
   nextPage: string;
-  data: ClientInterface[];
+  data: CardInterface[];
 }
 
 export declare interface PageClienteInterface {
-  pageCliente: PageCliente;
+  pageCliente: PageCard;
   isLoadingg: boolean;
 }
 const initialState = {
@@ -28,23 +27,9 @@ const initialState = {
   },
   isLoadingg: false,
 } as PageClienteInterface;
-export const fetchApiPage = createAsyncThunk(
-  'clients?page=&limit=3/fetchApiPage',
-  async (page: string) => {
-    const token = localStorage.getItem('token') as string;
-    const tokenValid = token.replace(/^"(.*)"$/, '$1');
-    const config = {
-      headers: {
-        Authorization: 'Bearer '.concat(tokenValid),
-        'content-type': 'application/json',
-      },
-    };
-    const response = await apiUser.get(`clients?page=${page}&limit=3`, config);
-    return response.data;
-  },
-);
+
 export const fetchApiSearch = createAsyncThunk(
-  'clients?search=/fetchApiPage',
+  'credit-card?search=/fetchApiPage',
   async (search: string) => {
     const token = localStorage.getItem('token') as string;
     const tokenValid = token.replace(/^"(.*)"$/, '$1');
@@ -54,12 +39,12 @@ export const fetchApiSearch = createAsyncThunk(
         'content-type': 'application/json',
       },
     };
-    const response = await apiUser.get(`clients?search=${search}`, config);
+    const response = await apiUser.get(`credit-card?search=${search}`, config);
     return response.data;
   },
 );
 export const fetchApiPageCard = createAsyncThunk(
-  'credit-card?page=&limit=3/fetchApiPage',
+  'credit-card?page=&limit=6/fetchApiPage',
   async (page: string) => {
     const token = localStorage.getItem('token') as string;
     const tokenValid = token.replace(/^"(.*)"$/, '$1');
@@ -70,29 +55,19 @@ export const fetchApiPageCard = createAsyncThunk(
       },
     };
     const response = await apiUser.get(
-      `credit-card?page=${page}&limit=3`,
+      `credit-card?page=${page}&limit=6`,
       config,
     );
     return response.data;
   },
 );
 
-const PageSlice = createSlice({
+const PageCardSlice = createSlice({
   name: 'pages',
   initialState,
   reducers: {},
 
   extraReducers(builder) {
-    builder.addCase(fetchApiPage.pending, state => {
-      state.isLoadingg = true;
-    });
-    builder.addCase(fetchApiPage.fulfilled, (state, action) => {
-      state.isLoadingg = false;
-      state.pageCliente = action.payload;
-    });
-    builder.addCase(fetchApiPage.rejected, state => {
-      state.isLoadingg = false;
-    });
     builder.addCase(fetchApiSearch.pending, state => {
       state.isLoadingg = true;
     });
@@ -116,5 +91,5 @@ const PageSlice = createSlice({
   },
 });
 
-export const PageSelector = (state: RootState) => state.pages;
-export default PageSlice.reducer;
+export const PageCardSelector = (state: RootState) => state.pagesCard;
+export default PageCardSlice.reducer;

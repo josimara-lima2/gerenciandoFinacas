@@ -12,38 +12,48 @@ import {
 import { DeleteOutline } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from 'store';
 import { useEffect } from 'react';
+import { fetchApiDelete, ClientInterface } from 'store/reducers/clients';
 import {
-  ClientSelector,
-  deleteClient,
-  fetchApi,
-  fetchApiDelete,
-  ListClientInterface,
-  ClientInterface,
-} from 'store/reducers/clients';
-import { fetchApiPage, PageCliente, PageSelector } from 'store/reducers/pages';
+  fetchApiPage,
+  PageSelector,
+  fetchApiSearch,
+} from 'store/reducers/pages';
 import Editar from 'components/Editar/Editar';
 import * as React from 'react';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-import ListSearch from '../components/ListSearch/ListSearch';
+import Search from '../components/Search/Search';
 
 export default function Clients() {
   const dispatch = useAppDispatch();
-  const { clients, isLoading } = useAppSelector(
-    ClientSelector,
-  ) as ListClientInterface;
   const [page, setPage] = React.useState(1);
-  const [list, setList] = React.useState<ClientInterface[]>([]);
   const { pageCliente, isLoadingg } = useAppSelector(PageSelector);
 
   const handleDelete = (id: string) => {
-    dispatch(fetchApiDelete(id));
-    dispatch(fetchApiPage(String(page)));
-    dispatch(deleteClient({ id }));
+    dispatch(fetchApiDelete(id))
+      .unwrap()
+      .then(response => {
+        const { statusCode } = response;
+        if (statusCode === 201) {
+          dispatch(fetchApiPage(String(page)));
+        }
+      });
   };
   const handleChange = (e: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
+
+  const handleAtualiza = () => {
+    dispatch(fetchApiPage('1'));
+  };
+
+  const teste = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    value: string,
+  ) => {
+    dispatch(fetchApiSearch(value));
+  };
+
   useEffect(() => {
     dispatch(fetchApiPage(String(page)));
   }, [dispatch, page]);
@@ -67,11 +77,9 @@ export default function Clients() {
       >
         <Cadastro />
 
-        <ListSearch />
+        <Search atualiza={handleAtualiza} handleChange={teste} />
       </Box>
       <Box sx={{ marginTop: '4%', maxHeight: '100vh', overflow: 'auto' }}>
-        <title>Lista de Cadastrados</title>
-
         <Stack spacing={2}>
           <Table size="small">
             <TableHead>

@@ -5,14 +5,10 @@ import {
 } from '@mui/material';
 import Modal from 'components/Modal/Modal';
 import { useState } from 'react';
-import { useAppDispatch } from 'store';
-
+import { useAppDispatch, useAppSelector } from 'store';
 import CreateIcon from '@mui/icons-material/Create';
-import {
-  fetchApiPut,
-  editClient,
-  ClientInterface,
-} from '../../store/reducers/clients';
+import { PageSelector, fetchApiPage } from 'store/reducers/pages';
+import { fetchApiPut, ClientInterface } from '../../store/reducers/clients';
 
 const Box = styled(MuiBox)(() => ({
   display: 'flex',
@@ -26,6 +22,7 @@ type Props = {
 
 export default function Editar({ client }: Props) {
   const dispatch = useAppDispatch();
+  const { pageCliente, isLoadingg } = useAppSelector(PageSelector);
 
   const [name, setName] = useState(client.name);
   const [email, setEmail] = useState(client.email);
@@ -38,7 +35,7 @@ export default function Editar({ client }: Props) {
       .then(response => {
         const { statusCode } = response;
         if (statusCode === 200) {
-          dispatch(editClient({ id, name, email, telephone, cpf }));
+          dispatch(fetchApiPage(pageCliente.page));
         } else {
           alert(statusCode);
         }

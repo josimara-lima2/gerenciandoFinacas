@@ -4,13 +4,11 @@ import {
   styled,
 } from '@mui/material';
 import Modal from 'components/Modal/Modal';
-import { useState, useEffect } from 'react';
-import { useAppDispatch } from 'store';
-import {
-  fetchApiPost,
-  addClient,
-  fetchApi,
-} from '../../store/reducers/clients';
+import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from 'store';
+
+import { PageSelector, fetchApiPage } from 'store/reducers/pages';
+import { fetchApiPost } from 'store/reducers/clients';
 
 const Box = styled(MuiBox)(() => ({
   display: 'flex',
@@ -20,7 +18,7 @@ const Box = styled(MuiBox)(() => ({
 
 export default function Cadastro() {
   const dispatch = useAppDispatch();
-
+  const { pageCliente } = useAppSelector(PageSelector);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [telephone, setTelephone] = useState('');
@@ -32,8 +30,7 @@ export default function Cadastro() {
       .then(response => {
         const { statusCode } = response;
         if (statusCode === 200) {
-          dispatch(fetchApi());
-          dispatch(addClient({ name, email, telephone, cpf }));
+          dispatch(fetchApiPage(pageCliente.page));
         }
       })
       .catch(e => e.message);

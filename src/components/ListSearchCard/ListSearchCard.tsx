@@ -30,32 +30,32 @@ export default function ListSearchCard() {
   };
 
   return (
-    <Search onChange={onChange} listar={searchNameCard}>
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell>Flag</TableCell>
-            <TableCell>Titular</TableCell>
-            <TableCell>Limite</TableCell>
-            <TableCell>Limite disponível</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {cardsSearch.map(item => {
-            const id = Math.random();
-            return (
-              <TableRow key={id}>
-                <TableCell>{item.name}</TableCell>
-                <TableCell>{item.flag}</TableCell>
-                <TableCell>{item.cardHolderName}</TableCell>
-                <TableCell>{item.limit}</TableCell>
-                <TableCell>{item.availableLimit}</TableCell>
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-    </Search>
+    <></>
+    // <></>;  <Search />
+    //  <Table size="small">
+    //     <TableHead>
+    //       <TableRow>
+    //         <TableCell>Name</TableCell>
+    //         <TableCell>Flag</TableCell>
+    //         <TableCell>Titular</TableCell>
+    //         <TableCell>Limite</TableCell>
+    //         <TableCell>Limite disponível</TableCell>
+    //       </TableRow>
+    //     </TableHead>
+    //     <TableBody>
+    //       {cardsSearch.map(item => {
+    //         const id = Math.random();
+    //         return (
+    //           <TableRow key={id}>
+    //             <TableCell>{item.name}</TableCell>
+    //             <TableCell>{item.flag}</TableCell>
+    //             <TableCell>{item.cardHolderName}</TableCell>
+    //             <TableCell>{item.limit}</TableCell>
+    //             <TableCell>{item.availableLimit}</TableCell>
+    //           </TableRow>
+    //         );
+    //       })}
+    //     </TableBody>
+    //   </Table>
   );
 }
