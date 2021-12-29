@@ -39,7 +39,10 @@ export default function Clients() {
         }
       });
   };
-  const handleChange = (e: React.ChangeEvent<unknown>, value: number) => {
+  const handleChangePagination = (
+    e: React.ChangeEvent<unknown>,
+    value: number,
+  ) => {
     setPage(value);
   };
 
@@ -47,8 +50,8 @@ export default function Clients() {
     dispatch(fetchApiPage('1'));
   };
 
-  const teste = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  const handleChange = (
+    e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
     value: string,
   ) => {
     dispatch(fetchApiSearch(value));
@@ -77,7 +80,7 @@ export default function Clients() {
       >
         <Cadastro />
 
-        <Search atualiza={handleAtualiza} handleChange={teste} />
+        <Search atualiza={handleAtualiza} onChange={handleChange} />
       </Box>
       <Box sx={{ marginTop: '4%', maxHeight: '100vh', overflow: 'auto' }}>
         <Stack spacing={2}>
@@ -121,7 +124,10 @@ export default function Clients() {
                 })}
             </TableBody>
           </Table>
-          <Pagination count={pageCliente.totalPage} onChange={handleChange} />
+          <Pagination
+            count={pageCliente.totalPage}
+            onChange={handleChangePagination}
+          />
         </Stack>
       </Box>
     </Box>

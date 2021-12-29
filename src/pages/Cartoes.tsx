@@ -44,18 +44,27 @@ export default function Cartao() {
     dispatch(fetchApiPageCard('1'));
   };
   const deleteCardId = (code: string) => {
-    const idr = cards.filter(card => card.code === code);
-    if (idr[0].id) {
-      dispatch(fetchApiDelete(idr[0].id));
+    const cardCode = pageCliente.data.filter(card => card.code === code);
 
-      dispatch(deleteCard({ code }));
+    if (cardCode[0].id) {
+      dispatch(fetchApiDelete(cardCode[0].id))
+        .unwrap()
+        .then(response => {
+          const { statusCode } = response;
+          if (statusCode === 201) {
+            dispatch(fetchApiPageCard(pageCliente.page));
+          }
+        });
     }
   };
-  const handleChange = (e: React.ChangeEvent<unknown>, value: number) => {
+  const handleChangePagination = (
+    e: React.ChangeEvent<unknown>,
+    value: number,
+  ) => {
     setPage(value);
   };
-  const teste = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  const handleChange = (
+    e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
     value: string,
   ) => {
     dispatch(fetchApiSearch(value));
@@ -79,7 +88,7 @@ export default function Cartao() {
       >
         <CadastroCard />
 
-        <Search atualiza={handleAtualiza} handleChange={teste} />
+        <Search atualiza={handleAtualiza} onChange={handleChange} />
       </Box>
       <Box sx={{ marginTop: '4%' }}>
         <Stack>
@@ -125,7 +134,10 @@ export default function Cartao() {
                 })}
             </TableBody>
           </Table>
-          <Pagination count={pageCliente.totalPage} onChange={handleChange} />
+          <Pagination
+            count={pageCliente.totalPage}
+            onChange={handleChangePagination}
+          />
         </Stack>
       </Box>
     </Box>

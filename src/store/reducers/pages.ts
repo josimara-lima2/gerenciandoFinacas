@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from 'store/rootReducer';
 import { apiUser } from '../../services/apiUser';
-import { CardInterface } from './cards';
 import { ClientInterface } from './clients';
 
 export declare interface PageCliente {
@@ -58,24 +57,6 @@ export const fetchApiSearch = createAsyncThunk(
     return response.data;
   },
 );
-export const fetchApiPageCard = createAsyncThunk(
-  'credit-card?page=&limit=3/fetchApiPage',
-  async (page: string) => {
-    const token = localStorage.getItem('token') as string;
-    const tokenValid = token.replace(/^"(.*)"$/, '$1');
-    const config = {
-      headers: {
-        Authorization: 'Bearer '.concat(tokenValid),
-        'content-type': 'application/json',
-      },
-    };
-    const response = await apiUser.get(
-      `credit-card?page=${page}&limit=3`,
-      config,
-    );
-    return response.data;
-  },
-);
 
 const PageSlice = createSlice({
   name: 'pages',
@@ -101,16 +82,6 @@ const PageSlice = createSlice({
       state.pageCliente = action.payload;
     });
     builder.addCase(fetchApiSearch.rejected, state => {
-      state.isLoadingg = false;
-    });
-    builder.addCase(fetchApiPageCard.pending, state => {
-      state.isLoadingg = true;
-    });
-    builder.addCase(fetchApiPageCard.fulfilled, (state, action) => {
-      state.isLoadingg = false;
-      state.pageCliente = action.payload;
-    });
-    builder.addCase(fetchApiPageCard.rejected, state => {
       state.isLoadingg = false;
     });
   },

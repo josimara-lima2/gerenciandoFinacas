@@ -1,10 +1,13 @@
 import { Box as MuiBox, TextField, styled } from '@mui/material';
 import Modal from 'components/Modal/Modal';
-import { useState, ChangeEventHandler } from 'react';
-import { useAppDispatch } from 'store';
+import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from 'store';
 import { addCard, fetchApiPost, fetchApi } from 'store/reducers/cards';
-import InputMask from 'react-input-mask';
 import AddCardIcon from '@mui/icons-material/AddCard';
+import * as React from 'react';
+import { maskCode, maskNumber, maskValue, maskFatura } from 'utils/masks';
+
+import { PageCardSelector, fetchApiPageCard } from 'store/reducers/pageCard';
 
 const styleTextField = {
   margin: '5px',
@@ -16,21 +19,6 @@ const Box = styled(MuiBox)(() => ({
   flexDirection: 'column',
   alignItems: 'center',
 }));
-type Props = {
-  value: string;
-  onChange?: ChangeEventHandler<HTMLInputElement> | undefined;
-};
-
-const Input2 = ({ value, onChange }: Props) => {
-  return (
-    <InputMask
-      mask="9999 9999 9999 9999"
-      value={value}
-      maskPlaceholder="*"
-      onChange={onChange}
-    />
-  );
-};
 
 const CadastroCard = () => {
   const dispatch = useAppDispatch();
@@ -43,6 +31,7 @@ const CadastroCard = () => {
   const [invoiceClosing, setInvoiceClosing] = useState(0);
   const [number, setNumber] = useState('');
   const [code, setCode] = useState('');
+  const { pageCliente } = useAppSelector(PageCardSelector);
 
   const cadastrar = () => {
     dispatch(
@@ -64,32 +53,12 @@ const CadastroCard = () => {
         const { statusCode } = response;
 
         if (statusCode === 200) {
-          dispatch(fetchApi());
-          dispatch(
-            addCard({
-              name,
-              flag,
-              cardHolderName,
-              limit,
-              availableLimit,
-              dueDate,
-              invoiceClosing,
-              code,
-              number,
-            }),
-          );
+          dispatch(fetchApiPageCard(pageCliente.page));
         }
       })
       .catch(e => e.message);
   };
-  function mcc(v: string) {
-    v = v.replace(/\D/g, '');
-    v = v.replace(/^(\d{4})(\d)/g, '$1 $2');
-    v = v.replace(/^(\d{4})\s(\d{4})(\d)/g, '$1 $2 $3');
-    v = v.replace(/^(\d{4})\s(\d{4})\s(\d{4})(\d)/g, '$1 $2 $3 $4');
 
-    return v;
-  }
   return (
     <MuiBox component="form">
       <Modal
@@ -131,7 +100,7 @@ const CadastroCard = () => {
               id="limite"
               label="Limite"
               variant="outlined"
-              onChange={e => setLimit(+e.target.value)}
+              onChange={e => setLimit(maskValue(e))}
               value={limit}
               required
               sx={styleTextField}
@@ -140,7 +109,7 @@ const CadastroCard = () => {
               id="limitDisponivel"
               label="Limite Disponivel"
               variant="outlined"
-              onChange={e => setAvailableLimit(+e.target.value)}
+              onChange={e => setAvailableLimit(maskValue(e))}
               value={availableLimit}
               required
               sx={styleTextField}
@@ -160,22 +129,18 @@ const CadastroCard = () => {
             label="Dia da fatura"
             variant="outlined"
             required
-            onChange={e => setInvoiceClosing(+e.target.value)}
+            onChange={e => setInvoiceClosing(maskFatura(e))}
             value={invoiceClosing}
             sx={styleTextField}
-          />
-
-          <Input2
-            value={number}
-            onChange={e => setNumber(mcc(e.target.value))}
           />
 
           <TextField
             id="teste"
             label="numero"
             variant="outlined"
+            placeholder="9999 9999 9999 9999"
             required
-            onChange={e => setNumber(mcc(e.target.value))}
+            onChange={e => setNumber(maskNumber(e))}
             value={number}
             sx={styleTextField}
           />
@@ -184,7 +149,7 @@ const CadastroCard = () => {
             label="código"
             variant="outlined"
             required
-            onChange={e => setCode(e.target.value)}
+            onChange={e => setCode(maskCode(e))}
             value={code}
             sx={styleTextField}
           />

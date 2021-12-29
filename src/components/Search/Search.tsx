@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Box as MuiBox, FormControl, InputLabel, Input } from '@mui/material';
-import Modal from 'components/Modal/Modal';
+
 import SearchIcon from '@mui/icons-material/Search';
 import { useAppDispatch, useAppSelector } from 'store';
 import { ClientSelector, ClientInterface } from 'store/reducers/clients';
@@ -12,16 +12,20 @@ import {
 
 type Props = {
   atualiza: () => void;
-  handleChange: (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  onChange: (
+    e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
     value: string,
   ) => void;
 };
-export default function Search({ atualiza, handleChange }: Props) {
-  const { pageCliente } = useAppSelector(PageSelector);
+export default function Search({ atualiza, onChange }: Props) {
   const [v, setV] = useState('0');
-  const dispatch = useAppDispatch();
 
+  const changenIput = (
+    e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setV(e.currentTarget.value);
+    onChange(e, e.currentTarget.value);
+  };
   useEffect(() => {
     atualiza();
   }, [v === '']);
@@ -45,7 +49,7 @@ export default function Search({ atualiza, handleChange }: Props) {
         <Input
           id="search"
           sx={{ borderRadius: '10px' }}
-          onChange={e => handleChange(e, e.target.value)}
+          onChange={e => changenIput(e)}
         />
       </FormControl>
     </MuiBox>
