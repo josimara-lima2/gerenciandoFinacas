@@ -2,7 +2,7 @@ import { Box as MuiBox, TextField, styled } from '@mui/material';
 import Modal from 'components/Modal/Modal';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'store';
-import { addCard, fetchApiPost, fetchApi } from 'store/reducers/cards';
+import { fetchApiPost } from 'store/reducers/cards';
 import AddCardIcon from '@mui/icons-material/AddCard';
 import * as React from 'react';
 import { maskCode, maskNumber, maskValue, maskFatura } from 'utils/masks';

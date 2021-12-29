@@ -31,6 +31,10 @@ export default function Cadastro() {
         const { statusCode } = response;
         if (statusCode === 200) {
           dispatch(fetchApiPage(pageCliente.page));
+          setName('');
+          setEmail('');
+          setTelephone('');
+          setCpf('');
         }
       })
       .catch(e => e.message);
