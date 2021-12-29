@@ -1,14 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Box as MuiBox, FormControl, InputLabel, Input } from '@mui/material';
-
+import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
-import { useAppDispatch, useAppSelector } from 'store';
-import { ClientSelector, ClientInterface } from 'store/reducers/clients';
-import {
-  fetchApiPage,
-  fetchApiSearch,
-  PageSelector,
-} from 'store/reducers/pages';
 
 type Props = {
   atualiza: () => void;
@@ -44,12 +37,15 @@ export default function Search({ atualiza, onChange }: Props) {
           marginTop: '10px',
         }}
       >
-        <InputLabel>Search</InputLabel>
-
         <Input
-          id="search"
+          placeholder="Search"
           sx={{ borderRadius: '10px' }}
           onChange={e => changenIput(e)}
+          endAdornment={
+            <InputAdornment position="start">
+              <SearchIcon />
+            </InputAdornment>
+          }
         />
       </FormControl>
     </MuiBox>

@@ -32,11 +32,8 @@ import Stack from '@mui/material/Stack';
 
 export default function Cartao() {
   const dispatch = useAppDispatch();
-  const { cards, isLoading } = useAppSelector(
-    CardSelector,
-  ) as ListCardInterface;
   const [page, setPage] = useState(1);
-  const { pageCliente } = useAppSelector(PageCardSelector);
+  const { pageCliente, isLoadingg } = useAppSelector(PageCardSelector);
   useEffect(() => {
     dispatch(fetchApiPageCard(String(page)));
   }, [dispatch, page]);
@@ -106,7 +103,7 @@ export default function Cartao() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {!isLoading &&
+              {!isLoadingg &&
                 pageCliente.data.map(item => {
                   const id = Math.random();
                   return (
