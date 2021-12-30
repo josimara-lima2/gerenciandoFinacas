@@ -5,6 +5,7 @@ import TelaCadastro from 'pages/TelaCadastro';
 import { Route, Routes } from 'react-router-dom';
 import PrivateRouter from 'PrivateRoutes';
 import Login from 'pages/Login';
+import Compra from 'pages/Compras';
 import Cartao from './pages/Cartoes';
 
 export default function CustomRoutes() {
@@ -39,6 +40,14 @@ export default function CustomRoutes() {
         element={
           <PrivateRouter>
             <Cartao />
+          </PrivateRouter>
+        }
+      />
+      <Route
+        path="/compra"
+        element={
+          <PrivateRouter>
+            <Compra />
           </PrivateRouter>
         }
       />

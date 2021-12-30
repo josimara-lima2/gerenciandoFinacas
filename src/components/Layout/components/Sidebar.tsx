@@ -9,6 +9,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import SettingsIcon from '@mui/icons-material/Settings';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 const Box = styled(MuiBox)(({ theme }) => ({
   // spacing de 1 corresponde a 8px
@@ -74,6 +75,18 @@ export default function Sidebar() {
           <CreditCardIcon />
         </ListItemIcon>
         <Typography>Cartões</Typography>
+      </Link>
+
+      <Link
+        to="/compra"
+        sx={{
+          backgroundColor: rota.pathname === '/compra' ? '#1C86EE' : '',
+        }}
+      >
+        <ListItemIcon>
+          <ShoppingCartIcon />
+        </ListItemIcon>
+        <Typography>Compras</Typography>
       </Link>
 
       <Link
