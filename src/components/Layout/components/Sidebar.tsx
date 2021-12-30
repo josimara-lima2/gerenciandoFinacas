@@ -2,10 +2,9 @@ import {
   Box as MuiBox,
   styled,
   Typography,
-  ListItem,
-  ListItemIcon,
+  ListItemIcon as MuiListItemIcon,
 } from '@mui/material';
-import { Link as MuiLink } from 'react-router-dom';
+import { Link as MuiLink, useLocation } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import SettingsIcon from '@mui/icons-material/Settings';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
@@ -30,47 +29,64 @@ const Link = styled(MuiLink)(({ theme }) => ({
       : theme.palette.grey[900],
   display: 'flex',
   justifyContent: 'start',
-  alignItems: 'space-between',
+  alignItems: 'center',
+  marginBottom: '8px',
   padding: '3px',
+  height: '50px',
+}));
+
+const ListItemIcon = styled(MuiListItemIcon)(() => ({
+  margin: '5px 20px',
 }));
 
 export default function Sidebar() {
+  const rota = useLocation();
+
   return (
     <Box>
-      <ListItem button>
-        <Link to="/">
-          <ListItemIcon>
-            <HomeIcon />
-          </ListItemIcon>
-          <Typography>Inicio</Typography>
-        </Link>
-      </ListItem>
+      <Link
+        to="/"
+        sx={{ backgroundColor: rota.pathname === '/' ? '#1C86EE' : '' }}
+      >
+        <ListItemIcon>
+          <HomeIcon />
+        </ListItemIcon>
+        <Typography>Inicio</Typography>
+      </Link>
 
-      <ListItem button>
-        <Link to="/clients">
-          <ListItemIcon>
-            <HowToRegIcon />
-          </ListItemIcon>
-          <Typography>Clientes</Typography>
-        </Link>
-      </ListItem>
+      <Link
+        to="/clients"
+        sx={{ backgroundColor: rota.pathname === '/clients' ? '#1C86EE' : '' }}
+      >
+        <ListItemIcon>
+          <HowToRegIcon />
+        </ListItemIcon>
+        <Typography>Clientes</Typography>
+      </Link>
 
-      <ListItem button>
-        <Link to="/credit-card">
-          <ListItemIcon>
-            <CreditCardIcon />
-          </ListItemIcon>
-          <Typography>Cartões</Typography>
-        </Link>
-      </ListItem>
-      <ListItem button>
-        <Link to="/settings">
-          <ListItemIcon>
-            <SettingsIcon />
-          </ListItemIcon>
-          <Typography>Configurações</Typography>
-        </Link>
-      </ListItem>
+      <Link
+        to="/credit-card"
+        sx={{
+          backgroundColor: rota.pathname === '/credit-card' ? '#1C86EE' : '',
+        }}
+      >
+        <ListItemIcon>
+          <CreditCardIcon />
+        </ListItemIcon>
+        <Typography>Cartões</Typography>
+      </Link>
+
+      <Link
+        to="/settings"
+        sx={{
+          backgroundColor: rota.pathname === '/settings' ? '#1C86EE' : '',
+        }}
+      >
+        <ListItemIcon>
+          <SettingsIcon />
+        </ListItemIcon>
+        <Typography>Configurações</Typography>
+      </Link>
     </Box>
   );
 }

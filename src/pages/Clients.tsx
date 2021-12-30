@@ -8,7 +8,6 @@ import {
   IconButton,
   TableBody,
   Tooltip,
-  Typography,
   styled,
 } from '@mui/material';
 import { DeleteOutline } from '@mui/icons-material';
