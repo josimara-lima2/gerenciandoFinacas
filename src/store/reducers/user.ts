@@ -8,14 +8,7 @@ export declare interface UserInterface {
   password: string;
   passwordConfirmation: string;
 }
-export declare interface LoginInterface {
-  email: string;
-  password: string;
-}
-
-export declare interface LoginState {
-  isLoggedIn: boolean;
-}
+type Login = Pick<UserInterface, 'email' | 'password'>;
 
 export declare interface UserState {
   user: UserInterface;
@@ -38,7 +31,7 @@ export const fetchApi = createAsyncThunk(
 
 export const fetchApiLogin = createAsyncThunk(
   'auth/signin/fetchApiLogin',
-  async (login: LoginInterface) => {
+  async (login: Login) => {
     const response = await apiUser.post('auth/signin', login);
     return response.data;
   },

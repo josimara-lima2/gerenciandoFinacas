@@ -27,6 +27,7 @@ const initialState = {
   },
   isLoadingg: false,
 } as PageClienteInterface;
+
 export const fetchApiPage = createAsyncThunk(
   'clients?page=&limit=3/fetchApiPage',
   async (page: string) => {
@@ -42,6 +43,7 @@ export const fetchApiPage = createAsyncThunk(
     return response.data;
   },
 );
+
 export const fetchApiSearch = createAsyncThunk(
   'clients?search=/fetchApiPage',
   async (search: string) => {

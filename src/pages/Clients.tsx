@@ -39,6 +39,7 @@ export default function Clients() {
         }
       });
   };
+
   const handleChangePagination = (
     e: React.ChangeEvent<unknown>,
     value: number,

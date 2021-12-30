@@ -4,7 +4,6 @@ import { apiUser } from '../../services/apiUser';
 
 export declare interface ClientInterface {
   id: string;
-
   name: string;
   email: string;
   telephone: string;
