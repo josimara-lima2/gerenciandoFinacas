@@ -34,6 +34,10 @@ const Link = styled(MuiLink)(({ theme }) => ({
   marginBottom: '8px',
   padding: '3px',
   height: '50px',
+
+  '&:hover': {
+    opacity: 0.6,
+  },
 }));
 
 const ListItemIcon = styled(MuiListItemIcon)(() => ({
