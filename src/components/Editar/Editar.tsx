@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'store';
 import CreateIcon from '@mui/icons-material/Create';
 import { PageSelector, fetchApiPage } from 'store/reducers/pages';
+import { maskCpf } from 'utils/masks';
 import { fetchApiPut, ClientInterface } from '../../store/reducers/clients';
 
 const Box = styled(MuiBox)(() => ({
@@ -22,7 +23,7 @@ type Props = {
 
 export default function Editar({ client }: Props) {
   const dispatch = useAppDispatch();
-  const { pageCliente, isLoadingg } = useAppSelector(PageSelector);
+  const { pageCliente } = useAppSelector(PageSelector);
 
   const [name, setName] = useState(client.name);
   const [email, setEmail] = useState(client.email);
@@ -103,7 +104,7 @@ export default function Editar({ client }: Props) {
             variant="outlined"
             required
             value={cpf}
-            onChange={e => setCpf(e.target.value)}
+            onChange={e => setCpf(maskCpf(e))}
             sx={styleTextField}
           />
         </Box>

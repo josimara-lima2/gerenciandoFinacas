@@ -2,7 +2,11 @@ import Layout from 'components/Layout';
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 
-const PrivateRouter = ({ children }: any) => {
+type PrivateRoute = {
+  children: React.ReactNode;
+};
+
+const PrivateRouter = ({ children }: PrivateRoute) => {
   const tokenString = localStorage.getItem('token');
   const token = tokenString?.replace(/^"(.*)"$/, '$1');
 

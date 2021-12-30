@@ -18,7 +18,6 @@ type Props = {
   children: React.ReactNode;
   buttonIcon?: React.ReactNode;
   cadastrar?: (id?: string) => void;
-  list?: () => void;
 };
 const Box = styled(MuiBox)(({ theme }) => ({
   display: 'flex',
@@ -32,21 +31,17 @@ export default function Modal({
   title,
   cadastrar,
   buttonIcon,
-  list,
 }: Props) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
-    if (list) {
-      list();
-    }
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
   };
-  const handleCloseCad = () => {
+  const handleCloseCadastro = () => {
     if (cadastrar) {
       cadastrar();
     }
@@ -74,14 +69,14 @@ export default function Modal({
               marginRight: '10px',
             }}
           >
-            <Typography>{list ? 'Fechar' : 'Cancelar'}</Typography>
+            <Typography>Cancelar</Typography>
           </Button>
 
           {cadastrar && (
             <Button
               variant="contained"
               color="success"
-              onClick={handleCloseCad}
+              onClick={handleCloseCadastro}
               sx={{
                 marginBottom: '15px',
                 marginRight: '10px',

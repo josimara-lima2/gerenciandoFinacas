@@ -60,44 +60,7 @@ export const fetchApiPost = createAsyncThunk(
 const ClientSlice = createSlice({
   name: 'clients',
   initialState,
-  reducers: {
-    deleteClient(state, action: PayloadAction<{ id: string }>) {
-      const { id } = action.payload;
-      state.clients = state.clients.filter(item => item.id !== id);
-    },
-    addClient(state, action: PayloadAction<Partial<ClientInterface>>) {
-      const name = action.payload.name as string;
-      const email = action.payload.email as string;
-      const telephone = action.payload.telephone as string;
-      const cpf = action.payload.cpf as string;
-      state.clients = [
-        ...state.clients,
-        { name, email, telephone, cpf, id: 'teste' },
-      ];
-    },
-    editClient(
-      state,
-      action: PayloadAction<{
-        id: string;
-        name: string;
-        email: string;
-        telephone: string;
-        cpf: string;
-      }>,
-    ) {
-      const { id } = action.payload;
-      state.clients.map(item => {
-        if (item.id === id) {
-          item.name = action.payload.name;
-          item.telephone = action.payload.telephone;
-          item.cpf = action.payload.cpf;
-          item.email = action.payload.email;
-        }
-
-        return state.clients;
-      });
-    },
-  },
+  reducers: {},
   extraReducers(builder) {
     builder.addCase(fetchApi.pending, state => {
       state.isLoading = true;
@@ -112,6 +75,5 @@ const ClientSlice = createSlice({
   },
 });
 
-export const { deleteClient, addClient, editClient } = ClientSlice.actions;
 export const ClientSelector = (state: RootState) => state.clients;
 export default ClientSlice.reducer;

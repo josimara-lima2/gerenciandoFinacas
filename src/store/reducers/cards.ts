@@ -46,40 +46,7 @@ export const fetchApiDelete = createAsyncThunk(
 const CardSlice = createSlice({
   name: 'cards',
   initialState,
-  reducers: {
-    addCard(state, action: PayloadAction<Partial<CardInterface>>) {
-      const name = action.payload.name as string;
-      const flag = action.payload.flag as string;
-      const cardHolderName = action.payload.cardHolderName as string;
-      const limit = action.payload.limit as number;
-      const availableLimit = action.payload.availableLimit as number;
-      const invoiceClosing = action.payload.invoiceClosing as number;
-      const number = action.payload.number as string;
-      const code = action.payload.code as string;
-      const dueDate = action.payload.dueDate as string;
-
-      state.cards = [
-        ...state.cards,
-        {
-          id: 'teste',
-          name,
-          flag,
-          cardHolderName,
-          limit,
-          availableLimit,
-          invoiceClosing,
-          number,
-          code,
-          dueDate,
-        },
-      ];
-    },
-    deleteCard(state, action: PayloadAction<{ code: string }>) {
-      state.cards = state.cards.filter(
-        card => card.code !== action.payload.code,
-      );
-    },
-  },
+  reducers: {},
   extraReducers(builder) {
     builder.addCase(fetchApi.pending, state => {
       state.isLoading = true;
@@ -94,6 +61,5 @@ const CardSlice = createSlice({
   },
 });
 
-export const { addCard, deleteCard } = CardSlice.actions;
 export const CardSelector = (state: RootState) => state.cards;
 export default CardSlice.reducer;

@@ -1,4 +1,4 @@
-import { Box as MuiBox, colors, styled } from '@mui/material';
+import { Box as MuiBox, styled } from '@mui/material';
 
 const Box = styled(MuiBox)(({ theme: { spacing, palette } }) => ({
   height: spacing(4),

@@ -11,14 +11,7 @@ import {
 import { DeleteOutline } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from 'store';
 import { useEffect, useState } from 'react';
-import {
-  CardSelector,
-  fetchApi,
-  CardInterface,
-  ListCardInterface,
-  deleteCard,
-  fetchApiDelete,
-} from 'store/reducers/cards';
+import { fetchApiDelete } from 'store/reducers/cards';
 import {
   fetchApiPageCard,
   PageCardSelector,
@@ -33,7 +26,7 @@ import Stack from '@mui/material/Stack';
 export default function Cartao() {
   const dispatch = useAppDispatch();
   const [page, setPage] = useState(1);
-  const { pageCliente, isLoadingg } = useAppSelector(PageCardSelector);
+  const { pageCard, isLoadingg } = useAppSelector(PageCardSelector);
   useEffect(() => {
     dispatch(fetchApiPageCard(String(page)));
   }, [dispatch, page]);
@@ -41,7 +34,7 @@ export default function Cartao() {
     dispatch(fetchApiPageCard('1'));
   };
   const deleteCardId = (code: string) => {
-    const cardCode = pageCliente.data.filter(card => card.code === code);
+    const cardCode = pageCard.data.filter(card => card.code === code);
 
     if (cardCode[0].id) {
       dispatch(fetchApiDelete(cardCode[0].id))
@@ -49,7 +42,7 @@ export default function Cartao() {
         .then(response => {
           const { statusCode } = response;
           if (statusCode === 201) {
-            dispatch(fetchApiPageCard(pageCliente.page));
+            dispatch(fetchApiPageCard(pageCard.page));
           }
         });
     }
@@ -104,7 +97,7 @@ export default function Cartao() {
             </TableHead>
             <TableBody>
               {!isLoadingg &&
-                pageCliente.data.map(item => {
+                pageCard.data.map(item => {
                   const id = Math.random();
                   return (
                     <TableRow key={id}>
@@ -132,7 +125,7 @@ export default function Cartao() {
             </TableBody>
           </Table>
           <Pagination
-            count={pageCliente.totalPage}
+            count={pageCard.totalPage}
             onChange={handleChangePagination}
           />
         </Stack>

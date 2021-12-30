@@ -13,15 +13,17 @@ type Props = {
 export default function Search({ atualiza, onChange }: Props) {
   const [v, setV] = useState('0');
 
-  const changenIput = (
+  const changeInput = (
     e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setV(e.currentTarget.value);
     onChange(e, e.currentTarget.value);
   };
+
   useEffect(() => {
     atualiza();
   }, [v === '']);
+
   return (
     <MuiBox
       component="form"
@@ -40,7 +42,7 @@ export default function Search({ atualiza, onChange }: Props) {
         <Input
           placeholder="Search"
           sx={{ borderRadius: '10px' }}
-          onChange={e => changenIput(e)}
+          onChange={e => changeInput(e)}
           endAdornment={
             <InputAdornment position="start">
               <SearchIcon />

@@ -44,6 +44,7 @@ const AppBar = styled(MuiAppBar, {
     }),
   }),
 }));
+
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: prop => prop !== 'open',
 })(({ theme, open }) => ({
@@ -80,9 +81,11 @@ export default function Header() {
   const changeTheme = useChangeTheme();
   const { mode } = palette;
   const [open, setOpen] = React.useState(true);
+
   const toggleDrawer = () => {
     setOpen(!open);
   };
+
   const toggleTheme = () => {
     const nextPaletteType = mode === 'dark' ? 'light' : 'dark';
     changeTheme({ type: 'CHANGE', payload: { paletteType: nextPaletteType } });
@@ -112,7 +115,13 @@ export default function Header() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography component="h1" variant="h6" noWrap sx={{ flexGrow: 1 }}>
+          <Typography
+            component="h1"
+            variant="h6"
+            noWrap
+            sx={{ flexGrow: 1 }}
+            color={mode === 'light' ? '#2f3136' : 'fafafa'}
+          >
             Finanças
           </Typography>
           <IconButton onClick={toggleTheme}>

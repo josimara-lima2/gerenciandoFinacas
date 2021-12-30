@@ -1,6 +1,6 @@
 import Cadastro from 'components/Cadastro/Cadastro';
 import {
-  Box,
+  Box as MuiBox,
   Table,
   TableHead,
   TableRow,
@@ -8,6 +8,8 @@ import {
   IconButton,
   TableBody,
   Tooltip,
+  Typography,
+  styled,
 } from '@mui/material';
 import { DeleteOutline } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from 'store';
@@ -23,6 +25,25 @@ import * as React from 'react';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import Search from '../components/Search/Search';
+
+const BoxContainer = styled(MuiBox)(() => ({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'space-between',
+  justifyContent: 'center',
+}));
+
+const BoxTable = styled(MuiBox)(() => ({
+  marginTop: '4%',
+  maxHeight: '100vh',
+  overflow: 'auto',
+}));
+
+const BoxFuncionalidades = styled(MuiBox)(() => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+}));
 
 export default function Clients() {
   const dispatch = useAppDispatch();
@@ -63,27 +84,13 @@ export default function Clients() {
   }, [dispatch, page]);
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'space-between',
-        justifyContent: 'center',
-      }}
-    >
-      <Box
-        className="container"
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}
-      >
+    <BoxContainer>
+      <BoxFuncionalidades>
         <Cadastro />
 
         <Search atualiza={handleAtualiza} onChange={handleChange} />
-      </Box>
-      <Box sx={{ marginTop: '4%', maxHeight: '100vh', overflow: 'auto' }}>
+      </BoxFuncionalidades>
+      <BoxTable>
         <Stack spacing={2}>
           <Table size="small">
             <TableHead>
@@ -130,7 +137,7 @@ export default function Clients() {
             onChange={handleChangePagination}
           />
         </Stack>
-      </Box>
-    </Box>
+      </BoxTable>
+    </BoxContainer>
   );
 }

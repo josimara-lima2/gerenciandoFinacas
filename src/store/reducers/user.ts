@@ -19,7 +19,7 @@ const initialState = {
   email: '',
   password: '',
   passwordConfirmation: '',
-};
+} as UserInterface;
 
 export const fetchApi = createAsyncThunk(
   'auth/signup/fetchApi',
@@ -37,20 +37,6 @@ export const fetchApiLogin = createAsyncThunk(
   },
 );
 
-export const fetchApiList = createAsyncThunk(
-  'clients/fetchApiList',
-  async (token: string) => {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    const response = await apiUser.get('clients', config);
-    return response.data;
-  },
-);
-
 export const fetchApiDelete = createAsyncThunk(
   'auth/signup/fetchApi',
   async (user: UserInterface) => {
@@ -64,7 +50,6 @@ const userSlice = createSlice({
   reducers: {
     logout: () => localStorage.removeItem('token'),
   },
-
   extraReducers(builder) {
     builder.addCase(fetchApiLogin.fulfilled, (state, action) => {
       const login = action.payload;
@@ -73,6 +58,7 @@ const userSlice = createSlice({
     });
   },
 });
+
 export const { logout } = userSlice.actions;
 export const UserSelector = (state: RootState) => state.user;
 export default userSlice.reducer;

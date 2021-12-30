@@ -31,7 +31,7 @@ const CadastroCard = () => {
   const [invoiceClosing, setInvoiceClosing] = useState(0);
   const [number, setNumber] = useState('');
   const [code, setCode] = useState('');
-  const { pageCliente } = useAppSelector(PageCardSelector);
+  const { pageCard } = useAppSelector(PageCardSelector);
 
   const cadastrar = () => {
     dispatch(
@@ -53,7 +53,7 @@ const CadastroCard = () => {
         const { statusCode } = response;
 
         if (statusCode === 200) {
-          dispatch(fetchApiPageCard(pageCliente.page));
+          dispatch(fetchApiPageCard(pageCard.page));
           setName('');
           setFlag('');
           setCardHolderName('');

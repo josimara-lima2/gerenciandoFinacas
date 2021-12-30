@@ -13,11 +13,11 @@ export declare interface PageCard {
 }
 
 export declare interface PageClienteInterface {
-  pageCliente: PageCard;
+  pageCard: PageCard;
   isLoadingg: boolean;
 }
 const initialState = {
-  pageCliente: {
+  pageCard: {
     totalCount: 1,
     page: '1',
     limite: '3',
@@ -73,7 +73,7 @@ const PageCardSlice = createSlice({
     });
     builder.addCase(fetchApiSearch.fulfilled, (state, action) => {
       state.isLoadingg = false;
-      state.pageCliente = action.payload;
+      state.pageCard = action.payload;
     });
     builder.addCase(fetchApiSearch.rejected, state => {
       state.isLoadingg = false;
@@ -83,7 +83,7 @@ const PageCardSlice = createSlice({
     });
     builder.addCase(fetchApiPageCard.fulfilled, (state, action) => {
       state.isLoadingg = false;
-      state.pageCliente = action.payload;
+      state.pageCard = action.payload;
     });
     builder.addCase(fetchApiPageCard.rejected, state => {
       state.isLoadingg = false;
