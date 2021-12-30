@@ -10,3 +10,10 @@
   - Husky
   - Lintstaged
   - Estrutura de pastas
+
+  ## Páginas
+
+  - Inicio
+  - Clientes
+  - Cartões
+  - Settings
