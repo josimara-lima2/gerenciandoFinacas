@@ -22,6 +22,7 @@ import CadastroCard from 'components/CadastroCard/CadastroCard';
 import Search from 'components/Search/Search';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import InfoIcon from '@mui/icons-material/Info';
 
 export default function Cartao() {
   const dispatch = useAppDispatch();
@@ -32,6 +33,10 @@ export default function Cartao() {
   }, [dispatch, page]);
   const handleAtualiza = () => {
     dispatch(fetchApiPageCard('1'));
+  };
+
+  const handleInfoCard = () => {
+    console.log('teste');
   };
   const deleteCardId = (code: string) => {
     const cardCode = pageCard.data.filter(card => card.code === code);
@@ -116,6 +121,11 @@ export default function Cartao() {
                         <Tooltip title="Edit">
                           <IconButton>
                             <CreateIcon />
+                          </IconButton>
+                        </Tooltip>
+                        <Tooltip title="info">
+                          <IconButton onClick={handleInfoCard}>
+                            <InfoIcon />
                           </IconButton>
                         </Tooltip>
                       </TableCell>
