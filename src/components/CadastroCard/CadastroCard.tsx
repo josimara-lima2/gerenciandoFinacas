@@ -54,6 +54,15 @@ const CadastroCard = () => {
 
         if (statusCode === 200) {
           dispatch(fetchApiPageCard(pageCliente.page));
+          setName('');
+          setFlag('');
+          setCardHolderName('');
+          setLimit(0);
+          setAvailableLimit(0);
+          setDueDate('');
+          setInvoiceClosing(0);
+          setCode('');
+          setNumber('');
         }
       })
       .catch(e => e.message);
@@ -119,6 +128,7 @@ const CadastroCard = () => {
             id="vencimento"
             label="Vencimento"
             variant="outlined"
+            placeholder="00/00/0000"
             required
             onChange={e => setDueDate(e.target.value)}
             value={dueDate}
@@ -147,6 +157,7 @@ const CadastroCard = () => {
           <TextField
             id="code"
             label="código"
+            placeholder="000"
             variant="outlined"
             required
             onChange={e => setCode(maskCode(e))}

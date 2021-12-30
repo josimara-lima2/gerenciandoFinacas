@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from 'store';
 
 import { PageSelector, fetchApiPage } from 'store/reducers/pages';
 import { fetchApiPost } from 'store/reducers/clients';
+import { maskCpf } from 'utils/masks';
 
 const Box = styled(MuiBox)(() => ({
   display: 'flex',
@@ -92,7 +93,7 @@ export default function Cadastro() {
             variant="outlined"
             required
             value={cpf}
-            onChange={e => setCpf(e.target.value)}
+            onChange={e => setCpf(maskCpf(e))}
             sx={styleTextField}
           />
         </Box>

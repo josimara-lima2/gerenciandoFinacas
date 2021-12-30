@@ -40,3 +40,15 @@ export function maskFatura(
 
   return +v;
 }
+
+export function maskCpf(
+  e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
+) {
+  e.currentTarget.maxLength = 14;
+  let v = e.currentTarget.value;
+  v = v.replace(/\D/g, '');
+  v = v.replace(/(\d{3})(\d)/, '$1.$2');
+  v = v.replace(/(\d{3})(\d)/, '$1.$2');
+  v = v.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+  return v;
+}

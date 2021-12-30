@@ -12,7 +12,7 @@ import {
 import { DeleteOutline } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from 'store';
 import { useEffect } from 'react';
-import { fetchApiDelete, ClientInterface } from 'store/reducers/clients';
+import { fetchApiDelete } from 'store/reducers/clients';
 import {
   fetchApiPage,
   PageSelector,

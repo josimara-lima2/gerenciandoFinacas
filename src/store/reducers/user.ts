@@ -1,9 +1,4 @@
-import {
-  createAsyncThunk,
-  createSlice,
-  Action,
-  PayloadAction,
-} from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from 'store/rootReducer';
 import { apiUser } from '../../services/apiUser';
 
@@ -59,7 +54,6 @@ export const fetchApiList = createAsyncThunk(
       },
     };
     const response = await apiUser.get('clients', config);
-    console.log(token);
     return response.data;
   },
 );
