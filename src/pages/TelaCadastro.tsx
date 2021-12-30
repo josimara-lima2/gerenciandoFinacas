@@ -7,7 +7,7 @@ import {
 import { useState } from 'react';
 import { useAppDispatch } from 'store';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
-import { fetchApi } from '../store/reducers/user';
+import { fetchApiCadastroUser } from '../store/reducers/user';
 import imgLogin from '../assets/images/login.png';
 
 const Box = styled(MuiBox)(() => ({
@@ -43,7 +43,9 @@ export default function TelaCadastro() {
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const handleClick = () => {
-    dispatch(fetchApi({ name, email, password, passwordConfirmation }));
+    dispatch(
+      fetchApiCadastroUser({ name, email, password, passwordConfirmation }),
+    );
     navigate('/login');
   };
 

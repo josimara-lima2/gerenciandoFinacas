@@ -21,7 +21,7 @@ const initialState = {
   passwordConfirmation: '',
 } as UserInterface;
 
-export const fetchApi = createAsyncThunk(
+export const fetchApiCadastroUser = createAsyncThunk(
   'auth/signup/fetchApi',
   async (user: UserInterface) => {
     const response = await apiUser.post('auth/signup', user);
@@ -54,6 +54,7 @@ const userSlice = createSlice({
     builder.addCase(fetchApiLogin.fulfilled, (state, action) => {
       const login = action.payload;
       const { token } = login;
+
       localStorage.setItem('token', JSON.stringify(token.replace('"')));
     });
   },
