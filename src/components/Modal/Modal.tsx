@@ -5,6 +5,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import CloseIcon from '@mui/icons-material/Close';
 import {
   Box as MuiBox,
   styled,
@@ -69,7 +70,7 @@ export default function Modal({
               marginRight: '10px',
             }}
           >
-            <Typography>Cancelar</Typography>
+            <Typography>{cadastrar ? 'Cancelar' : 'Fechar'}</Typography>
           </Button>
 
           {cadastrar && (

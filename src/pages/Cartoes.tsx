@@ -7,6 +7,7 @@ import {
   TableBody,
   Tooltip,
   IconButton,
+  Typography,
 } from '@mui/material';
 import { DeleteOutline } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from 'store';
@@ -22,7 +23,7 @@ import CadastroCard from 'components/CadastroCard/CadastroCard';
 import Search from 'components/Search/Search';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-import InfoIcon from '@mui/icons-material/Info';
+import InfoCard from 'components/ModalCard/ModalCard';
 
 export default function Cartao() {
   const dispatch = useAppDispatch();
@@ -124,9 +125,25 @@ export default function Cartao() {
                           </IconButton>
                         </Tooltip>
                         <Tooltip title="info">
-                          <IconButton onClick={handleInfoCard}>
-                            <InfoIcon />
-                          </IconButton>
+                          <InfoCard>
+                            <Typography align="right">{item.flag}</Typography>
+                            <Table>
+                              <TableHead>
+                                <TableRow>
+                                  <TableCell>Data de vencimento</TableCell>
+                                  <TableCell>Fechamento da fatura</TableCell>
+                                  <TableCell>Código</TableCell>
+                                </TableRow>
+                              </TableHead>
+                              <TableBody>
+                                <TableRow>
+                                  <TableCell>{item.dueDate}</TableCell>
+                                  <TableCell>{item.invoiceClosing}</TableCell>
+                                  <TableCell>{item.code}</TableCell>
+                                </TableRow>
+                              </TableBody>
+                            </Table>
+                          </InfoCard>
                         </Tooltip>
                       </TableCell>
                     </TableRow>
