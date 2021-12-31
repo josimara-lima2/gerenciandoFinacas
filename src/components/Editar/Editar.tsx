@@ -55,14 +55,13 @@ export default function Editar({ client }: Props) {
       noValidate
       sx={{
         display: 'flex',
-        justifyContent: 'flex-start',
-        marginLeft: '-90%;',
       }}
     >
       <Modal
         title="Cadastre-se"
         buttonIcon={<CreateIcon />}
         cadastrar={() => handleClick(client.id)}
+        tamanho="sm"
       >
         <Box>
           <MuiTextField

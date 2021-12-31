@@ -10,7 +10,7 @@ import { maskCode, maskNumber, maskValue, maskFatura } from 'utils/masks';
 import { PageCardSelector, fetchApiPageCard } from 'store/reducers/pageCard';
 
 const styleTextField = {
-  margin: '5px',
+  margin: '5px 0',
   width: '84%',
   borderRadius: '20px',
 };
@@ -74,6 +74,7 @@ const CadastroCard = () => {
         title="Cadastre o cartão"
         cadastrar={cadastrar}
         buttonIcon={<AddCardIcon />}
+        tamanho="sm"
       >
         <Box>
           <TextField
@@ -104,7 +105,7 @@ const CadastroCard = () => {
             value={cardHolderName}
             sx={styleTextField}
           />
-          <MuiBox sx={{ display: 'flex' }}>
+          <MuiBox sx={{ display: 'flex', width: '84%' }}>
             <TextField
               id="limite"
               label="Limite"
@@ -112,7 +113,7 @@ const CadastroCard = () => {
               onChange={e => setLimit(maskValue(e))}
               value={limit}
               required
-              sx={styleTextField}
+              sx={{ ...styleTextField, marginRight: '5px' }}
             />
             <TextField
               id="limitDisponivel"
@@ -121,7 +122,7 @@ const CadastroCard = () => {
               onChange={e => setAvailableLimit(maskValue(e))}
               value={availableLimit}
               required
-              sx={styleTextField}
+              sx={{ ...styleTextField, marginLeft: '5px' }}
             />
           </MuiBox>
           <TextField

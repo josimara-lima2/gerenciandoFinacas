@@ -24,6 +24,7 @@ import Search from 'components/Search/Search';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import InfoCard from 'components/ModalCard/ModalCard';
+import DeleteCard from 'components/DeleteCard/DeleteCard';
 
 export default function Cartao() {
   const dispatch = useAppDispatch();
@@ -36,20 +37,6 @@ export default function Cartao() {
     dispatch(fetchApiPageCard('1'));
   };
 
-  const deleteCardId = (code: string) => {
-    const cardCode = pageCard.data.filter(card => card.code === code);
-
-    if (cardCode[0].id) {
-      dispatch(fetchApiDelete(cardCode[0].id))
-        .unwrap()
-        .then(response => {
-          const { statusCode } = response;
-          if (statusCode === 201) {
-            dispatch(fetchApiPageCard(pageCard.page));
-          }
-        });
-    }
-  };
   const handleChangePagination = (
     e: React.ChangeEvent<unknown>,
     value: number,
@@ -111,11 +98,7 @@ export default function Cartao() {
                       <TableCell>{item.availableLimit}</TableCell>
                       <TableCell>{item.number}</TableCell>
                       <TableCell sx={{ display: 'flex' }}>
-                        <Tooltip title="Delete">
-                          <IconButton onClick={() => deleteCardId(item.code)}>
-                            <DeleteOutline />
-                          </IconButton>
-                        </Tooltip>
+                        <DeleteCard card={item} />
                         <Tooltip title="Edit">
                           <IconButton>
                             <CreateIcon />

@@ -23,6 +23,8 @@ import Editar from 'components/Editar/Editar';
 import * as React from 'react';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import Modal from 'components/Modal/Modal';
+import DeleteClient from 'components/DeleteClient/DeleteClient';
 import Search from '../components/Search/Search';
 
 const BoxContainer = styled(MuiBox)(() => ({
@@ -48,17 +50,6 @@ export default function Clients() {
   const dispatch = useAppDispatch();
   const [page, setPage] = React.useState(1);
   const { pageCliente, isLoadingg } = useAppSelector(PageSelector);
-
-  const handleDelete = (id: string) => {
-    dispatch(fetchApiDelete(id))
-      .unwrap()
-      .then(response => {
-        const { statusCode } = response;
-        if (statusCode === 201) {
-          dispatch(fetchApiPage(String(page)));
-        }
-      });
-  };
 
   const handleChangePagination = (
     e: React.ChangeEvent<unknown>,
@@ -114,18 +105,17 @@ export default function Clients() {
                       <TableCell>{item.telephone}</TableCell>
                       <TableCell>{item.cpf}</TableCell>
 
-                      <TableCell>
-                        <Tooltip title="Delete">
-                          <IconButton onClick={() => handleDelete(item.id)}>
-                            <DeleteOutline />
-                          </IconButton>
-                        </Tooltip>
+                      <TableCell
+                        sx={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'start',
+                          padding: 0,
+                        }}
+                      >
+                        <Editar client={item} />
+                        <DeleteClient client={item} />
                       </TableCell>
-                      <Tooltip title="Edit">
-                        <TableCell>
-                          <Editar client={item} />
-                        </TableCell>
-                      </Tooltip>
                     </TableRow>
                   );
                 })}

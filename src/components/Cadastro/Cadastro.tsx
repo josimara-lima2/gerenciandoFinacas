@@ -42,7 +42,7 @@ export default function Cadastro() {
   };
   const styleTextField = {
     margin: '5px',
-    width: '80%',
+    width: '100%',
     borderRadius: '20px',
   };
   return (
@@ -56,7 +56,7 @@ export default function Cadastro() {
         justifyContent: 'space-between',
       }}
     >
-      <Modal title="Cadastre-se" cadastrar={handleClick}>
+      <Modal title="Cadastre-se" cadastrar={handleClick} tamanho="md">
         <Box>
           <MuiTextField
             id="nome"

@@ -5,13 +5,13 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import CloseIcon from '@mui/icons-material/Close';
 import {
   Box as MuiBox,
   styled,
   Dialog,
   Typography,
   IconButton,
+  Breakpoint,
 } from '@mui/material';
 
 type Props = {
@@ -19,10 +19,12 @@ type Props = {
   children: React.ReactNode;
   buttonIcon?: React.ReactNode;
   cadastrar?: (id?: string) => void;
+  deletar?: boolean;
+  tamanho?: false | Breakpoint | undefined;
+  largura?: number;
 };
 const Box = styled(MuiBox)(({ theme }) => ({
   display: 'flex',
-
   backgroundColor: theme.palette.background.paper,
 }));
 
@@ -31,6 +33,9 @@ export default function Modal({
   title,
   cadastrar,
   buttonIcon,
+  deletar,
+  tamanho,
+  largura,
 }: Props) {
   const [open, setOpen] = React.useState(false);
 
@@ -53,39 +58,96 @@ export default function Modal({
       <IconButton onClick={handleClickOpen}>
         {buttonIcon || <AddCircleIcon />}
       </IconButton>
-      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        fullWidth
+        maxWidth={tamanho}
+        sx={{
+          padding: '64px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
         <DialogTitle>{title}</DialogTitle>
         <DialogContent>
           <DialogContentText />
           {children}
         </DialogContent>
-        <DialogActions>
-          <Button
-            variant="contained"
-            color="error"
-            onClick={handleClose}
+        {!deletar && (
+          <DialogActions
             sx={{
-              marginBottom: '15px',
-              marginRight: '10px',
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '16px',
             }}
           >
-            <Typography>{cadastrar ? 'Cancelar' : 'Fechar'}</Typography>
-          </Button>
-
-          {cadastrar && (
             <Button
-              variant="contained"
-              color="success"
-              onClick={handleCloseCadastro}
               sx={{
-                marginBottom: '15px',
-                marginRight: '10px',
+                width: '64px',
+                padding: '0 48px',
+                height: '32px',
+                marginRight: '10%',
               }}
+              variant="outlined"
+              color="error"
+              onClick={handleClose}
             >
-              Salvar
+              <Typography>{cadastrar ? 'Cancelar' : 'Fechar'}</Typography>
             </Button>
-          )}
-        </DialogActions>
+            {cadastrar && (
+              <Button
+                sx={{
+                  width: '64px',
+                  padding: '0 48px',
+                  height: '32px',
+                }}
+                variant="contained"
+                color="primary"
+                onClick={handleCloseCadastro}
+              >
+                <Typography>Salvar</Typography>
+              </Button>
+            )}
+          </DialogActions>
+        )}
+
+        {deletar && (
+          <DialogActions
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-around',
+              paddingBottom: '16px',
+            }}
+          >
+            <Button
+              color="primary"
+              variant="contained"
+              sx={{
+                width: '64px',
+                height: '32px',
+                padding: '8px 48px',
+              }}
+              onClick={handleClose}
+            >
+              <Typography>Cancelar</Typography>
+            </Button>
+            <Button
+              variant="outlined"
+              color="error"
+              sx={{ width: '64px', padding: '8px 48px', height: '32px' }}
+              onClick={handleCloseCadastro}
+            >
+              <Typography>Excluir</Typography>
+            </Button>
+          </DialogActions>
+        )}
       </Dialog>
     </Box>
   );
