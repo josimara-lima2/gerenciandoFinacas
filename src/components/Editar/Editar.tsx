@@ -55,12 +55,8 @@ export default function Editar({ client }: Props) {
       noValidate
       sx={{
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        marginBottom: '25px',
-        marginTop: 0,
-        marginRight: 0,
-        marginLeft: '-30%',
+        justifyContent: 'flex-start',
+        marginLeft: '-90%;',
       }}
     >
       <Modal

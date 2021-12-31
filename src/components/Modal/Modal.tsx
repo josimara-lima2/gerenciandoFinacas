@@ -22,9 +22,8 @@ type Props = {
 };
 const Box = styled(MuiBox)(({ theme }) => ({
   display: 'flex',
-  marginRight: '50px',
+
   backgroundColor: theme.palette.background.paper,
-  marginTop: '25px',
 }));
 
 export default function Modal({

@@ -36,9 +36,6 @@ export default function Cartao() {
     dispatch(fetchApiPageCard('1'));
   };
 
-  const handleInfoCard = () => {
-    console.log('teste');
-  };
   const deleteCardId = (code: string) => {
     const cardCode = pageCard.data.filter(card => card.code === code);
 
@@ -113,7 +110,7 @@ export default function Cartao() {
                       <TableCell>{item.limit}</TableCell>
                       <TableCell>{item.availableLimit}</TableCell>
                       <TableCell>{item.number}</TableCell>
-                      <TableCell>
+                      <TableCell sx={{ display: 'flex' }}>
                         <Tooltip title="Delete">
                           <IconButton onClick={() => deleteCardId(item.code)}>
                             <DeleteOutline />
@@ -124,27 +121,26 @@ export default function Cartao() {
                             <CreateIcon />
                           </IconButton>
                         </Tooltip>
-                        <Tooltip title="info">
-                          <InfoCard>
-                            <Typography align="right">{item.flag}</Typography>
-                            <Table>
-                              <TableHead>
-                                <TableRow>
-                                  <TableCell>Data de vencimento</TableCell>
-                                  <TableCell>Fechamento da fatura</TableCell>
-                                  <TableCell>Código</TableCell>
-                                </TableRow>
-                              </TableHead>
-                              <TableBody>
-                                <TableRow>
-                                  <TableCell>{item.dueDate}</TableCell>
-                                  <TableCell>{item.invoiceClosing}</TableCell>
-                                  <TableCell>{item.code}</TableCell>
-                                </TableRow>
-                              </TableBody>
-                            </Table>
-                          </InfoCard>
-                        </Tooltip>
+
+                        <InfoCard>
+                          <Typography align="right">{item.flag}</Typography>
+                          <Table>
+                            <TableHead>
+                              <TableRow>
+                                <TableCell>Data de vencimento</TableCell>
+                                <TableCell>Fechamento da fatura</TableCell>
+                                <TableCell>Código</TableCell>
+                              </TableRow>
+                            </TableHead>
+                            <TableBody>
+                              <TableRow>
+                                <TableCell>{item.dueDate}</TableCell>
+                                <TableCell>{item.invoiceClosing}</TableCell>
+                                <TableCell>{item.code}</TableCell>
+                              </TableRow>
+                            </TableBody>
+                          </Table>
+                        </InfoCard>
                       </TableCell>
                     </TableRow>
                   );
