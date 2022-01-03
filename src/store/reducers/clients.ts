@@ -11,12 +11,19 @@ export declare interface ClientInterface {
 }
 
 export declare interface ListClientInterface {
-  clients: ClientInterface[];
+  clients: {
+    totalCount: number | null;
+    page: string | null;
+    limite: string | null;
+    totalPage: number | null;
+    nextPage: string;
+    data: ClientInterface[];
+  };
   isLoading: boolean;
 }
 
 const initialState = {
-  clients: [],
+  clients: {},
   isLoading: false,
 } as ListClientInterface;
 
@@ -67,7 +74,7 @@ const ClientSlice = createSlice({
     });
     builder.addCase(fetchApi.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.clients = action.payload;
+      state.clients.data = action.payload;
     });
     builder.addCase(fetchApi.rejected, state => {
       state.isLoading = false;

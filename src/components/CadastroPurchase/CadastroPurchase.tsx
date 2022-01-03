@@ -1,8 +1,11 @@
-import { TextField, Autocomplete } from '@mui/material';
+import { TextField, Autocomplete, MenuItem } from '@mui/material';
 import Modal from 'components/Modal/Modal';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import * as React from 'react';
+import { useAppDispatch, useAppSelector } from 'store';
+import { fetchApiPage, PageSelector } from 'store/reducers/pages';
+import { fetchApi, ClientSelector } from 'store/reducers/clients';
 
 const styleTextField = {
   margin: '5px 0',
@@ -24,8 +27,29 @@ const CadastroPurchase = () => {
   const [formOfPayment, setFormOfPayment] = useState('');
   const [status, setStatus] = useState('');
   const [paidInstallments, setPaidInstallments] = useState(0);
+  const dispatch = useAppDispatch();
+  const { pageCliente, isLoadingg } = useAppSelector(PageSelector);
+  const [client, setClient] = React.useState('');
+  const [creditCardId, setCreditCardId] = useState('');
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setClient(event.target.value);
+    setCreditCardId(event.target.value);
+  };
+
+  useEffect(() => {
+    dispatch(fetchApiPage(''));
+  }, [dispatch]);
+
+  const cadastrar = () => {
+    dispatch(fetchApiPage(''));
+  };
   return (
-    <Modal title="Purchase" buttonIcon={<AddShoppingCartIcon />}>
+    <Modal
+      title="Purchase"
+      buttonIcon={<AddShoppingCartIcon />}
+      cadastrar={cadastrar}
+    >
       <TextField
         id="description"
         label="Descrição"
@@ -106,6 +130,23 @@ const CadastroPurchase = () => {
         value={paidInstallments}
         sx={styleTextField}
       />
+      <TextField
+        id="outlined-select-currency"
+        select
+        label="Select"
+        value={creditCardId}
+        onChange={handleChange}
+        helperText="Selecione o nome do cliente"
+      >
+        {!isLoadingg &&
+          pageCliente.data.map(item => {
+            return (
+              <MenuItem key={item.id} value={item.id}>
+                {item.name}
+              </MenuItem>
+            );
+          })}
+      </TextField>
     </Modal>
   );
 };

@@ -19,7 +19,8 @@ export default function Compra() {
       <Typography>Teste</Typography>
       {!loadingPurchases &&
         pagePurchases.data.map(item => {
-          return <Typography>{item.description}</Typography>;
+          const id = Math.random();
+          return <Typography key={id}>{item.description}</Typography>;
         })}
     </Box>
   );
