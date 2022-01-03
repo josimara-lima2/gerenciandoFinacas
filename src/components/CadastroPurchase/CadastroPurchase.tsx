@@ -1,4 +1,4 @@
-import { TextField, Autocomplete, MenuItem } from '@mui/material';
+import { TextField, Autocomplete, MenuItem, Box } from '@mui/material';
 import Modal from 'components/Modal/Modal';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { useState, useEffect } from 'react';
@@ -101,39 +101,52 @@ const CadastroPurchase = () => {
         value={description}
         sx={styleTextField}
       />
-      <TextField
-        id="value"
-        label="Valor"
-        variant="outlined"
-        required
-        onChange={e => setValue(+e.target.value)}
-        value={value}
-        sx={styleTextField}
-      />
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
 
-      <Autocomplete
-        value={valueAutoComplete}
-        onChange={(event: React.SyntheticEvent, newValue: string | null) => {
-          if (newValue === 'sim') {
-            setParceleOut(true);
-            setValueAutoComplete(optionsParceleOut[0]);
-          } else {
-            setValueAutoComplete(optionsParceleOut[1]);
-            setParceleOut(false);
-          }
+          justifyContent: 'center',
         }}
-        inputValue={inputValue}
-        onInputChange={(event, newInputValue) => {
-          setInputValue(newInputValue);
-        }}
-        id="controllable-states-demo"
-        options={optionsParceleOut}
-        sx={{ width: 300 }}
-        renderInput={params => (
-          <TextField {...params} label="Parcelar valor?" sx={styleTextField} />
-        )}
-      />
+      >
+        <TextField
+          id="value"
+          label="Valor"
+          variant="outlined"
+          required
+          onChange={e => setValue(+e.target.value)}
+          value={value}
+          sx={{ ...styleTextField, marginRight: '5%' }}
+        />
 
+        <Autocomplete
+          value={valueAutoComplete}
+          onChange={(event: React.SyntheticEvent, newValue: string | null) => {
+            if (newValue === 'sim') {
+              setParceleOut(true);
+              setValueAutoComplete(optionsParceleOut[0]);
+            } else {
+              setValueAutoComplete(optionsParceleOut[1]);
+              setParceleOut(false);
+            }
+          }}
+          inputValue={inputValue}
+          onInputChange={(event, newInputValue) => {
+            setInputValue(newInputValue);
+          }}
+          id="controllable-states-demo"
+          options={optionsParceleOut}
+          sx={styleTextField}
+          renderInput={params => (
+            <TextField
+              {...params}
+              label="Parcelar valor?"
+              sx={styleTextField}
+            />
+          )}
+        />
+      </Box>
       {parceleOut && (
         <TextField
           id="numberOfInstallments"
@@ -172,40 +185,53 @@ const CadastroPurchase = () => {
         value={paidInstallments}
         sx={styleTextField}
       />
-      <TextField
-        id="clientId"
-        select
-        label="Cliente"
-        value={clientId}
-        onChange={handleChange}
-        helperText="Selecione o nome do cliente"
+
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+
+          justifyContent: 'center',
+        }}
       >
-        {!isLoadingg &&
-          pageCliente.data.map(item => {
-            return (
-              <MenuItem key={item.id} value={item.id}>
-                {item.name}
-              </MenuItem>
-            );
-          })}
-      </TextField>
-      <TextField
-        id="creditCardId"
-        select
-        label="Cartão"
-        value={creditCardId}
-        onChange={handleChangeCard}
-        helperText="Selecione o cartão de crédito"
-      >
-        {!loadingCard &&
-          pageCard.data.map(item => {
-            return (
-              <MenuItem key={item.id} value={item.id}>
-                {item.name}
-              </MenuItem>
-            );
-          })}
-      </TextField>
+        <TextField
+          id="clientId"
+          select
+          label="Cliente"
+          value={clientId}
+          onChange={handleChange}
+          helperText="Selecione o nome do cliente"
+          sx={{ ...styleTextField, marginRight: '5%' }}
+        >
+          {!isLoadingg &&
+            pageCliente.data.map(item => {
+              return (
+                <MenuItem key={item.id} value={item.id}>
+                  {item.name}
+                </MenuItem>
+              );
+            })}
+        </TextField>
+        <TextField
+          id="creditCardId"
+          select
+          label="Cartão"
+          value={creditCardId}
+          onChange={handleChangeCard}
+          helperText="Selecione o cartão de crédito"
+          sx={styleTextField}
+        >
+          {!loadingCard &&
+            pageCard.data.map(item => {
+              return (
+                <MenuItem key={item.id} value={item.id}>
+                  {item.name}
+                </MenuItem>
+              );
+            })}
+        </TextField>
+      </Box>
     </Modal>
   );
 };
