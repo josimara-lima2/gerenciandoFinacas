@@ -9,7 +9,7 @@ type Props = {
 export default function InfoCard({ children }: Props) {
   return (
     <Box>
-      <Modal title="Credit Card" buttonIcon={<InfoIcon />} tamanho="xs">
+      <Modal title="Credit Card" buttonIcon={<InfoIcon />} tamanho="sm">
         {children}
       </Modal>
     </Box>

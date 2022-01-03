@@ -11,7 +11,7 @@ import { PageCardSelector, fetchApiPageCard } from 'store/reducers/pageCard';
 
 const styleTextField = {
   margin: '5px 0',
-  width: '84%',
+  width: '100%',
   borderRadius: '20px',
 };
 const Box = styled(MuiBox)(() => ({
@@ -105,7 +105,7 @@ const CadastroCard = () => {
             value={cardHolderName}
             sx={styleTextField}
           />
-          <MuiBox sx={{ display: 'flex', width: '84%' }}>
+          <MuiBox sx={{ display: 'flex', width: '100%' }}>
             <TextField
               id="limite"
               label="Limite"

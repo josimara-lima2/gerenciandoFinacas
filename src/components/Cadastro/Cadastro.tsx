@@ -1,8 +1,4 @@
-import {
-  Box as MuiBox,
-  TextField as MuiTextField,
-  styled,
-} from '@mui/material';
+import { Box, TextField as MuiTextField } from '@mui/material';
 import Modal from 'components/Modal/Modal';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'store';
@@ -10,12 +6,6 @@ import { useAppDispatch, useAppSelector } from 'store';
 import { PageSelector, fetchApiPage } from 'store/reducers/pages';
 import { fetchApiPost } from 'store/reducers/clients';
 import { maskCpf } from 'utils/masks';
-
-const Box = styled(MuiBox)(() => ({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-}));
 
 export default function Cadastro() {
   const dispatch = useAppDispatch();
@@ -46,9 +36,8 @@ export default function Cadastro() {
     borderRadius: '20px',
   };
   return (
-    <MuiBox
+    <Box
       component="form"
-      className="container"
       noValidate
       sx={{
         display: 'flex',
@@ -56,48 +45,46 @@ export default function Cadastro() {
         justifyContent: 'space-between',
       }}
     >
-      <Modal title="Cadastre-se" cadastrar={handleClick} tamanho="md">
-        <Box>
-          <MuiTextField
-            id="nome"
-            label="Nome"
-            variant="outlined"
-            required
-            value={name}
-            onChange={e => {
-              setName(e.target.value);
-            }}
-            sx={styleTextField}
-          />
-          <MuiTextField
-            id="email"
-            label="Email"
-            variant="outlined"
-            required
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            sx={styleTextField}
-          />
-          <MuiTextField
-            id="telephone"
-            label="Telephone"
-            variant="outlined"
-            required
-            value={telephone}
-            onChange={e => setTelephone(e.target.value)}
-            sx={styleTextField}
-          />
-          <MuiTextField
-            id="cpf"
-            label="Cpf"
-            variant="outlined"
-            required
-            value={cpf}
-            onChange={e => setCpf(maskCpf(e))}
-            sx={styleTextField}
-          />
-        </Box>
+      <Modal title="Cadastre-se" cadastrar={handleClick} tamanho="sm">
+        <MuiTextField
+          id="nome"
+          label="Nome"
+          variant="outlined"
+          required
+          value={name}
+          onChange={e => {
+            setName(e.target.value);
+          }}
+          sx={styleTextField}
+        />
+        <MuiTextField
+          id="email"
+          label="Email"
+          variant="outlined"
+          required
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          sx={styleTextField}
+        />
+        <MuiTextField
+          id="telephone"
+          label="Telephone"
+          variant="outlined"
+          required
+          value={telephone}
+          onChange={e => setTelephone(e.target.value)}
+          sx={styleTextField}
+        />
+        <MuiTextField
+          id="cpf"
+          label="Cpf"
+          variant="outlined"
+          required
+          value={cpf}
+          onChange={e => setCpf(maskCpf(e))}
+          sx={styleTextField}
+        />
       </Modal>
-    </MuiBox>
+    </Box>
   );
 }

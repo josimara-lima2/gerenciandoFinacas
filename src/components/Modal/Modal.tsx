@@ -2,7 +2,6 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import {
@@ -21,7 +20,6 @@ type Props = {
   cadastrar?: (id?: string) => void;
   deletar?: boolean;
   tamanho?: false | Breakpoint | undefined;
-  largura?: number;
 };
 const Box = styled(MuiBox)(({ theme }) => ({
   display: 'flex',
@@ -35,7 +33,6 @@ export default function Modal({
   buttonIcon,
   deletar,
   tamanho,
-  largura,
 }: Props) {
   const [open, setOpen] = React.useState(false);
 
@@ -68,14 +65,10 @@ export default function Modal({
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          justifyContent: 'center',
         }}
       >
         <DialogTitle>{title}</DialogTitle>
-        <DialogContent>
-          <DialogContentText />
-          {children}
-        </DialogContent>
+        <DialogContent>{children}</DialogContent>
         {!deletar && (
           <DialogActions
             sx={{
@@ -91,7 +84,6 @@ export default function Modal({
                 width: '64px',
                 padding: '0 48px',
                 height: '32px',
-                marginRight: '10%',
               }}
               variant="outlined"
               color="error"

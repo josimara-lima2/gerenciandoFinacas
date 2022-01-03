@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box as MuiBox, FormControl, InputLabel, Input } from '@mui/material';
+import { Box as MuiBox, FormControl, Input } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 

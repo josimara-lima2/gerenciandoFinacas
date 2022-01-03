@@ -9,10 +9,8 @@ import {
   IconButton,
   Typography,
 } from '@mui/material';
-import { DeleteOutline } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from 'store';
 import { useEffect, useState } from 'react';
-import { fetchApiDelete } from 'store/reducers/cards';
 import {
   fetchApiPageCard,
   PageCardSelector,
@@ -72,7 +70,7 @@ export default function Cartao() {
       </Box>
       <Box sx={{ marginTop: '4%' }}>
         <Stack>
-          <Table sx={{ maxHeight: '100vh', overflow: 'auto' }}>
+          <Table sx={{ maxHeight: '100vh', overflow: 'auto' }} stickyHeader>
             <TableHead>
               <TableRow>
                 <TableCell>Name</TableCell>
@@ -81,7 +79,6 @@ export default function Cartao() {
                 <TableCell>Limite</TableCell>
                 <TableCell>Limite Disponível</TableCell>
                 <TableCell>Numero</TableCell>
-
                 <TableCell>Ações</TableCell>
               </TableRow>
             </TableHead>
@@ -107,11 +104,11 @@ export default function Cartao() {
 
                         <InfoCard>
                           <Typography align="right">{item.flag}</Typography>
-                          <Table>
+                          <Table stickyHeader>
                             <TableHead>
                               <TableRow>
-                                <TableCell>Data de vencimento</TableCell>
-                                <TableCell>Fechamento da fatura</TableCell>
+                                <TableCell>Vencimento</TableCell>
+                                <TableCell>Fatura</TableCell>
                                 <TableCell>Código</TableCell>
                               </TableRow>
                             </TableHead>

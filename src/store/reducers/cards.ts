@@ -1,5 +1,5 @@
 import { RootState } from 'store/rootReducer';
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { apiUser } from '../../services/apiUser';
 
 export declare interface CardInterface {

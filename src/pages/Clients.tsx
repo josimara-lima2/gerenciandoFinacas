@@ -5,15 +5,11 @@ import {
   TableHead,
   TableRow,
   TableCell,
-  IconButton,
   TableBody,
-  Tooltip,
   styled,
 } from '@mui/material';
-import { DeleteOutline } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from 'store';
 import { useEffect } from 'react';
-import { fetchApiDelete } from 'store/reducers/clients';
 import {
   fetchApiPage,
   PageSelector,
@@ -23,7 +19,6 @@ import Editar from 'components/Editar/Editar';
 import * as React from 'react';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-import Modal from 'components/Modal/Modal';
 import DeleteClient from 'components/DeleteClient/DeleteClient';
 import Search from '../components/Search/Search';
 
@@ -82,7 +77,7 @@ export default function Clients() {
       </BoxFuncionalidades>
       <BoxTable>
         <Stack spacing={2}>
-          <Table size="small">
+          <Table size="small" stickyHeader>
             <TableHead>
               <TableRow>
                 <TableCell>Name</TableCell>
