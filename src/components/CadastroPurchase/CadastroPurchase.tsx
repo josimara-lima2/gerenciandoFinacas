@@ -5,7 +5,12 @@ import { useState, useEffect } from 'react';
 import * as React from 'react';
 import { useAppDispatch, useAppSelector } from 'store';
 import { fetchApiPage, PageSelector } from 'store/reducers/pages';
-import { fetchApi, ClientSelector } from 'store/reducers/clients';
+import { fetchApiPageCard, PageCardSelector } from 'store/reducers/pageCard';
+import {
+  addPurchase,
+  fetchApiPurchases,
+  fetchApiPurchasesPost,
+} from 'store/reducers/compras';
 
 const styleTextField = {
   margin: '5px 0',
@@ -27,22 +32,59 @@ const CadastroPurchase = () => {
   const [formOfPayment, setFormOfPayment] = useState('');
   const [status, setStatus] = useState('');
   const [paidInstallments, setPaidInstallments] = useState(0);
+
   const dispatch = useAppDispatch();
   const { pageCliente, isLoadingg } = useAppSelector(PageSelector);
-  const [client, setClient] = React.useState('');
-  const [creditCardId, setCreditCardId] = useState('');
+  const { pageCard, loadingCard } = useAppSelector(PageCardSelector);
 
+  const [clientId, setClientId] = useState('');
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setClient(event.target.value);
-    setCreditCardId(event.target.value);
+    setClientId(event.target.value);
   };
 
+  const [creditCardId, setCreditCardId] = useState('');
+  const handleChangeCard = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCreditCardId(event.target.value);
+  };
   useEffect(() => {
     dispatch(fetchApiPage(''));
+    dispatch(fetchApiPageCard(''));
   }, [dispatch]);
 
   const cadastrar = () => {
-    dispatch(fetchApiPage(''));
+    dispatch(
+      fetchApiPurchasesPost({
+        description,
+        value,
+        parceleOut,
+        numberOfInstallments,
+        formOfPayment,
+        status,
+        paidInstallments,
+        creditCardId,
+        clientId,
+      }),
+    )
+      .unwrap()
+      .then(response => {
+        const { statusCode } = response;
+        if (statusCode === 201) {
+          dispatch(
+            addPurchase({
+              description,
+              value,
+              parceleOut,
+              numberOfInstallments,
+              formOfPayment,
+              status,
+              paidInstallments,
+              creditCardId,
+              clientId,
+            }),
+          );
+        }
+        dispatch(fetchApiPurchases(1));
+      });
   };
   return (
     <Modal
@@ -131,15 +173,32 @@ const CadastroPurchase = () => {
         sx={styleTextField}
       />
       <TextField
-        id="outlined-select-currency"
+        id="clientId"
         select
-        label="Select"
-        value={creditCardId}
+        label="Cliente"
+        value={clientId}
         onChange={handleChange}
         helperText="Selecione o nome do cliente"
       >
         {!isLoadingg &&
           pageCliente.data.map(item => {
+            return (
+              <MenuItem key={item.id} value={item.id}>
+                {item.name}
+              </MenuItem>
+            );
+          })}
+      </TextField>
+      <TextField
+        id="creditCardId"
+        select
+        label="Cartão"
+        value={creditCardId}
+        onChange={handleChangeCard}
+        helperText="Selecione o cartão de crédito"
+      >
+        {!loadingCard &&
+          pageCard.data.map(item => {
             return (
               <MenuItem key={item.id} value={item.id}>
                 {item.name}

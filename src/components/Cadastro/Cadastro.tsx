@@ -3,7 +3,7 @@ import Modal from 'components/Modal/Modal';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'store';
 
-import { PageSelector, fetchApiPage } from 'store/reducers/pages';
+import { PageSelector, fetchApiPage, addClient } from 'store/reducers/pages';
 import { fetchApiPost } from 'store/reducers/clients';
 import { maskCpf } from 'utils/masks';
 
@@ -21,12 +21,15 @@ export default function Cadastro() {
       .then(response => {
         const { statusCode } = response;
         if (statusCode === 200) {
-          dispatch(fetchApiPage(pageCliente.page));
+          dispatch(
+            addClient({ id: 'idTemporario', name, email, telephone, cpf }),
+          );
           setName('');
           setEmail('');
           setTelephone('');
           setCpf('');
         }
+        dispatch(fetchApiPage(pageCliente.page));
       })
       .catch(e => e.message);
   };

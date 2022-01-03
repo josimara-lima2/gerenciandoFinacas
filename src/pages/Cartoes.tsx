@@ -27,7 +27,7 @@ import DeleteCard from 'components/DeleteCard/DeleteCard';
 export default function Cartao() {
   const dispatch = useAppDispatch();
   const [page, setPage] = useState(1);
-  const { pageCard, isLoadingg } = useAppSelector(PageCardSelector);
+  const { pageCard, loadingCard } = useAppSelector(PageCardSelector);
   useEffect(() => {
     dispatch(fetchApiPageCard(String(page)));
   }, [dispatch, page]);
@@ -83,7 +83,7 @@ export default function Cartao() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {!isLoadingg &&
+              {!loadingCard &&
                 pageCard.data.map(item => {
                   const id = Math.random();
                   return (

@@ -14,7 +14,7 @@ export declare interface PageCard {
 
 export declare interface PageClienteInterface {
   pageCard: PageCard;
-  isLoadingg: boolean;
+  loadingCard: boolean;
 }
 const initialState = {
   pageCard: {
@@ -25,7 +25,7 @@ const initialState = {
     nextPage: '0',
     data: [],
   },
-  isLoadingg: false,
+  loadingCard: false,
 } as PageClienteInterface;
 
 export const fetchApiSearch = createAsyncThunk(
@@ -54,10 +54,11 @@ export const fetchApiPageCard = createAsyncThunk(
         'content-type': 'application/json',
       },
     };
-    const response = await apiUser.get(
-      `credit-card?page=${page}&limit=8`,
-      config,
-    );
+    const url =
+      page === ''
+        ? `credit-card?page=&limit=`
+        : `credit-card?page=${page}&limit=8`;
+    const response = await apiUser.get(url, config);
     return response.data;
   },
 );
@@ -69,24 +70,24 @@ const PageCardSlice = createSlice({
 
   extraReducers(builder) {
     builder.addCase(fetchApiSearch.pending, state => {
-      state.isLoadingg = true;
+      state.loadingCard = true;
     });
     builder.addCase(fetchApiSearch.fulfilled, (state, action) => {
-      state.isLoadingg = false;
+      state.loadingCard = false;
       state.pageCard = action.payload;
     });
     builder.addCase(fetchApiSearch.rejected, state => {
-      state.isLoadingg = false;
+      state.loadingCard = false;
     });
     builder.addCase(fetchApiPageCard.pending, state => {
-      state.isLoadingg = true;
+      state.loadingCard = true;
     });
     builder.addCase(fetchApiPageCard.fulfilled, (state, action) => {
-      state.isLoadingg = false;
+      state.loadingCard = false;
       state.pageCard = action.payload;
     });
     builder.addCase(fetchApiPageCard.rejected, state => {
-      state.isLoadingg = false;
+      state.loadingCard = false;
     });
   },
 });

@@ -39,7 +39,7 @@ const initialState = {
 } as PagePurchaseInterface;
 
 export const fetchApiPurchases = createAsyncThunk(
-  'purchases?page=&limit=10/fetchApiPurchases',
+  'purchases?page=&limit=8/fetchApiPurchases',
   async (page: number) => {
     const token = localStorage.getItem('token') as string;
     const tokenValid = token.replace(/^"(.*)"$/, '$1');
@@ -49,14 +49,27 @@ export const fetchApiPurchases = createAsyncThunk(
         'content-type': 'application/json',
       },
     };
-    const response = await apiUser.get(
-      `purchases?page=${page}&limit=10`,
-      config,
-    );
+    const url = `purchases?page=${page}&limit=8`;
+    const response = await apiUser.get(url, config);
     return response.data;
   },
 );
+export const fetchApiPurchasesPost = createAsyncThunk(
+  'purchases/fetchApiPurchasesPost',
+  async (purchase: IPurchase) => {
+    const token = localStorage.getItem('token') as string;
+    const tokenValid = token.replace(/^"(.*)"$/, '$1');
+    const config = {
+      headers: {
+        Authorization: 'Bearer '.concat(tokenValid),
+        'content-type': 'application/json',
+      },
+    };
 
+    const response = await apiUser.post('purchases', purchase, config);
+    return response.data;
+  },
+);
 const purchasesSlice = createSlice({
   name: 'purchases',
   initialState,

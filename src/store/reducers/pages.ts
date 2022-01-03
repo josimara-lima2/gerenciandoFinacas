@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from 'store/rootReducer';
 import { apiUser } from '../../services/apiUser';
 import { ClientInterface } from './clients';
@@ -29,7 +29,7 @@ const initialState = {
 } as PageClienteInterface;
 
 export const fetchApiPage = createAsyncThunk(
-  'clients?page=&limit=/fetchApiPage',
+  'clients?page=&limit=15/fetchApiPage',
   async (page: string) => {
     const token = localStorage.getItem('token') as string;
     const tokenValid = token.replace(/^"(.*)"$/, '$1');
@@ -39,11 +39,10 @@ export const fetchApiPage = createAsyncThunk(
         'content-type': 'application/json',
       },
     };
-    if (page === '') {
-      const response = await apiUser.get(`clients?page=&limit=`, config);
-      return response.data;
-    }
-    const response = await apiUser.get(`clients?page=${page}&limit=`, config);
+    const url =
+      page === '' ? `clients?page=&limit=` : `clients?page=${page}&limit=10`;
+    const response = await apiUser.get(url, config);
+
     return response.data;
   },
 );
@@ -67,7 +66,11 @@ export const fetchApiSearch = createAsyncThunk(
 const PageSlice = createSlice({
   name: 'pages',
   initialState,
-  reducers: {},
+  reducers: {
+    addClient(state, action: PayloadAction<ClientInterface>) {
+      state.pageCliente.data = [...state.pageCliente.data, action.payload];
+    },
+  },
 
   extraReducers(builder) {
     builder.addCase(fetchApiPage.pending, state => {
@@ -92,6 +95,6 @@ const PageSlice = createSlice({
     });
   },
 });
-
+export const { addClient } = PageSlice.actions;
 export const PageSelector = (state: RootState) => state.pages;
 export default PageSlice.reducer;
