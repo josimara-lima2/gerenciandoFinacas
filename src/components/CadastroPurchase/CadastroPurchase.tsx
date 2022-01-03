@@ -164,7 +164,7 @@ const CadastroPurchase = () => {
         sx={styleTextField}
       />
       <TextField
-        id="poidInstallments"
+        id="paidInstallments"
         label="Numero de parcelas pagas"
         variant="outlined"
         required

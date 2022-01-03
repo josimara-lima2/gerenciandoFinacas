@@ -15,7 +15,7 @@ declare interface IPurchase {
 }
 export declare interface PagePurchases {
   totalCount: number;
-  page: string;
+  page: number;
   limite: string;
   totalPage: number;
   nextPage: string;
@@ -29,7 +29,7 @@ export declare interface PagePurchaseInterface {
 const initialState = {
   pagePurchases: {
     totalCount: 1,
-    page: '1',
+    page: 1,
     limite: '3',
     totalPage: 1,
     nextPage: '0',
@@ -39,7 +39,7 @@ const initialState = {
 } as PagePurchaseInterface;
 
 export const fetchApiPurchases = createAsyncThunk(
-  'purchases?page=&limit=8/fetchApiPurchases',
+  'purchases?page=&limit=5/fetchApiPurchases',
   async (page: number) => {
     const token = localStorage.getItem('token') as string;
     const tokenValid = token.replace(/^"(.*)"$/, '$1');
@@ -49,11 +49,12 @@ export const fetchApiPurchases = createAsyncThunk(
         'content-type': 'application/json',
       },
     };
-    const url = `purchases?page=${page}&limit=8`;
+    const url = `purchases?page=${page}&limit=5`;
     const response = await apiUser.get(url, config);
     return response.data;
   },
 );
+
 export const fetchApiPurchasesPost = createAsyncThunk(
   'purchases/fetchApiPurchasesPost',
   async (purchase: IPurchase) => {
@@ -70,6 +71,7 @@ export const fetchApiPurchasesPost = createAsyncThunk(
     return response.data;
   },
 );
+
 const purchasesSlice = createSlice({
   name: 'purchases',
   initialState,

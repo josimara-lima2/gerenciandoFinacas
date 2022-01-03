@@ -1,12 +1,10 @@
 import {
   Box,
-  Stack,
   Table,
   TableRow,
   TableHead,
   TableCell,
   TableBody,
-  Pagination,
   IconButton,
 } from '@mui/material';
 import CadastroPurchase from 'components/CadastroPurchase/CadastroPurchase';
@@ -18,58 +16,46 @@ import { DeleteOutline } from '@mui/icons-material';
 
 export default function Compra() {
   const dispatch = useAppDispatch();
-  const [page, setPage] = useState(1);
+
   const { pagePurchases, loadingPurchases } = useAppSelector(purchasesSelector);
 
-  const handleChangePagination = (
-    e: React.ChangeEvent<unknown>,
-    value: number,
-  ) => {
-    setPage(value);
-  };
-
   useEffect(() => {
-    dispatch(fetchApiPurchases(page));
-  }, [dispatch, page]);
+    dispatch(fetchApiPurchases(1));
+  }, [dispatch]);
+
   return (
     <Box>
       <CadastroPurchase />
-      {/* <Search /> */}
+      {/* <Search atualiza={handleAtualiza} onChange={handleChange} /> */}
 
       <Box sx={{ marginTop: '4%' }}>
-        <Stack>
-          <Table sx={{ maxHeight: '100vh', overflow: 'auto' }} stickyHeader>
-            <TableHead>
-              <TableRow>
-                <TableCell>Descrição</TableCell>
-                <TableCell>Valor</TableCell>
+        <Table sx={{ maxHeight: '100vh', overflow: 'auto' }} stickyHeader>
+          <TableHead>
+            <TableRow>
+              <TableCell>Descrição</TableCell>
+              <TableCell>Valor</TableCell>
 
-                <TableCell>Ações</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {!loadingPurchases &&
-                pagePurchases.data.map(item => {
-                  const id = Math.random();
-                  return (
-                    <TableRow key={id}>
-                      <TableCell>{item.description}</TableCell>
-                      <TableCell>{item.value}</TableCell>
-                      <TableCell sx={{ display: 'flex' }}>
-                        <IconButton>
-                          <DeleteOutline />
-                        </IconButton>
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
-            </TableBody>
-          </Table>
-          <Pagination
-            count={pagePurchases.totalPage}
-            onChange={handleChangePagination}
-          />
-        </Stack>
+              <TableCell>Ações</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {!loadingPurchases &&
+              pagePurchases.data.map(item => {
+                const id = Math.random();
+                return (
+                  <TableRow key={id}>
+                    <TableCell>{item.description}</TableCell>
+                    <TableCell>{item.value}</TableCell>
+                    <TableCell sx={{ display: 'flex' }}>
+                      <IconButton>
+                        <DeleteOutline />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+          </TableBody>
+        </Table>
       </Box>
     </Box>
   );
