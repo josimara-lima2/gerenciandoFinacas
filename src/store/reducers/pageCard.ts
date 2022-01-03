@@ -44,7 +44,7 @@ export const fetchApiSearch = createAsyncThunk(
   },
 );
 export const fetchApiPageCard = createAsyncThunk(
-  'credit-card?page=&limit=6/fetchApiPage',
+  'credit-card?page=&limit=8/fetchApiPage',
   async (page: string) => {
     const token = localStorage.getItem('token') as string;
     const tokenValid = token.replace(/^"(.*)"$/, '$1');
@@ -55,7 +55,7 @@ export const fetchApiPageCard = createAsyncThunk(
       },
     };
     const response = await apiUser.get(
-      `credit-card?page=${page}&limit=6`,
+      `credit-card?page=${page}&limit=8`,
       config,
     );
     return response.data;

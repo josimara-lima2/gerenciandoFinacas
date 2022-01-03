@@ -5,6 +5,7 @@ import clientsReducer from './reducers/clients';
 import cardReducer from './reducers/cards';
 import pageReducer from './reducers/pages';
 import pagesCardReducer from './reducers/pageCard';
+import purchasesReducer from './reducers/compras';
 
 const rootReducer = combineReducers({
   posts: postsReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   cards: cardReducer,
   pages: pageReducer,
   pagesCard: pagesCardReducer,
+  purchases: purchasesReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

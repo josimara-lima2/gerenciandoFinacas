@@ -82,9 +82,9 @@ export default function Sidebar() {
       </Link>
 
       <Link
-        to="/compra"
+        to="/purchases"
         sx={{
-          backgroundColor: rota.pathname === '/compra' ? '#1C86EE' : '',
+          backgroundColor: rota.pathname === '/purchases' ? '#1C86EE' : '',
         }}
       >
         <ListItemIcon>

@@ -17,7 +17,7 @@ const DeleteCard = ({ card }: Props) => {
 
   const deleteCardId = (code: string) => {
     const cardCode = pageCard.data.filter(card => card.code === code);
-    console.log(cardCode);
+
     if (cardCode[0].id) {
       dispatch(fetchApiDelete(cardCode[0].id))
         .unwrap()

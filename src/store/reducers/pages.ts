@@ -29,7 +29,7 @@ const initialState = {
 } as PageClienteInterface;
 
 export const fetchApiPage = createAsyncThunk(
-  'clients?page=&limit=3/fetchApiPage',
+  'clients?page=&limit=15/fetchApiPage',
   async (page: string) => {
     const token = localStorage.getItem('token') as string;
     const tokenValid = token.replace(/^"(.*)"$/, '$1');
@@ -39,7 +39,7 @@ export const fetchApiPage = createAsyncThunk(
         'content-type': 'application/json',
       },
     };
-    const response = await apiUser.get(`clients?page=${page}&limit=3`, config);
+    const response = await apiUser.get(`clients?page=${page}&limit=15`, config);
     return response.data;
   },
 );

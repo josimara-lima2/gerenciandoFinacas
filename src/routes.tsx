@@ -44,7 +44,7 @@ export default function CustomRoutes() {
         }
       />
       <Route
-        path="/compra"
+        path="/purchases"
         element={
           <PrivateRouter>
             <Compra />
