@@ -83,7 +83,7 @@ const CadastroPurchase = () => {
             }),
           );
         }
-        dispatch(fetchApiPurchases());
+        dispatch(fetchApiPurchases(1));
       });
   };
   return (

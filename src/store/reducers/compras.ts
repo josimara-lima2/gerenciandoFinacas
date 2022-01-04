@@ -39,8 +39,8 @@ const initialState = {
 } as PagePurchaseInterface;
 
 export const fetchApiPurchases = createAsyncThunk(
-  'purchases/fetchApiPurchases',
-  async () => {
+  'purchases?page=&limit=15/fetchApiPurchases',
+  async (page: number) => {
     const token = localStorage.getItem('token') as string;
     const tokenValid = token.replace(/^"(.*)"$/, '$1');
     const config = {
@@ -49,7 +49,7 @@ export const fetchApiPurchases = createAsyncThunk(
         'content-type': 'application/json',
       },
     };
-    const url = 'purchases';
+    const url = `purchases?page=${page}&limit=15`;
     const response = await apiUser.get(url, config);
     return response.data;
   },
@@ -71,6 +71,21 @@ export const fetchApiPurchasesPost = createAsyncThunk(
     return response.data;
   },
 );
+export const fetchApiSearch = createAsyncThunk(
+  'purchases?search=/fetchApiSearch',
+  async (search: string) => {
+    const token = localStorage.getItem('token') as string;
+    const tokenValid = token.replace(/^"(.*)"$/, '$1');
+    const config = {
+      headers: {
+        Authorization: 'Bearer '.concat(tokenValid),
+        'content-type': 'application/json',
+      },
+    };
+    const response = await apiUser.get(`purchases?search=${search}`, config);
+    return response.data;
+  },
+);
 
 const purchasesSlice = createSlice({
   name: 'purchases',
@@ -89,6 +104,16 @@ const purchasesSlice = createSlice({
       state.pagePurchases = action.payload;
     });
     builder.addCase(fetchApiPurchases.rejected, state => {
+      state.loadingPurchases = false;
+    });
+    builder.addCase(fetchApiSearch.pending, state => {
+      state.loadingPurchases = true;
+    });
+    builder.addCase(fetchApiSearch.fulfilled, (state, action) => {
+      state.loadingPurchases = false;
+      state.pagePurchases = action.payload;
+    });
+    builder.addCase(fetchApiSearch.rejected, state => {
       state.loadingPurchases = false;
     });
   },
