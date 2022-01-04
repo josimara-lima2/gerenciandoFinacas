@@ -124,7 +124,7 @@ export default function Header() {
           >
             Finanças
           </Typography>
-          <IconButton onClick={toggleTheme}>
+          <IconButton onClick={toggleTheme} sx={{ marginRight: '10px' }}>
             {mode === 'light' ? <LightModeIcon /> : <DarkModeIcon />}
           </IconButton>
           <IconButton onClick={handleLogout}>

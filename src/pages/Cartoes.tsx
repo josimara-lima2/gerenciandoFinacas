@@ -23,6 +23,7 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import InfoCard from 'components/ModalCard/ModalCard';
 import DeleteCard from 'components/DeleteCard/DeleteCard';
+import chipImg from '../assets/images/chip.png';
 
 export default function Cartao() {
   const dispatch = useAppDispatch();
@@ -103,23 +104,70 @@ export default function Cartao() {
                         </Tooltip>
 
                         <InfoCard>
-                          <Typography align="right">{item.flag}</Typography>
-                          <Table stickyHeader>
-                            <TableHead>
-                              <TableRow>
-                                <TableCell>Vencimento</TableCell>
-                                <TableCell>Fatura</TableCell>
-                                <TableCell>Código</TableCell>
-                              </TableRow>
-                            </TableHead>
-                            <TableBody>
-                              <TableRow>
-                                <TableCell>{item.dueDate}</TableCell>
-                                <TableCell>{item.invoiceClosing}</TableCell>
-                                <TableCell>{item.code}</TableCell>
-                              </TableRow>
-                            </TableBody>
-                          </Table>
+                          <Box
+                            sx={{
+                              display: 'flex',
+                              margin: '10px 20px',
+                              justifyContent: 'space-between',
+                            }}
+                          >
+                            <img
+                              style={{ marginTop: '30px' }}
+                              width={50}
+                              src={chipImg}
+                              alt="chip"
+                            />
+                            <Typography
+                              sx={{ marginRight: '10px', marginTop: '10px' }}
+                            >
+                              {item.flag}
+                            </Typography>
+                          </Box>
+                          <Typography
+                            align="justify"
+                            variant="h5"
+                            sx={{ marginLeft: '20px', marginTop: '20px' }}
+                          >
+                            {item.number}
+                          </Typography>
+                          <Box
+                            sx={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'start',
+                              marginTop: '20px',
+                              marginLeft: '20px',
+                            }}
+                          >
+                            <Box
+                              sx={{ display: 'flex', flexDirection: 'column' }}
+                            >
+                              <Typography variant="caption">Titular</Typography>
+                              <Typography>{item.cardHolderName}</Typography>
+                            </Box>
+                            <Box
+                              sx={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                marginLeft: '40px',
+                              }}
+                            >
+                              <Typography variant="caption">
+                                Vencimento
+                              </Typography>
+                              <Typography>{item.dueDate}</Typography>
+                            </Box>
+                            <Box
+                              sx={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                marginLeft: '50px',
+                              }}
+                            >
+                              <Typography variant="caption">CVV</Typography>
+                              <Typography>{item.code}</Typography>
+                            </Box>
+                          </Box>
                         </InfoCard>
                       </TableCell>
                     </TableRow>

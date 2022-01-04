@@ -10,6 +10,11 @@ import {
   fetchApiPost,
 } from 'store/reducers/pageClient';
 import { maskCpf } from 'utils/masks';
+import InputAdornment from '@mui/material/InputAdornment';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import PermIdentityIcon from '@mui/icons-material/PermIdentity';
+import CallIcon from '@mui/icons-material/Call';
 
 export default function Cadastro() {
   const dispatch = useAppDispatch();
@@ -60,6 +65,13 @@ export default function Cadastro() {
           onChange={e => {
             setName(e.target.value);
           }}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <PermIdentityIcon />
+              </InputAdornment>
+            ),
+          }}
           sx={styleTextField}
         />
         <MuiTextField
@@ -70,6 +82,13 @@ export default function Cadastro() {
           value={email}
           onChange={e => setEmail(e.target.value)}
           sx={styleTextField}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <MailOutlineIcon />
+              </InputAdornment>
+            ),
+          }}
         />
         <MuiTextField
           id="telephone"
@@ -78,6 +97,13 @@ export default function Cadastro() {
           required
           value={telephone}
           onChange={e => setTelephone(e.target.value)}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <CallIcon />
+              </InputAdornment>
+            ),
+          }}
           sx={styleTextField}
         />
         <MuiTextField

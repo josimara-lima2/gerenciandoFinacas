@@ -10,11 +10,13 @@ import {
 import AddCardIcon from '@mui/icons-material/AddCard';
 import * as React from 'react';
 import { maskCode, maskNumber, maskValue, maskFatura } from 'utils/masks';
+import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined';
+import InputAdornment from '@mui/material/InputAdornment';
+import DateRangeOutlinedIcon from '@mui/icons-material/DateRangeOutlined';
 
 const styleTextField = {
   margin: '8px 0',
   width: '100%',
-  borderRadius: '20px',
 };
 const Box = styled(MuiBox)(() => ({
   display: 'flex',
@@ -134,6 +136,13 @@ const CadastroCard = () => {
             placeholder="00/00/0000"
             required
             onChange={e => setDueDate(e.target.value)}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <DateRangeOutlinedIcon />
+                </InputAdornment>
+              ),
+            }}
             value={dueDate}
             sx={styleTextField}
           />
@@ -154,6 +163,13 @@ const CadastroCard = () => {
             placeholder="9999 9999 9999 9999"
             required
             onChange={e => setNumber(maskNumber(e))}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <CreditCardOutlinedIcon />
+                </InputAdornment>
+              ),
+            }}
             value={number}
             sx={styleTextField}
           />

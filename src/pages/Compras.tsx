@@ -1,5 +1,5 @@
 import {
-  Box,
+  Box as MuiBox,
   Table,
   TableRow,
   TableHead,
@@ -8,6 +8,7 @@ import {
   IconButton,
   Stack,
   Pagination,
+  styled,
 } from '@mui/material';
 import CadastroPurchase from 'components/CadastroPurchase/CadastroPurchase';
 import Search from 'components/Search/Search';
@@ -20,6 +21,24 @@ import {
 } from 'store/reducers/compras';
 import { DeleteOutline } from '@mui/icons-material';
 
+const BoxContainer = styled(MuiBox)(() => ({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'space-between',
+  justifyContent: 'center',
+}));
+
+const BoxTable = styled(MuiBox)(() => ({
+  marginTop: '4%',
+  maxHeight: '100vh',
+  overflow: 'auto',
+}));
+
+const BoxFuncionalidades = styled(MuiBox)(() => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+}));
 export default function Compra() {
   const dispatch = useAppDispatch();
   const [page, setPage] = useState(1);
@@ -47,18 +66,21 @@ export default function Compra() {
   }, [dispatch, page]);
 
   return (
-    <Box>
-      <CadastroPurchase />
-      <Search atualiza={handleAtualiza} onChange={handleChange} />
+    <BoxContainer>
+      <BoxFuncionalidades>
+        <CadastroPurchase />
+        <Search atualiza={handleAtualiza} onChange={handleChange} />
+      </BoxFuncionalidades>
 
-      <Box sx={{ marginTop: '4%' }}>
+      <BoxTable>
         <Stack>
-          <Table sx={{ maxHeight: '100vh', overflow: 'auto' }} stickyHeader>
+          <Table stickyHeader>
             <TableHead>
               <TableRow>
                 <TableCell>Descrição</TableCell>
                 <TableCell>Valor</TableCell>
-
+                <TableCell>Status</TableCell>
+                <TableCell>Forma de pagamento</TableCell>
                 <TableCell>Ações</TableCell>
               </TableRow>
             </TableHead>
@@ -67,10 +89,18 @@ export default function Compra() {
                 pagePurchases.data.map(item => {
                   const id = Math.random();
                   return (
-                    <TableRow key={id}>
+                    <TableRow key={id} sx={{ padding: 0 }}>
                       <TableCell>{item.description}</TableCell>
                       <TableCell>{item.value}</TableCell>
-                      <TableCell sx={{ display: 'flex' }}>
+                      <TableCell>{item.status}</TableCell>
+                      <TableCell>{item.formOfPayment}</TableCell>
+                      <TableCell
+                        sx={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'start',
+                        }}
+                      >
                         <IconButton>
                           <DeleteOutline />
                         </IconButton>
@@ -85,7 +115,7 @@ export default function Compra() {
           count={pagePurchases.totalPage}
           onChange={handleChangePagination}
         />
-      </Box>
-    </Box>
+      </BoxTable>
+    </BoxContainer>
   );
 }

@@ -30,6 +30,9 @@ const DeleteCard = ({ card }: Props) => {
           if (statusCode === 201) {
             dispatch(fetchApiPageCard(pageCard.page));
           }
+        })
+        .catch(error => {
+          console.log(error.message);
         });
     }
   };
