@@ -2,12 +2,14 @@ import { Box as MuiBox, TextField, styled } from '@mui/material';
 import Modal from 'components/Modal/Modal';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'store';
-import { fetchApiPost } from 'store/reducers/cards';
+import {
+  fetchApiPost,
+  PageCardSelector,
+  fetchApiPageCard,
+} from 'store/reducers/pageCard';
 import AddCardIcon from '@mui/icons-material/AddCard';
 import * as React from 'react';
 import { maskCode, maskNumber, maskValue, maskFatura } from 'utils/masks';
-
-import { PageCardSelector, fetchApiPageCard } from 'store/reducers/pageCard';
 
 const styleTextField = {
   margin: '8px 0',

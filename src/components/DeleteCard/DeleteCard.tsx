@@ -1,8 +1,12 @@
 import Modal from 'components/Modal/Modal';
 import { DeleteOutline } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from 'store';
-import { fetchApiDelete, CardInterface } from 'store/reducers/cards';
-import { fetchApiPageCard, PageCardSelector } from 'store/reducers/pageCard';
+import {
+  fetchApiDelete,
+  CardInterface,
+  fetchApiPageCard,
+  PageCardSelector,
+} from 'store/reducers/pageCard';
 import Box from '@mui/material/Box';
 import { Typography } from '@mui/material';
 import imgDel from '../../assets/images/delete.png';

@@ -3,8 +3,12 @@ import Modal from 'components/Modal/Modal';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'store';
 
-import { PageSelector, fetchApiPage, addClient } from 'store/reducers/pages';
-import { fetchApiPost } from 'store/reducers/clients';
+import {
+  PageSelector,
+  fetchApiPage,
+  addClient,
+  fetchApiPost,
+} from 'store/reducers/pageClient';
 import { maskCpf } from 'utils/masks';
 
 export default function Cadastro() {

@@ -3,9 +3,13 @@ import Modal from 'components/Modal/Modal';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'store';
 import CreateIcon from '@mui/icons-material/Create';
-import { PageSelector, fetchApiPage } from 'store/reducers/pages';
+import {
+  PageSelector,
+  fetchApiPage,
+  fetchApiPut,
+  ClientInterface,
+} from 'store/reducers/pageClient';
 import { maskCpf } from 'utils/masks';
-import { fetchApiPut, ClientInterface } from '../../store/reducers/clients';
 
 type Props = {
   client: ClientInterface;

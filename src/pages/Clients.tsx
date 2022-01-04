@@ -14,7 +14,7 @@ import {
   fetchApiPage,
   PageSelector,
   fetchApiSearch,
-} from 'store/reducers/pages';
+} from 'store/reducers/pageClient';
 import Editar from 'components/Editar/Editar';
 import * as React from 'react';
 import Pagination from '@mui/material/Pagination';

@@ -4,7 +4,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { useState, useEffect } from 'react';
 import * as React from 'react';
 import { useAppDispatch, useAppSelector } from 'store';
-import { fetchApiPage, PageSelector } from 'store/reducers/pages';
+import { fetchApiPage, PageSelector } from 'store/reducers/pageClient';
 import { fetchApiPageCard, PageCardSelector } from 'store/reducers/pageCard';
 import {
   addPurchase,

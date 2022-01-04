@@ -41,16 +41,8 @@ const initialState = {
 export const fetchApiPurchases = createAsyncThunk(
   'purchases?page=&limit=15/fetchApiPurchases',
   async (page: number) => {
-    const token = localStorage.getItem('token') as string;
-    const tokenValid = token.replace(/^"(.*)"$/, '$1');
-    const config = {
-      headers: {
-        Authorization: 'Bearer '.concat(tokenValid),
-        'content-type': 'application/json',
-      },
-    };
     const url = `purchases?page=${page}&limit=15`;
-    const response = await apiUser.get(url, config);
+    const response = await apiUser.get(url);
     return response.data;
   },
 );
@@ -58,31 +50,14 @@ export const fetchApiPurchases = createAsyncThunk(
 export const fetchApiPurchasesPost = createAsyncThunk(
   'purchases/fetchApiPurchasesPost',
   async (purchase: IPurchase) => {
-    const token = localStorage.getItem('token') as string;
-    const tokenValid = token.replace(/^"(.*)"$/, '$1');
-    const config = {
-      headers: {
-        Authorization: 'Bearer '.concat(tokenValid),
-        'content-type': 'application/json',
-      },
-    };
-
-    const response = await apiUser.post('purchases', purchase, config);
+    const response = await apiUser.post('purchases', purchase);
     return response.data;
   },
 );
 export const fetchApiSearch = createAsyncThunk(
   'purchases?search=/fetchApiSearch',
   async (search: string) => {
-    const token = localStorage.getItem('token') as string;
-    const tokenValid = token.replace(/^"(.*)"$/, '$1');
-    const config = {
-      headers: {
-        Authorization: 'Bearer '.concat(tokenValid),
-        'content-type': 'application/json',
-      },
-    };
-    const response = await apiUser.get(`purchases?search=${search}`, config);
+    const response = await apiUser.get(`purchases?search=${search}`);
     return response.data;
   },
 );

@@ -1,7 +1,24 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from 'store/rootReducer';
 import { apiUser } from '../../services/apiUser';
-import { CardInterface } from './cards';
+
+export declare interface CardInterface {
+  id: string;
+  name: string;
+  flag: string;
+  cardHolderName: string;
+  limit: number;
+  availableLimit: number;
+  dueDate: string;
+  invoiceClosing: number;
+  number: string;
+  code: string;
+}
+
+export declare interface ListCardInterface {
+  cards: CardInterface[];
+  isLoading: boolean;
+}
 
 export declare interface PageCard {
   totalCount: number;
@@ -22,7 +39,7 @@ const initialState = {
     page: '1',
     limite: '3',
     totalPage: 1,
-    nextPage: '0',
+    nextPage: '2',
     data: [],
   },
   loadingCard: false,
@@ -31,38 +48,35 @@ const initialState = {
 export const fetchApiSearch = createAsyncThunk(
   'credit-card?search=/fetchApiPage',
   async (search: string) => {
-    const token = localStorage.getItem('token') as string;
-    const tokenValid = token.replace(/^"(.*)"$/, '$1');
-    const config = {
-      headers: {
-        Authorization: 'Bearer '.concat(tokenValid),
-        'content-type': 'application/json',
-      },
-    };
-    const response = await apiUser.get(`credit-card?search=${search}`, config);
+    const response = await apiUser.get(`credit-card?search=${search}`);
     return response.data;
   },
 );
 export const fetchApiPageCard = createAsyncThunk(
   'credit-card?page=&limit=8/fetchApiPage',
   async (page: string) => {
-    const token = localStorage.getItem('token') as string;
-    const tokenValid = token.replace(/^"(.*)"$/, '$1');
-    const config = {
-      headers: {
-        Authorization: 'Bearer '.concat(tokenValid),
-        'content-type': 'application/json',
-      },
-    };
     const url =
       page === ''
         ? `credit-card?page=&limit=`
         : `credit-card?page=${page}&limit=8`;
-    const response = await apiUser.get(url, config);
+    const response = await apiUser.get(url);
     return response.data;
   },
 );
-
+export const fetchApiPost = createAsyncThunk(
+  'credit-card/fetchApiPost',
+  async (card: CardInterface) => {
+    const response = await apiUser.post('credit-card', card);
+    return response.data;
+  },
+);
+export const fetchApiDelete = createAsyncThunk(
+  'credit-card/id/fetchApiPost',
+  async (id: string) => {
+    const response = await apiUser.delete(`credit-card/${id}`);
+    return response.data;
+  },
+);
 const PageCardSlice = createSlice({
   name: 'pages',
   initialState,
