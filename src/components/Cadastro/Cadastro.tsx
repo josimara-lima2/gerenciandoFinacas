@@ -34,21 +34,19 @@ export default function Cadastro() {
       .catch(e => e.message);
   };
   const styleTextField = {
-    margin: '5px',
+    margin: '8px',
     width: '100%',
     borderRadius: '20px',
   };
   return (
-    <Box
-      component="form"
-      noValidate
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-      }}
-    >
-      <Modal title="Cadastre-se" cadastrar={handleClick} tamanho="sm">
+    <Modal title="Cadastre-se" cadastrar={handleClick} tamanho="sm">
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
         <MuiTextField
           id="nome"
           label="Nome"
@@ -87,7 +85,7 @@ export default function Cadastro() {
           onChange={e => setCpf(maskCpf(e))}
           sx={styleTextField}
         />
-      </Modal>
-    </Box>
+      </Box>
+    </Modal>
   );
 }

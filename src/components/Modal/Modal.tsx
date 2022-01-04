@@ -24,6 +24,7 @@ type Props = {
 const Box = styled(MuiBox)(({ theme }) => ({
   display: 'flex',
   backgroundColor: theme.palette.background.paper,
+  marginTop: '5px',
 }));
 
 export default function Modal({
@@ -61,7 +62,6 @@ export default function Modal({
         fullWidth
         maxWidth={tamanho}
         sx={{
-          padding: '64px',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -75,7 +75,8 @@ export default function Modal({
               display: 'flex',
               flexDirection: 'row',
               alignItems: 'center',
-              justifyContent: 'center',
+              justifyContent: 'space-around',
+              width: '100%',
               padding: '16px',
             }}
           >
@@ -95,7 +96,7 @@ export default function Modal({
               <Button
                 sx={{
                   width: '64px',
-                  padding: '0 48px',
+                  padding: '8px 48px',
                   height: '32px',
                 }}
                 variant="contained"

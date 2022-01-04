@@ -39,8 +39,8 @@ const initialState = {
 } as PagePurchaseInterface;
 
 export const fetchApiPurchases = createAsyncThunk(
-  'purchases?page=&limit=5/fetchApiPurchases',
-  async (page: number) => {
+  'purchases/fetchApiPurchases',
+  async () => {
     const token = localStorage.getItem('token') as string;
     const tokenValid = token.replace(/^"(.*)"$/, '$1');
     const config = {
@@ -49,7 +49,7 @@ export const fetchApiPurchases = createAsyncThunk(
         'content-type': 'application/json',
       },
     };
-    const url = `purchases?page=${page}&limit=5`;
+    const url = 'purchases';
     const response = await apiUser.get(url, config);
     return response.data;
   },

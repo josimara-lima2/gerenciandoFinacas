@@ -13,7 +13,7 @@ import {
 } from 'store/reducers/compras';
 
 const styleTextField = {
-  margin: '5px 0',
+  margin: '8px 0',
   width: '100%',
   borderRadius: '20px',
 };
@@ -83,7 +83,7 @@ const CadastroPurchase = () => {
             }),
           );
         }
-        dispatch(fetchApiPurchases(1));
+        dispatch(fetchApiPurchases());
       });
   };
   return (
@@ -106,7 +106,7 @@ const CadastroPurchase = () => {
           display: 'flex',
           flexDirection: 'row',
           alignItems: 'center',
-
+          width: '100%',
           justifyContent: 'center',
         }}
       >
@@ -185,7 +185,6 @@ const CadastroPurchase = () => {
         value={paidInstallments}
         sx={styleTextField}
       />
-
       <Box
         sx={{
           display: 'flex',

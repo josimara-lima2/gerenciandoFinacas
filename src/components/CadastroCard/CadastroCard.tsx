@@ -10,7 +10,7 @@ import { maskCode, maskNumber, maskValue, maskFatura } from 'utils/masks';
 import { PageCardSelector, fetchApiPageCard } from 'store/reducers/pageCard';
 
 const styleTextField = {
-  margin: '5px 0',
+  margin: '8px 0',
   width: '100%',
   borderRadius: '20px',
 };

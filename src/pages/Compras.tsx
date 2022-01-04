@@ -20,7 +20,7 @@ export default function Compra() {
   const { pagePurchases, loadingPurchases } = useAppSelector(purchasesSelector);
 
   useEffect(() => {
-    dispatch(fetchApiPurchases(1));
+    dispatch(fetchApiPurchases());
   }, [dispatch]);
 
   return (

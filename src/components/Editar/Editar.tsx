@@ -37,59 +37,50 @@ export default function Editar({ client }: Props) {
     borderRadius: '20px',
   };
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-      }}
+    <Modal
+      title="Cadastre-se"
+      buttonIcon={<CreateIcon />}
+      cadastrar={() => handleClick(client.id)}
+      tamanho="xs"
     >
-      <Modal
-        title="Cadastre-se"
-        buttonIcon={<CreateIcon />}
-        cadastrar={() => handleClick(client.id)}
-        tamanho="xs"
-      >
-        <MuiTextField
-          id="nome"
-          label="Nome"
-          variant="outlined"
-          required
-          value={name}
-          onChange={e => {
-            setName(e.target.value);
-          }}
-          sx={styleTextField}
-        />
-        <MuiTextField
-          id="email"
-          label="Email"
-          variant="outlined"
-          required
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          sx={styleTextField}
-        />
-        <MuiTextField
-          id="telephone"
-          label="Telephone"
-          variant="outlined"
-          required
-          value={telephone}
-          onChange={e => setTelephone(e.target.value)}
-          sx={styleTextField}
-        />
-        <MuiTextField
-          id="cpf"
-          label="Cpf"
-          variant="outlined"
-          required
-          value={cpf}
-          onChange={e => setCpf(maskCpf(e))}
-          sx={styleTextField}
-        />
-      </Modal>
-    </Box>
+      <MuiTextField
+        id="nome"
+        label="Nome"
+        variant="outlined"
+        required
+        value={name}
+        onChange={e => {
+          setName(e.target.value);
+        }}
+        sx={styleTextField}
+      />
+      <MuiTextField
+        id="email"
+        label="Email"
+        variant="outlined"
+        required
+        value={email}
+        onChange={e => setEmail(e.target.value)}
+        sx={styleTextField}
+      />
+      <MuiTextField
+        id="telephone"
+        label="Telephone"
+        variant="outlined"
+        required
+        value={telephone}
+        onChange={e => setTelephone(e.target.value)}
+        sx={styleTextField}
+      />
+      <MuiTextField
+        id="cpf"
+        label="Cpf"
+        variant="outlined"
+        required
+        value={cpf}
+        onChange={e => setCpf(maskCpf(e))}
+        sx={styleTextField}
+      />
+    </Modal>
   );
 }
