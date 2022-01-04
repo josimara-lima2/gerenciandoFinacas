@@ -3,6 +3,8 @@ import {
   TextField as MuiTextField,
   Button as MuiButton,
   Box as MuiBox,
+  Typography,
+  Divider,
 } from '@mui/material';
 import { useState } from 'react';
 import { useAppDispatch } from 'store';
@@ -12,8 +14,8 @@ import imgLogin from '../assets/images/login.png';
 
 const Box = styled(MuiBox)(() => ({
   width: '100%',
-  height: '70%',
-  marginTop: '40px',
+
+  marginTop: '300px',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
@@ -22,18 +24,19 @@ const Box = styled(MuiBox)(() => ({
 
 const TextField = styled(MuiTextField)(({ theme }) => ({
   margin: '5px',
-  width: '40%',
+  width: '60%',
   borderRadius: '20px',
   color: theme.palette.mode === 'dark' ? '#000000' : '#fafafa',
 }));
 
 const Button = styled(MuiButton)(() => ({
   margin: '15px',
-  border: 'none',
-  backgroundColor: '#1E90FF',
-  width: '10%',
+  border: '0.5px solid #1C86EE',
+  borderRadius: '5px',
+  backgroundColor: '#1C86EE',
+  width: '60%',
   color: '#fafafa',
-  height: '5%px',
+  padding: '8px 0',
 }));
 export default function Login() {
   const navigate = useNavigate();
@@ -52,41 +55,62 @@ export default function Login() {
   }
 
   return (
-    <Box>
-      <img src={imgLogin} alt="login" width="30%" />
-      <TextField
-        id="email"
-        label="Email"
-        variant="outlined"
-        value={email}
-        required
-        onChange={e => setEmail(e.target.value)}
-      />
-      <TextField
-        id="password"
-        label="Password"
-        variant="outlined"
-        value={password}
-        required
-        onChange={e => setPassword(e.target.value)}
-      />
-      <Box
+    <MuiBox
+      sx={{
+        width: '100%',
+        height: '100vh',
+
+        display: 'flex',
+        alignItems: 'center',
+      }}
+    >
+      <MuiBox
         sx={{
+          width: '50%',
+          height: '80%',
+
           display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'center',
-          marginRight: '10%',
+          alignItems: 'center',
         }}
       >
-        <Link to="/cadastro">Cadastre-se</Link>
-        <Button
-          variant="contained"
-          onClick={() => handleLogin()}
-          sx={{ marginLeft: '5%' }}
-        >
+        <img width="80%" src={imgLogin} alt="loginImg" />
+      </MuiBox>
+      <Divider
+        orientation="vertical"
+        sx={{
+          height: '50%',
+        }}
+      />
+      <MuiBox
+        sx={{
+          width: '50%',
+          height: '80%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Typography variant="h6">Login</Typography>
+        <TextField
+          variant="outlined"
+          label="Email"
+          required
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+        />
+        <TextField
+          variant="outlined"
+          label="Password"
+          required
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+        />
+        <Button variant="contained" onClick={() => handleLogin()}>
           Login
         </Button>
-      </Box>
-    </Box>
+        <Link to="/cadastro">Cadastre-se</Link>
+      </MuiBox>
+    </MuiBox>
   );
 }
