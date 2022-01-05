@@ -10,6 +10,7 @@ import {
 import { useState } from 'react';
 import { useAppDispatch } from 'store';
 import { useNavigate } from 'react-router-dom';
+import { type } from 'os';
 import { fetchApiCadastroUser } from '../store/reducers/user';
 import imgLogin from '../assets/images/login.png';
 

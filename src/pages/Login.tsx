@@ -5,23 +5,20 @@ import {
   Box as MuiBox,
   Typography,
   Divider,
-  Link,
+  IconButton,
+  InputAdornment,
+  FormControl,
+  InputLabel,
+  OutlinedInput,
 } from '@mui/material';
 import { useState } from 'react';
 import { useAppDispatch } from 'store';
 import { useNavigate } from 'react-router-dom';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
+import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
 import { fetchApiLogin } from '../store/reducers/user';
 import imgLogin from '../assets/images/login.png';
-
-const Box = styled(MuiBox)(() => ({
-  width: '100%',
-
-  marginTop: '300px',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  alignItems: 'center',
-}));
 
 const TextField = styled(MuiTextField)(({ theme }) => ({
   margin: '5px',
@@ -45,7 +42,11 @@ export default function Login() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => {
+    setPassword(password);
+    setShowPassword(!showPassword);
+  };
   function handleLogin() {
     dispatch(fetchApiLogin({ email, password }))
       .unwrap()
@@ -95,8 +96,9 @@ export default function Login() {
           justifyContent: 'center',
         }}
       >
+        <LockOutlinedIcon />
         <Typography variant="h6" sx={{ marginBottom: '16px' }}>
-          Login
+          Sign in
         </Typography>
         <TextField
           variant="outlined"
@@ -105,17 +107,41 @@ export default function Login() {
           value={email}
           onChange={e => setEmail(e.target.value)}
         />
-        <TextField
-          variant="outlined"
-          label="Password"
-          required
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-        />
+
+        <FormControl sx={{ m: 1, width: '60%' }} variant="outlined">
+          <InputLabel required htmlFor="password">
+            Password
+          </InputLabel>
+          <OutlinedInput
+            required
+            id="password"
+            type={showPassword ? 'text' : 'password'}
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton onClick={handleClickShowPassword} edge="end">
+                  {showPassword ? (
+                    <VisibilityOffOutlinedIcon />
+                  ) : (
+                    <VisibilityOutlinedIcon />
+                  )}
+                </IconButton>
+              </InputAdornment>
+            }
+            label="Password"
+          />
+        </FormControl>
+
         <Button variant="contained" onClick={() => handleLogin()}>
           Login
         </Button>
-        <MuiButton onClick={() => linkCadastro()}>Cadastre-se</MuiButton>
+        <MuiButton
+          sx={{ textDecoration: 'underline' }}
+          onClick={() => linkCadastro()}
+        >
+          Cadastre-se
+        </MuiButton>
       </MuiBox>
     </MuiBox>
   );
