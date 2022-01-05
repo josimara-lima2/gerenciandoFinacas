@@ -5,10 +5,11 @@ import {
   Box as MuiBox,
   Typography,
   Divider,
+  Link,
 } from '@mui/material';
 import { useState } from 'react';
 import { useAppDispatch } from 'store';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { fetchApiLogin } from '../store/reducers/user';
 import imgLogin from '../assets/images/login.png';
 
@@ -53,6 +54,9 @@ export default function Login() {
         if (token) navigate('/');
       });
   }
+  function linkCadastro() {
+    navigate('/cadastro');
+  }
 
   return (
     <MuiBox
@@ -91,7 +95,9 @@ export default function Login() {
           justifyContent: 'center',
         }}
       >
-        <Typography variant="h6">Login</Typography>
+        <Typography variant="h6" sx={{ marginBottom: '16px' }}>
+          Login
+        </Typography>
         <TextField
           variant="outlined"
           label="Email"
@@ -109,7 +115,7 @@ export default function Login() {
         <Button variant="contained" onClick={() => handleLogin()}>
           Login
         </Button>
-        <Link to="/cadastro">Cadastre-se</Link>
+        <MuiButton onClick={() => linkCadastro()}>Cadastre-se</MuiButton>
       </MuiBox>
     </MuiBox>
   );
