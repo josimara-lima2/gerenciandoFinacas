@@ -23,6 +23,31 @@ const TextField = styled(MuiTextField)(({ theme }) => ({
   borderRadius: '20px',
   color: theme.palette.mode === 'dark' ? '#000000' : '#fafafa',
 }));
+const Box = styled(MuiBox)(({ theme }) => ({
+  display: 'flex',
+  padding: 0,
+  margin: 0,
+  [theme.breakpoints.down('md')]: {
+    flexDirection: 'column',
+    justifyContent: 'start',
+    alignItems: 'center',
+    height: '80%',
+  },
+  [theme.breakpoints.up('md')]: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: '100vh',
+  },
+  [theme.breakpoints.up('lg')]: {
+    width: '100%',
+    height: '100vh',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+  },
+}));
 
 const Button = styled(MuiButton)(() => ({
   margin: '15px',
@@ -63,15 +88,7 @@ export default function TelaCadastro() {
   }
 
   return (
-    <MuiBox
-      sx={{
-        width: '100%',
-        height: '100vh',
-
-        display: 'flex',
-        alignItems: 'center',
-      }}
-    >
+    <Box>
       <MuiBox
         sx={{
           width: '50%',
@@ -166,6 +183,6 @@ export default function TelaCadastro() {
           Login
         </MuiButton>
       </MuiBox>
-    </MuiBox>
+    </Box>
   );
 }
