@@ -40,13 +40,6 @@ const Box = styled(MuiBox)(({ theme }) => ({
     width: '100%',
     height: '100vh',
   },
-  [theme.breakpoints.up('lg')]: {
-    width: '100%',
-    height: '100vh',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-around',
-  },
 }));
 
 const Button = styled(MuiButton)(() => ({
