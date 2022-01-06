@@ -5,12 +5,15 @@ import {
   Box as MuiBox,
   Typography,
   Divider,
-  Link,
+  Collapse,
+  Alert,
+  IconButton,
 } from '@mui/material';
 import { useState } from 'react';
 import { useAppDispatch } from 'store';
 import { useNavigate } from 'react-router-dom';
-import { type } from 'os';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import CloseIcon from '@mui/icons-material/Close';
 import { fetchApiCadastroUser } from '../store/reducers/user';
 import imgLogin from '../assets/images/login.png';
 
@@ -38,11 +41,21 @@ export default function TelaCadastro() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState('');
+
   const handleClick = () => {
+    setOpen(!open);
     dispatch(
       fetchApiCadastroUser({ name, email, password, passwordConfirmation }),
-    );
-    navigate('/login');
+    )
+      .unwrap()
+      .then(response => {
+        navigate('/login');
+      })
+      .catch(e => {
+        setMessage(e.message);
+      });
   };
 
   function linkLogin() {
@@ -86,8 +99,29 @@ export default function TelaCadastro() {
           justifyContent: 'center',
         }}
       >
+        <Collapse in={open}>
+          <Alert
+            severity="error"
+            color="error"
+            action={
+              <IconButton
+                aria-label="close"
+                size="small"
+                onClick={() => {
+                  setOpen(!open);
+                }}
+              >
+                <CloseIcon fontSize="inherit" />
+              </IconButton>
+            }
+            sx={{ mt: 10 }}
+          >
+            {message}
+          </Alert>
+        </Collapse>
+        <LockOutlinedIcon />
         <Typography variant="h6" sx={{ marginBottom: '16px' }}>
-          Cadastro
+          Register
         </Typography>
         <TextField
           id="name"
@@ -121,10 +155,16 @@ export default function TelaCadastro() {
           required
           onChange={e => setPasswordConfirmation(e.target.value)}
         />
+
         <Button variant="contained" onClick={() => handleClick()}>
           Cadastrar
         </Button>
-        <MuiButton onClick={() => linkLogin()}>Login</MuiButton>
+        <MuiButton
+          sx={{ textDecoration: 'underline' }}
+          onClick={() => linkLogin()}
+        >
+          Login
+        </MuiButton>
       </MuiBox>
     </MuiBox>
   );

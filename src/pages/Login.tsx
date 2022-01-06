@@ -10,6 +10,8 @@ import {
   FormControl,
   InputLabel,
   OutlinedInput,
+  Alert,
+  Collapse,
 } from '@mui/material';
 import { useState } from 'react';
 import { useAppDispatch } from 'store';
@@ -17,6 +19,7 @@ import { useNavigate } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
+import CloseIcon from '@mui/icons-material/Close';
 import { fetchApiLogin } from '../store/reducers/user';
 import imgLogin from '../assets/images/login.png';
 
@@ -43,16 +46,26 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState('');
+
   const handleClickShowPassword = () => {
     setPassword(password);
     setShowPassword(!showPassword);
   };
   function handleLogin() {
+    setOpen(!open);
     dispatch(fetchApiLogin({ email, password }))
       .unwrap()
       .then(response => {
         const { token } = response;
-        if (token) navigate('/');
+        if (token) {
+          setMessage(response.statusText);
+          navigate('/');
+        }
+      })
+      .catch(e => {
+        setMessage(e.message);
       });
   }
   function linkCadastro() {
@@ -96,6 +109,27 @@ export default function Login() {
           justifyContent: 'center',
         }}
       >
+        {' '}
+        <Collapse in={open}>
+          <Alert
+            severity="error"
+            color="error"
+            action={
+              <IconButton
+                aria-label="close"
+                size="small"
+                onClick={() => {
+                  setOpen(!open);
+                }}
+              >
+                <CloseIcon fontSize="inherit" />
+              </IconButton>
+            }
+            sx={{ mt: 10 }}
+          >
+            {message}
+          </Alert>
+        </Collapse>
         <LockOutlinedIcon />
         <Typography variant="h6" sx={{ marginBottom: '16px' }}>
           Sign in
@@ -107,7 +141,6 @@ export default function Login() {
           value={email}
           onChange={e => setEmail(e.target.value)}
         />
-
         <FormControl sx={{ m: 1, width: '60%' }} variant="outlined">
           <InputLabel required htmlFor="password">
             Password
@@ -132,7 +165,6 @@ export default function Login() {
             label="Password"
           />
         </FormControl>
-
         <Button variant="contained" onClick={() => handleLogin()}>
           Login
         </Button>
