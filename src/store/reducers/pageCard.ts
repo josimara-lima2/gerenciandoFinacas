@@ -22,10 +22,10 @@ export declare interface ListCardInterface {
 
 export declare interface PageCard {
   totalCount: number;
-  page: string;
-  limite: string;
+  page: number;
+  limite: number;
   totalPage: number;
-  nextPage: string;
+  nextPage: number;
   data: CardInterface[];
 }
 
@@ -36,10 +36,10 @@ export declare interface PageClienteInterface {
 const initialState = {
   pageCard: {
     totalCount: 1,
-    page: '1',
-    limite: '3',
+    page: 1,
+    limite: 3,
     totalPage: 1,
-    nextPage: '2',
+    nextPage: 2,
     data: [],
   },
   loadingCard: false,
@@ -54,11 +54,9 @@ export const fetchApiSearch = createAsyncThunk(
 );
 export const fetchApiPageCard = createAsyncThunk(
   'credit-card?page=&limit=8/fetchApiPage',
-  async (page: string) => {
+  async (page: number | null) => {
     const url =
-      page === ''
-        ? `credit-card?page=&limit=`
-        : `credit-card?page=${page}&limit=8`;
+      page === null ? 'credit-card' : `credit-card?page=${page}&limit=8`;
     const response = await apiUser.get(url);
     return response.data;
   },

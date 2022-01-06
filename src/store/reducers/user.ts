@@ -55,7 +55,7 @@ const userSlice = createSlice({
       const login = action.payload;
       const { token } = login;
 
-      localStorage.setItem('token', JSON.stringify(token.replace('"')));
+      localStorage.setItem('token', JSON.stringify(token));
     });
   },
 });

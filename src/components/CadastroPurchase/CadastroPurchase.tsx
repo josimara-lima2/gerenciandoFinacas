@@ -47,8 +47,8 @@ const CadastroPurchase = () => {
     setCreditCardId(event.target.value);
   };
   useEffect(() => {
-    dispatch(fetchApiPage(''));
-    dispatch(fetchApiPageCard(''));
+    dispatch(fetchApiPage(1));
+    dispatch(fetchApiPageCard(null));
   }, [dispatch]);
 
   const cadastrar = () => {

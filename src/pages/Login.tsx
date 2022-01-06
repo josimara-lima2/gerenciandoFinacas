@@ -7,7 +7,7 @@ import {
   Divider,
   IconButton,
   InputAdornment,
-  FormControl,
+  FormControl as MuiFormControl,
   InputLabel,
   OutlinedInput,
   Alert,
@@ -23,11 +23,34 @@ import CloseIcon from '@mui/icons-material/Close';
 import { fetchApiLogin } from '../store/reducers/user';
 import imgLogin from '../assets/images/login.png';
 
+const FormControl = styled(MuiFormControl)(({ theme }) => ({
+  m: 1,
+  width: '60%',
+  [theme.breakpoints.down('xs')]: {
+    width: '100%',
+  },
+  [theme.breakpoints.down('md')]: {
+    width: '80%',
+  },
+  [theme.breakpoints.up('lg')]: {
+    width: '40%',
+  },
+}));
+
 const TextField = styled(MuiTextField)(({ theme }) => ({
   margin: '5px',
   width: '60%',
   borderRadius: '20px',
   color: theme.palette.mode === 'dark' ? '#000000' : '#fafafa',
+  [theme.breakpoints.down('xs')]: {
+    width: '100%',
+  },
+  [theme.breakpoints.down('md')]: {
+    width: '80%',
+  },
+  [theme.breakpoints.up('lg')]: {
+    width: '40%',
+  },
 }));
 
 const Box = styled(MuiBox)(({ theme }) => ({
@@ -39,6 +62,7 @@ const Box = styled(MuiBox)(({ theme }) => ({
     justifyContent: 'start',
     alignItems: 'center',
     height: '80%',
+    marginTop: theme.spacing(35),
   },
   [theme.breakpoints.up('md')]: {
     flexDirection: 'row',
@@ -49,7 +73,17 @@ const Box = styled(MuiBox)(({ theme }) => ({
   },
 }));
 
-const Button = styled(MuiButton)(() => ({
+const BoxImagem = styled(MuiBox)(({ theme }) => ({
+  width: '50%',
+  height: '80%',
+  display: 'flex',
+  alignItems: 'center',
+  [theme.breakpoints.down('md')]: {
+    display: 'none',
+  },
+}));
+
+const Button = styled(MuiButton)(({ theme }) => ({
   margin: '15px',
   border: '0.5px solid #1C86EE',
   borderRadius: '5px',
@@ -57,6 +91,15 @@ const Button = styled(MuiButton)(() => ({
   width: '60%',
   color: '#fafafa',
   padding: '8px 0',
+  [theme.breakpoints.down('xs')]: {
+    width: '100%',
+  },
+  [theme.breakpoints.down('md')]: {
+    width: '80%',
+  },
+  [theme.breakpoints.up('lg')]: {
+    width: '40%',
+  },
 }));
 export default function Login() {
   const navigate = useNavigate();
@@ -93,16 +136,9 @@ export default function Login() {
 
   return (
     <Box>
-      <MuiBox
-        sx={{
-          width: '50%',
-          height: '80%',
-          display: 'flex',
-          alignItems: 'center',
-        }}
-      >
+      <BoxImagem>
         <img width="80%" src={imgLogin} alt="loginImg" />
-      </MuiBox>
+      </BoxImagem>
       <Divider
         orientation="vertical"
         sx={{

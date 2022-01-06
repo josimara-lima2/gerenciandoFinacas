@@ -46,6 +46,10 @@ export default function Clients() {
   const [page, setPage] = React.useState(1);
   const { pageCliente, isLoadingg } = useAppSelector(PageSelector);
 
+  useEffect(() => {
+    dispatch(fetchApiPage(page));
+  }, [dispatch, page]);
+
   const handleChangePagination = (
     e: React.ChangeEvent<unknown>,
     value: number,
@@ -54,7 +58,7 @@ export default function Clients() {
   };
 
   const handleAtualiza = () => {
-    dispatch(fetchApiPage('1'));
+    dispatch(fetchApiPage(1));
   };
 
   const handleChange = (
@@ -63,10 +67,6 @@ export default function Clients() {
   ) => {
     dispatch(fetchApiSearch(value));
   };
-
-  useEffect(() => {
-    dispatch(fetchApiPage(String(page)));
-  }, [dispatch, page]);
 
   return (
     <BoxContainer>

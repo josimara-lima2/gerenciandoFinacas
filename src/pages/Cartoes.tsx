@@ -30,10 +30,10 @@ export default function Cartao() {
   const [page, setPage] = useState(1);
   const { pageCard, loadingCard } = useAppSelector(PageCardSelector);
   useEffect(() => {
-    dispatch(fetchApiPageCard(String(page)));
+    dispatch(fetchApiPageCard(page));
   }, [dispatch, page]);
   const handleAtualiza = () => {
-    dispatch(fetchApiPageCard('1'));
+    dispatch(fetchApiPageCard(1));
   };
 
   const handleChangePagination = (

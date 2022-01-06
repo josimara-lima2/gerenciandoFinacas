@@ -39,9 +39,9 @@ const initialState = {
 } as PagePurchaseInterface;
 
 export const fetchApiPurchases = createAsyncThunk(
-  'purchases?page=&limit=15/fetchApiPurchases',
+  'purchases?page=&limit=10/fetchApiPurchases',
   async (page: number) => {
-    const url = `purchases?page=${page}&limit=15`;
+    const url = `purchases?page=${page}&limit=10`;
     const response = await apiUser.get(url);
     return response.data;
   },

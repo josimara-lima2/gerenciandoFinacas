@@ -12,7 +12,7 @@ export declare interface ClientInterface {
 
 export declare interface PageCliente {
   totalCount: number;
-  page: string;
+  page: number;
   limite: string;
   totalPage: number;
   nextPage: string;
@@ -26,7 +26,7 @@ export declare interface PageClienteInterface {
 const initialState = {
   pageCliente: {
     totalCount: 1,
-    page: '1',
+    page: 1,
     limite: '3',
     totalPage: 1,
     nextPage: '0',
@@ -36,10 +36,12 @@ const initialState = {
 } as PageClienteInterface;
 
 export const fetchApiPage = createAsyncThunk(
-  'clients?page=&limit=15/fetchApiPage',
-  async (page: string) => {
+  'clients?page=&limit=10/fetchApiPage',
+  async (page: number | null) => {
     const url =
-      page === '' ? `clients?page=&limit=` : `clients?page=${page}&limit=10`;
+      page === null
+        ? 'clients?page=1&limit=10'
+        : `clients?page=${page}&limit=10`;
     const response = await apiUser.get(url);
     return response.data;
   },
@@ -81,6 +83,12 @@ const PageSlice = createSlice({
   reducers: {
     addClient(state, action: PayloadAction<ClientInterface>) {
       state.pageCliente.data = [...state.pageCliente.data, action.payload];
+    },
+    deleteClient(state, action: PayloadAction<{ id: string }>) {
+      state.pageCliente.data = state.pageCliente.data.filter(
+        item => item.id !== action.payload.id,
+      );
+      return state;
     },
   },
 
