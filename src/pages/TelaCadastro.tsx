@@ -103,7 +103,7 @@ export default function TelaCadastro() {
       <Divider
         orientation="vertical"
         sx={{
-          height: '50%',
+          height: '70%',
         }}
       />
       <MuiBox

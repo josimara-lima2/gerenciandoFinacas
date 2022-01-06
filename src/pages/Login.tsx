@@ -47,13 +47,6 @@ const Box = styled(MuiBox)(({ theme }) => ({
     width: '100%',
     height: '100vh',
   },
-  [theme.breakpoints.up('lg')]: {
-    width: '100%',
-    height: '100vh',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-around',
-  },
 }));
 
 const Button = styled(MuiButton)(() => ({
@@ -109,15 +102,13 @@ export default function Login() {
         }}
       >
         <img width="80%" src={imgLogin} alt="loginImg" />
-        <Divider
-          orientation="vertical"
-          sx={{
-            height: '90%',
-            marginLeft: '15%',
-          }}
-        />
       </MuiBox>
-
+      <Divider
+        orientation="vertical"
+        sx={{
+          height: '70%',
+        }}
+      />
       {/* box de form */}
       <MuiBox
         sx={{
