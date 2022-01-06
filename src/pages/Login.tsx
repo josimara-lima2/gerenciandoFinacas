@@ -30,6 +30,32 @@ const TextField = styled(MuiTextField)(({ theme }) => ({
   color: theme.palette.mode === 'dark' ? '#000000' : '#fafafa',
 }));
 
+const Box = styled(MuiBox)(({ theme }) => ({
+  display: 'flex',
+  padding: 0,
+  margin: 0,
+  [theme.breakpoints.down('md')]: {
+    flexDirection: 'column',
+    justifyContent: 'start',
+    alignItems: 'center',
+    height: '80%',
+  },
+  [theme.breakpoints.up('md')]: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: '100vh',
+  },
+  [theme.breakpoints.up('lg')]: {
+    width: '100%',
+    height: '100vh',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+  },
+}));
+
 const Button = styled(MuiButton)(() => ({
   margin: '15px',
   border: '0.5px solid #1C86EE',
@@ -73,32 +99,26 @@ export default function Login() {
   }
 
   return (
-    <MuiBox
-      sx={{
-        width: '100%',
-        height: '100vh',
-
-        display: 'flex',
-        alignItems: 'center',
-      }}
-    >
+    <Box>
       <MuiBox
         sx={{
           width: '50%',
           height: '80%',
-
           display: 'flex',
           alignItems: 'center',
         }}
       >
         <img width="80%" src={imgLogin} alt="loginImg" />
+        <Divider
+          orientation="vertical"
+          sx={{
+            height: '90%',
+            marginLeft: '15%',
+          }}
+        />
       </MuiBox>
-      <Divider
-        orientation="vertical"
-        sx={{
-          height: '50%',
-        }}
-      />
+
+      {/* box de form */}
       <MuiBox
         sx={{
           width: '50%',
@@ -175,6 +195,6 @@ export default function Login() {
           Cadastre-se
         </MuiButton>
       </MuiBox>
-    </MuiBox>
+    </Box>
   );
 }
