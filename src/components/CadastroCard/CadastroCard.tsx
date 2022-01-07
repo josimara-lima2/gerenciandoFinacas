@@ -8,7 +8,6 @@ import {
   fetchApiPageCard,
 } from 'store/reducers/pageCard';
 import AddCardIcon from '@mui/icons-material/AddCard';
-import * as React from 'react';
 import { maskCode, maskNumber, maskValue, maskFatura } from 'utils/masks';
 import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -26,6 +25,8 @@ const Box = styled(MuiBox)(() => ({
 
 const CadastroCard = () => {
   const dispatch = useAppDispatch();
+  const { pageCard } = useAppSelector(PageCardSelector);
+
   const [name, setName] = useState('');
   const [flag, setFlag] = useState('');
   const [cardHolderName, setCardHolderName] = useState('');
@@ -35,38 +36,38 @@ const CadastroCard = () => {
   const [invoiceClosing, setInvoiceClosing] = useState(0);
   const [number, setNumber] = useState('');
   const [code, setCode] = useState('');
-  const { pageCard } = useAppSelector(PageCardSelector);
 
+  const newCard = {
+    id: 'teste',
+    name,
+    flag,
+    cardHolderName,
+    limit,
+    availableLimit,
+    dueDate,
+    invoiceClosing,
+    code,
+    number,
+  };
+  const limpaState = () => {
+    setName('');
+    setFlag('');
+    setCardHolderName('');
+    setLimit(0);
+    setAvailableLimit(0);
+    setDueDate('');
+    setInvoiceClosing(0);
+    setCode('');
+    setNumber('');
+  };
   const cadastrar = () => {
-    dispatch(
-      fetchApiPost({
-        id: 'teste',
-        name,
-        flag,
-        cardHolderName,
-        limit,
-        availableLimit,
-        dueDate,
-        invoiceClosing,
-        code,
-        number,
-      }),
-    )
+    dispatch(fetchApiPost(newCard))
       .unwrap()
       .then(response => {
         const { statusCode } = response;
-
         if (statusCode === 200) {
           dispatch(fetchApiPageCard(pageCard.page));
-          setName('');
-          setFlag('');
-          setCardHolderName('');
-          setLimit(0);
-          setAvailableLimit(0);
-          setDueDate('');
-          setInvoiceClosing(0);
-          setCode('');
-          setNumber('');
+          limpaState();
         }
       })
       .catch(e => e.message);
@@ -100,6 +101,7 @@ const CadastroCard = () => {
             value={flag}
             sx={styleTextField}
           />
+
           <TextField
             id="titular"
             label="Nome do titular"
@@ -109,6 +111,7 @@ const CadastroCard = () => {
             value={cardHolderName}
             sx={styleTextField}
           />
+
           <MuiBox sx={{ display: 'flex', width: '100%' }}>
             <TextField
               id="limite"
@@ -129,6 +132,7 @@ const CadastroCard = () => {
               sx={{ ...styleTextField, marginLeft: '5px' }}
             />
           </MuiBox>
+
           <TextField
             id="vencimento"
             label="Vencimento"
@@ -146,6 +150,7 @@ const CadastroCard = () => {
             value={dueDate}
             sx={styleTextField}
           />
+
           <TextField
             id="fatura"
             label="Dia da fatura"
@@ -173,6 +178,7 @@ const CadastroCard = () => {
             value={number}
             sx={styleTextField}
           />
+
           <TextField
             id="code"
             label="código"

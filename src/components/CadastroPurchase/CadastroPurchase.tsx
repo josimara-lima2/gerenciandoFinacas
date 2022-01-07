@@ -17,6 +17,7 @@ import {
   fetchApiPurchases,
   fetchApiPurchasesPost,
 } from 'store/reducers/compras';
+import Alerta from 'components/Alerta/Alerta';
 
 const styleTextField = {
   margin: '8px 0',
@@ -49,6 +50,7 @@ const CadastroPurchase = () => {
   const dispatch = useAppDispatch();
   const { pageCliente, isLoadingg } = useAppSelector(PageSelector);
   const { pageCard, loadingCard } = useAppSelector(PageCardSelector);
+  const [message, setMessage] = useState('');
 
   const [inputValue, setInputValue] = useState('');
 
@@ -91,7 +93,8 @@ const CadastroPurchase = () => {
           dispatch(addPurchase(newCard));
         }
         dispatch(fetchApiPurchases(1));
-      });
+      })
+      .catch(error => setMessage(error.message));
   };
   return (
     <Modal

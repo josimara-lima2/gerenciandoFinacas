@@ -10,8 +10,6 @@ import {
   FormControl as MuiFormControl,
   InputLabel,
   OutlinedInput,
-  Alert,
-  Collapse,
 } from '@mui/material';
 import { useState } from 'react';
 import { useAppDispatch } from 'store';
@@ -19,7 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
-import CloseIcon from '@mui/icons-material/Close';
+import Alerta from 'components/Alerta/Alerta';
 import { fetchApiLogin } from '../store/reducers/user';
 import imgLogin from '../assets/images/login.png';
 
@@ -115,6 +113,7 @@ export default function Login() {
     setPassword(password);
     setShowPassword(!showPassword);
   };
+
   function handleLogin() {
     dispatch(fetchApiLogin({ email, password }))
       .unwrap()
@@ -156,27 +155,8 @@ export default function Login() {
           justifyContent: 'center',
         }}
       >
-        {' '}
-        <Collapse in={open}>
-          <Alert
-            severity="error"
-            color="error"
-            action={
-              <IconButton
-                aria-label="close"
-                size="small"
-                onClick={() => {
-                  setOpen(!open);
-                }}
-              >
-                <CloseIcon fontSize="inherit" />
-              </IconButton>
-            }
-            sx={{ mt: 10 }}
-          >
-            {message}
-          </Alert>
-        </Collapse>
+        <Alerta open={open} setOpen={setOpen} message={message} />
+
         <LockOutlinedIcon />
         <Typography variant="h6" sx={{ marginBottom: '16px' }}>
           Sign in
