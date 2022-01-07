@@ -1,6 +1,5 @@
 import {
   TextField,
-  Autocomplete,
   MenuItem,
   Box,
   FormControl,
@@ -18,7 +17,6 @@ import {
   fetchApiPurchases,
   fetchApiPurchasesPost,
 } from 'store/reducers/compras';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 const styleTextField = {
   margin: '8px 0',
@@ -37,6 +35,17 @@ const CadastroPurchase = () => {
   const [clientId, setClientId] = useState('');
   const [creditCardId, setCreditCardId] = useState('');
 
+  const newCard = {
+    description,
+    value,
+    parceleOut,
+    numberOfInstallments,
+    formOfPayment,
+    status,
+    paidInstallments,
+    creditCardId,
+    clientId,
+  };
   const dispatch = useAppDispatch();
   const { pageCliente, isLoadingg } = useAppSelector(PageSelector);
   const { pageCard, loadingCard } = useAppSelector(PageCardSelector);
@@ -47,8 +56,21 @@ const CadastroPurchase = () => {
     setClientId(event.target.value);
   };
 
-  const handleChangeSelect = (event: SelectChangeEvent) => {
+  const handleChangeSelect = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     setInputValue(event.target.value as string);
+
+    switch (+event.target.value) {
+      case 1:
+        setParceleOut(true);
+        break;
+      case 0:
+        setParceleOut(false);
+        break;
+      default:
+        break;
+    }
   };
 
   const handleChangeCard = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,36 +83,12 @@ const CadastroPurchase = () => {
   }, [dispatch]);
 
   const cadastrar = () => {
-    dispatch(
-      fetchApiPurchasesPost({
-        description,
-        value,
-        parceleOut,
-        numberOfInstallments,
-        formOfPayment,
-        status,
-        paidInstallments,
-        creditCardId,
-        clientId,
-      }),
-    )
+    dispatch(fetchApiPurchasesPost(newCard))
       .unwrap()
       .then(response => {
         const { statusCode } = response;
         if (statusCode === 201) {
-          dispatch(
-            addPurchase({
-              description,
-              value,
-              parceleOut,
-              numberOfInstallments,
-              formOfPayment,
-              status,
-              paidInstallments,
-              creditCardId,
-              clientId,
-            }),
-          );
+          dispatch(addPurchase(newCard));
         }
         dispatch(fetchApiPurchases(1));
       });
@@ -128,22 +126,22 @@ const CadastroPurchase = () => {
           value={value}
           sx={{ ...styleTextField, marginRight: '5%' }}
         />
+        <FormControl sx={{ ...styleTextField }}>
+          <InputLabel htmlFor="select" id="parceleOut" />
+          <TextField
+            required
+            select
+            id="select"
+            value={inputValue}
+            label="Parcelar valor?"
+            onChange={e => handleChangeSelect(e)}
+          >
+            <MenuItem value={0}>nao</MenuItem>
+            <MenuItem value={1}>sim</MenuItem>
+          </TextField>
+        </FormControl>
       </Box>
-      <FormControl fullWidth>
-        <InputLabel id="parceleOut">Parcelar valor?</InputLabel>
-        <Select
-          labelId="parceleOut"
-          required
-          id="select"
-          value={inputValue}
-          label="Parcelar valor?"
-          onChange={handleChangeSelect}
-          onClick={() => setParceleOut(!parceleOut)}
-        >
-          <MenuItem value={1}>nao</MenuItem>
-          <MenuItem value={0}>sim</MenuItem>
-        </Select>
-      </FormControl>
+
       {parceleOut === true && (
         <TextField
           id="numberOfInstallments"
