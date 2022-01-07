@@ -112,7 +112,7 @@ export default function Compra() {
           </Table>
         </Stack>
         <Pagination
-          count={pagePurchases.totalPage}
+          count={pagePurchases.totalPage || 1}
           onChange={handleChangePagination}
         />
       </BoxTable>

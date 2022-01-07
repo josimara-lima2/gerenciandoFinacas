@@ -117,7 +117,7 @@ export default function Clients() {
             </TableBody>
           </Table>
           <Pagination
-            count={pageCliente.totalPage}
+            count={pageCliente.totalPage || 1}
             onChange={handleChangePagination}
           />
         </Stack>

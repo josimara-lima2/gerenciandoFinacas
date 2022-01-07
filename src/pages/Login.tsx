@@ -116,7 +116,6 @@ export default function Login() {
     setShowPassword(!showPassword);
   };
   function handleLogin() {
-    setOpen(!open);
     dispatch(fetchApiLogin({ email, password }))
       .unwrap()
       .then(response => {
@@ -127,6 +126,7 @@ export default function Login() {
         }
       })
       .catch(e => {
+        setOpen(true);
         setMessage(e.message);
       });
   }

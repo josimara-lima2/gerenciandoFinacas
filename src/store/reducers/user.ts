@@ -54,7 +54,6 @@ const userSlice = createSlice({
     builder.addCase(fetchApiLogin.fulfilled, (state, action) => {
       const login = action.payload;
       const { token } = login;
-
       localStorage.setItem('token', JSON.stringify(token));
     });
   },

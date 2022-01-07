@@ -1,4 +1,11 @@
-import { TextField, Autocomplete, MenuItem, Box } from '@mui/material';
+import {
+  TextField,
+  Autocomplete,
+  MenuItem,
+  Box,
+  FormControl,
+  InputLabel,
+} from '@mui/material';
 import Modal from 'components/Modal/Modal';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { useState, useEffect } from 'react';
@@ -11,6 +18,7 @@ import {
   fetchApiPurchases,
   fetchApiPurchasesPost,
 } from 'store/reducers/compras';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 const styleTextField = {
   margin: '8px 0',
@@ -18,36 +26,37 @@ const styleTextField = {
   borderRadius: '20px',
 };
 
-const optionsParceleOut = ['sim', 'não'];
-
 const CadastroPurchase = () => {
   const [description, setDescription] = useState('');
   const [value, setValue] = useState(0);
   const [parceleOut, setParceleOut] = useState(false);
-  const [valueAutoComplete, setValueAutoComplete] = useState<string | null>(
-    optionsParceleOut[1],
-  );
-  const [inputValue, setInputValue] = useState('');
   const [numberOfInstallments, setNumberOfInstallments] = useState(0);
   const [formOfPayment, setFormOfPayment] = useState('');
   const [status, setStatus] = useState('');
   const [paidInstallments, setPaidInstallments] = useState(0);
+  const [clientId, setClientId] = useState('');
+  const [creditCardId, setCreditCardId] = useState('');
 
   const dispatch = useAppDispatch();
   const { pageCliente, isLoadingg } = useAppSelector(PageSelector);
   const { pageCard, loadingCard } = useAppSelector(PageCardSelector);
 
-  const [clientId, setClientId] = useState('');
+  const [inputValue, setInputValue] = useState('');
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setClientId(event.target.value);
   };
 
-  const [creditCardId, setCreditCardId] = useState('');
+  const handleChangeSelect = (event: SelectChangeEvent) => {
+    setInputValue(event.target.value as string);
+  };
+
   const handleChangeCard = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCreditCardId(event.target.value);
   };
+
   useEffect(() => {
-    dispatch(fetchApiPage(1));
+    dispatch(fetchApiPage(null));
     dispatch(fetchApiPageCard(null));
   }, [dispatch]);
 
@@ -119,35 +128,23 @@ const CadastroPurchase = () => {
           value={value}
           sx={{ ...styleTextField, marginRight: '5%' }}
         />
-
-        <Autocomplete
-          value={valueAutoComplete}
-          onChange={(event: React.SyntheticEvent, newValue: string | null) => {
-            if (newValue === 'sim') {
-              setParceleOut(true);
-              setValueAutoComplete(optionsParceleOut[0]);
-            } else {
-              setValueAutoComplete(optionsParceleOut[1]);
-              setParceleOut(false);
-            }
-          }}
-          inputValue={inputValue}
-          onInputChange={(event, newInputValue) => {
-            setInputValue(newInputValue);
-          }}
-          id="controllable-states-demo"
-          options={optionsParceleOut}
-          sx={styleTextField}
-          renderInput={params => (
-            <TextField
-              {...params}
-              label="Parcelar valor?"
-              sx={styleTextField}
-            />
-          )}
-        />
       </Box>
-      {parceleOut && (
+      <FormControl fullWidth>
+        <InputLabel id="parceleOut">Parcelar valor?</InputLabel>
+        <Select
+          labelId="parceleOut"
+          required
+          id="select"
+          value={inputValue}
+          label="Parcelar valor?"
+          onChange={handleChangeSelect}
+          onClick={() => setParceleOut(!parceleOut)}
+        >
+          <MenuItem value={1}>nao</MenuItem>
+          <MenuItem value={0}>sim</MenuItem>
+        </Select>
+      </FormControl>
+      {parceleOut === true && (
         <TextField
           id="numberOfInstallments"
           label="Número de parcelas"

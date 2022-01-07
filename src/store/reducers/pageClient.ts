@@ -36,13 +36,17 @@ const initialState = {
 } as PageClienteInterface;
 
 export const fetchApiPage = createAsyncThunk(
-  'clients?page=&limit=10/fetchApiPage',
+  'clients?page=&limit=/fetchApiPage',
   async (page: number | null) => {
-    const url =
-      page === null
-        ? 'clients?page=1&limit=10'
-        : `clients?page=${page}&limit=10`;
-    const response = await apiUser.get(url);
+    const token = localStorage.getItem('token') as string;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token ? token.replace(/^"(.*)"$/, '$1') : ''}`,
+        'content-type': 'application/json',
+      },
+    };
+    const url = page === null ? 'clients' : `clients?page=${page}&limit=10`;
+    const response = await apiUser.get(url, config);
     return response.data;
   },
 );
@@ -50,7 +54,14 @@ export const fetchApiPage = createAsyncThunk(
 export const fetchApiSearch = createAsyncThunk(
   'clients?search=/fetchApiPage',
   async (search: string) => {
-    const response = await apiUser.get(`clients?search=${search}`);
+    const token = localStorage.getItem('token') as string;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token ? token.replace(/^"(.*)"$/, '$1') : ''}`,
+        'content-type': 'application/json',
+      },
+    };
+    const response = await apiUser.get(`clients?search=${search}`, config);
     return response.data;
   },
 );
@@ -58,14 +69,28 @@ export const fetchApiSearch = createAsyncThunk(
 export const fetchApiPost = createAsyncThunk(
   'clients/fetchApiPost',
   async (client: Partial<ClientInterface>) => {
-    const response = await apiUser.post('clients', client);
+    const token = localStorage.getItem('token') as string;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token ? token.replace(/^"(.*)"$/, '$1') : ''}`,
+        'content-type': 'application/json',
+      },
+    };
+    const response = await apiUser.post('clients', client, config);
     return response.data;
   },
 );
 export const fetchApiDelete = createAsyncThunk(
   'clients/id/fetchApiDelete',
   async (id: string) => {
-    const response = await apiUser.delete(`clients/${id}`);
+    const token = localStorage.getItem('token') as string;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token ? token.replace(/^"(.*)"$/, '$1') : ''}`,
+        'content-type': 'application/json',
+      },
+    };
+    const response = await apiUser.delete(`clients/${id}`, config);
     return response.data;
   },
 );

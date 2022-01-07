@@ -176,7 +176,7 @@ export default function Cartao() {
             </TableBody>
           </Table>
           <Pagination
-            count={pageCard.totalPage}
+            count={pageCard.totalPage || 1}
             onChange={handleChangePagination}
           />
         </Stack>

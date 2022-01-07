@@ -16,9 +16,9 @@ declare interface IPurchase {
 export declare interface PagePurchases {
   totalCount: number;
   page: number;
-  limite: string;
+  limite: number;
   totalPage: number;
-  nextPage: string;
+  nextPage: number;
   data: IPurchase[];
 }
 
@@ -30,9 +30,9 @@ const initialState = {
   pagePurchases: {
     totalCount: 1,
     page: 1,
-    limite: '3',
-    totalPage: 1,
-    nextPage: '0',
+    limite: 1,
+    totalPage: 2,
+    nextPage: 2,
     data: [],
   },
   loadingPurchases: false,
@@ -41,8 +41,15 @@ const initialState = {
 export const fetchApiPurchases = createAsyncThunk(
   'purchases?page=&limit=10/fetchApiPurchases',
   async (page: number) => {
+    const token = localStorage.getItem('token') as string;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token ? token.replace(/^"(.*)"$/, '$1') : ''}`,
+        'content-type': 'application/json',
+      },
+    };
     const url = `purchases?page=${page}&limit=10`;
-    const response = await apiUser.get(url);
+    const response = await apiUser.get(url, config);
     return response.data;
   },
 );
@@ -50,14 +57,28 @@ export const fetchApiPurchases = createAsyncThunk(
 export const fetchApiPurchasesPost = createAsyncThunk(
   'purchases/fetchApiPurchasesPost',
   async (purchase: IPurchase) => {
-    const response = await apiUser.post('purchases', purchase);
+    const token = localStorage.getItem('token') as string;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token ? token.replace(/^"(.*)"$/, '$1') : ''}`,
+        'content-type': 'application/json',
+      },
+    };
+    const response = await apiUser.post('purchases', purchase, config);
     return response.data;
   },
 );
 export const fetchApiSearch = createAsyncThunk(
   'purchases?search=/fetchApiSearch',
   async (search: string) => {
-    const response = await apiUser.get(`purchases?search=${search}`);
+    const token = localStorage.getItem('token') as string;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token ? token.replace(/^"(.*)"$/, '$1') : ''}`,
+        'content-type': 'application/json',
+      },
+    };
+    const response = await apiUser.get(`purchases?search=${search}`, config);
     return response.data;
   },
 );

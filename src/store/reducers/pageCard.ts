@@ -48,30 +48,58 @@ const initialState = {
 export const fetchApiSearch = createAsyncThunk(
   'credit-card?search=/fetchApiPage',
   async (search: string) => {
-    const response = await apiUser.get(`credit-card?search=${search}`);
+    const token = localStorage.getItem('token') as string;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token ? token.replace(/^"(.*)"$/, '$1') : ''}`,
+        'content-type': 'application/json',
+      },
+    };
+    const response = await apiUser.get(`credit-card?search=${search}`, config);
     return response.data;
   },
 );
 export const fetchApiPageCard = createAsyncThunk(
   'credit-card?page=&limit=8/fetchApiPage',
   async (page: number | null) => {
+    const token = localStorage.getItem('token') as string;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token ? token.replace(/^"(.*)"$/, '$1') : ''}`,
+        'content-type': 'application/json',
+      },
+    };
     const url =
       page === null ? 'credit-card' : `credit-card?page=${page}&limit=8`;
-    const response = await apiUser.get(url);
+    const response = await apiUser.get(url, config);
     return response.data;
   },
 );
 export const fetchApiPost = createAsyncThunk(
   'credit-card/fetchApiPost',
   async (card: CardInterface) => {
-    const response = await apiUser.post('credit-card', card);
+    const token = localStorage.getItem('token') as string;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token ? token.replace(/^"(.*)"$/, '$1') : ''}`,
+        'content-type': 'application/json',
+      },
+    };
+    const response = await apiUser.post('credit-card', card, config);
     return response.data;
   },
 );
 export const fetchApiDelete = createAsyncThunk(
   'credit-card/id/fetchApiPost',
   async (id: string) => {
-    const response = await apiUser.delete(`credit-card/${id}`);
+    const token = localStorage.getItem('token') as string;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token ? token.replace(/^"(.*)"$/, '$1') : ''}`,
+        'content-type': 'application/json',
+      },
+    };
+    const response = await apiUser.delete(`credit-card/${id}`, config);
     return response.data;
   },
 );
