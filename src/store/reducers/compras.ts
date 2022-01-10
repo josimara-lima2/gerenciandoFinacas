@@ -40,8 +40,8 @@ const initialState = {
 
 export const fetchApiPurchases = createAsyncThunk(
   'purchases?page=&limit=8/fetchApiPurchases',
-  async (page: number) => {
-    const url = `purchases?page=${page}&limit=8`;
+  async (page: number | null) => {
+    const url = page === null ? 'purchases' : `purchases?page=${page}&limit=8`;
     const response = await apiUser.get(url);
     return response.data;
   },
