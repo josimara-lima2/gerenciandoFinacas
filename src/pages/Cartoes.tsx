@@ -27,9 +27,11 @@ export default function Cartao() {
   const dispatch = useAppDispatch();
   const [page, setPage] = useState(1);
   const { pageCard, loadingCard } = useAppSelector(PageCardSelector);
+
   useEffect(() => {
     dispatch(fetchApiPageCard(page));
   }, [dispatch, page]);
+
   const handleAtualiza = () => {
     dispatch(fetchApiPageCard(1));
   };

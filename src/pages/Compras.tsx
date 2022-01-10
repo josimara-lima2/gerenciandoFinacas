@@ -44,6 +44,10 @@ export default function Compra() {
   const [page, setPage] = useState(1);
   const { pagePurchases, loadingPurchases } = useAppSelector(purchasesSelector);
 
+  useEffect(() => {
+    dispatch(fetchApiPurchases(page));
+  }, [dispatch, page]);
+
   const handleChangePagination = (
     e: React.ChangeEvent<unknown>,
     value: number,
@@ -61,9 +65,6 @@ export default function Compra() {
   ) => {
     dispatch(fetchApiSearch(value));
   };
-  useEffect(() => {
-    dispatch(fetchApiPurchases(page));
-  }, [dispatch, page]);
 
   return (
     <BoxContainer>

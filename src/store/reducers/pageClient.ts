@@ -13,9 +13,9 @@ export declare interface ClientInterface {
 export declare interface PageCliente {
   totalCount: number;
   page: number;
-  limite: string;
+  limite: number;
   totalPage: number;
-  nextPage: string;
+  nextPage: number;
   data: ClientInterface[];
 }
 
@@ -27,16 +27,16 @@ const initialState = {
   pageCliente: {
     totalCount: 1,
     page: 1,
-    limite: '3',
+    limite: 3,
     totalPage: 1,
-    nextPage: '0',
+    nextPage: 2,
     data: [],
   },
   isLoadingg: false,
 } as PageClienteInterface;
 
 export const fetchApiPage = createAsyncThunk(
-  'clients?page=&limit=/fetchApiPage',
+  'clients?page=&limit=10/fetchApiPage',
   async (page: number | null) => {
     const url = page === null ? 'clients' : `clients?page=${page}&limit=10`;
     const response = await apiUser.get(url);

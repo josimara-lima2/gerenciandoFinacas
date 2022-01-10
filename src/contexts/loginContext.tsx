@@ -1,6 +1,4 @@
-// AuthContext.tsx
-
-import { createContext, ReactNode, useEffect } from 'react';
+import { createContext, ReactNode, useCallback, useEffect } from 'react';
 import { apiUser } from '../services/apiUser';
 
 type AuthProviderProps = {
@@ -14,18 +12,19 @@ interface AuthContextInterface {
   signin: ({ email, password }: Login) => Promise<void>;
 }
 
-const addTokenInApi = (token: string) => {
-  apiUser.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
-
 export const AuthContext = createContext({} as AuthContextInterface);
 
 export default function AuthProvider({ children }: AuthProviderProps) {
+  const addTokenInApi = useCallback((token: string) => {
+    apiUser.defaults.headers.common.Authorization = `Bearer ${token}`;
+  }, []);
+
   useEffect(() => {
     const tokenLocal = localStorage.getItem('token') as string;
-    const token = tokenLocal ? tokenLocal.replace(/^"(.*)"$/, '$1') : '';
-    addTokenInApi(token);
-  }, []);
+    if (tokenLocal) {
+      addTokenInApi(tokenLocal);
+    }
+  }, [addTokenInApi]);
 
   const signin = async (login: Login) => {
     const response = await apiUser.post('auth/signin', login);

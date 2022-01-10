@@ -8,13 +8,13 @@ import AuthProvider from './contexts/loginContext';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ReduxProvider store={store}>
-      <AuthProvider>
+    <AuthProvider>
+      <ReduxProvider store={store}>
         <ThemeProvider>
           <App />
         </ThemeProvider>
-      </AuthProvider>
-    </ReduxProvider>
+      </ReduxProvider>
+    </AuthProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

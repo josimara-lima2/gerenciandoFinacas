@@ -6,3 +6,6 @@ export const apiUser = axios.create({
     'Content-type': 'application/json',
   },
 });
+
+const tokenLocal = localStorage.getItem('token') as string;
+apiUser.defaults.headers.common.Authorization = `Bearer ${tokenLocal}`;

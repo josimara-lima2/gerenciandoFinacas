@@ -35,6 +35,14 @@ export const fetchApiDelete = createAsyncThunk(
     return response.data as string;
   },
 );
+
+export const fetchApiAuthMe = createAsyncThunk(
+  'auth/me/fetchApiAuthMe',
+  async () => {
+    const response = await apiUser.get('auth/me');
+    return response.data;
+  },
+);
 const userSlice = createSlice({
   name: 'user',
   initialState,

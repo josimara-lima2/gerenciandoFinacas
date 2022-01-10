@@ -29,7 +29,7 @@ export declare interface PageCard {
   data: CardInterface[];
 }
 
-export declare interface PageClienteInterface {
+export declare interface PageCardInterface {
   pageCard: PageCard;
   loadingCard: boolean;
 }
@@ -43,7 +43,17 @@ const initialState = {
     data: [],
   },
   loadingCard: false,
-} as PageClienteInterface;
+} as PageCardInterface;
+
+export const fetchApiPageCard = createAsyncThunk(
+  'credit-card?page=&limit=8/fetchApiPageCard',
+  async (page: number | null) => {
+    const url =
+      page === null ? 'credit-card' : `credit-card?page=${page}&limit=8`;
+    const response = await apiUser.get(url);
+    return response.data;
+  },
+);
 
 export const fetchApiSearch = createAsyncThunk(
   'credit-card?search=/fetchApiPage',
@@ -52,15 +62,7 @@ export const fetchApiSearch = createAsyncThunk(
     return response.data;
   },
 );
-export const fetchApiPageCard = createAsyncThunk(
-  'credit-card?page=&limit=8/fetchApiPage',
-  async (page: number | null) => {
-    const url =
-      page === null ? 'credit-card' : `credit-card?page=${page}&limit=8`;
-    const response = await apiUser.get(url);
-    return response.data;
-  },
-);
+
 export const fetchApiPost = createAsyncThunk(
   'credit-card/fetchApiPost',
   async (card: CardInterface) => {
@@ -76,7 +78,7 @@ export const fetchApiDelete = createAsyncThunk(
   },
 );
 const PageCardSlice = createSlice({
-  name: 'pages',
+  name: 'pagesCard',
   initialState,
   reducers: {},
 
