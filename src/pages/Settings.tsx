@@ -2,18 +2,16 @@ import {
   Avatar,
   Box,
   Typography,
-  ListItemIcon,
   styled,
   Collapse,
   IconButton,
-  Link,
   Button,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'store';
-import { fetchApiAuthMe, logout } from 'store/reducers/user';
-import { UserLogadoSelector } from 'store/reducers/userLogado';
-import { Link as MuiLink, useLocation, useNavigate } from 'react-router-dom';
+import { logout } from 'store/reducers/user';
+import { UserLogadoSelector, fetchApiAuthMe } from 'store/reducers/userLogado';
+import { useNavigate } from 'react-router-dom';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
 import avatarImg from '../assets/images/avatar.png';
@@ -40,11 +38,13 @@ const ButtonLink = styled(Button)(({ theme }) => ({
 export default function Settings() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { userLogado, loadingUserLogado } = useAppSelector(UserLogadoSelector);
+  const { userLogado } = useAppSelector(UserLogadoSelector);
   const [open, setOpen] = useState(true);
+
   useEffect(() => {
     dispatch(fetchApiAuthMe());
   }, []);
+
   const logoutUser = () => {
     dispatch(logout());
     navigate('/login');
@@ -53,7 +53,6 @@ export default function Settings() {
     <Box
       sx={{
         display: 'flex',
-
         alignItems: 'space-between',
         justifyContent: 'space-between',
         marginTop: '20px',
@@ -65,7 +64,6 @@ export default function Settings() {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'space-between',
-
           marginTop: '20px',
           borderRadius: '10px',
         }}
