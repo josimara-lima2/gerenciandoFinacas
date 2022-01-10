@@ -8,7 +8,6 @@ export declare interface UserInterface {
   password: string;
   passwordConfirmation: string;
 }
-type Login = Pick<UserInterface, 'email' | 'password'>;
 
 export declare interface UserState {
   user: UserInterface;
@@ -29,17 +28,9 @@ export const fetchApiCadastroUser = createAsyncThunk(
   },
 );
 
-export const fetchApiLogin = createAsyncThunk(
-  'auth/signin/fetchApiLogin',
-  async (login: Login) => {
-    const response = await apiUser.post('auth/signin', login);
-    return response.data;
-  },
-);
-
 export const fetchApiDelete = createAsyncThunk(
   'auth/signup/fetchApi',
-  async (user: UserInterface) => {
+  async () => {
     const response = await apiUser.delete('auth/signup');
     return response.data as string;
   },
@@ -49,13 +40,6 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     logout: () => localStorage.removeItem('token'),
-  },
-  extraReducers(builder) {
-    builder.addCase(fetchApiLogin.fulfilled, (state, action) => {
-      const login = action.payload;
-      const { token } = login;
-      localStorage.setItem('token', JSON.stringify(token));
-    });
   },
 });
 

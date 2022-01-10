@@ -48,58 +48,30 @@ const initialState = {
 export const fetchApiSearch = createAsyncThunk(
   'credit-card?search=/fetchApiPage',
   async (search: string) => {
-    const token = localStorage.getItem('token') as string;
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token ? token.replace(/^"(.*)"$/, '$1') : ''}`,
-        'content-type': 'application/json',
-      },
-    };
-    const response = await apiUser.get(`credit-card?search=${search}`, config);
+    const response = await apiUser.get(`credit-card?search=${search}`);
     return response.data;
   },
 );
 export const fetchApiPageCard = createAsyncThunk(
   'credit-card?page=&limit=8/fetchApiPage',
   async (page: number | null) => {
-    const token = localStorage.getItem('token') as string;
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token ? token.replace(/^"(.*)"$/, '$1') : ''}`,
-        'content-type': 'application/json',
-      },
-    };
     const url =
       page === null ? 'credit-card' : `credit-card?page=${page}&limit=8`;
-    const response = await apiUser.get(url, config);
+    const response = await apiUser.get(url);
     return response.data;
   },
 );
 export const fetchApiPost = createAsyncThunk(
   'credit-card/fetchApiPost',
   async (card: CardInterface) => {
-    const token = localStorage.getItem('token') as string;
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token ? token.replace(/^"(.*)"$/, '$1') : ''}`,
-        'content-type': 'application/json',
-      },
-    };
-    const response = await apiUser.post('credit-card', card, config);
+    const response = await apiUser.post('credit-card', card);
     return response.data;
   },
 );
 export const fetchApiDelete = createAsyncThunk(
   'credit-card/id/fetchApiPost',
   async (id: string) => {
-    const token = localStorage.getItem('token') as string;
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token ? token.replace(/^"(.*)"$/, '$1') : ''}`,
-        'content-type': 'application/json',
-      },
-    };
-    const response = await apiUser.delete(`credit-card/${id}`, config);
+    const response = await apiUser.delete(`credit-card/${id}`);
     return response.data;
   },
 );

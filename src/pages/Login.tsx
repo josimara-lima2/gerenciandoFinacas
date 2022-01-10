@@ -12,13 +12,12 @@ import {
   OutlinedInput,
 } from '@mui/material';
 import { useState } from 'react';
-import { useAppDispatch } from 'store';
 import { useNavigate } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
 import Alerta from 'components/Alerta/Alerta';
-import { fetchApiLogin } from '../store/reducers/user';
+import useAuth from 'hooks/useAuth';
 import imgLogin from '../assets/images/login.png';
 
 const FormControl = styled(MuiFormControl)(({ theme }) => ({
@@ -101,7 +100,7 @@ const Button = styled(MuiButton)(({ theme }) => ({
 }));
 export default function Login() {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+  const { signin } = useAuth();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -115,18 +114,13 @@ export default function Login() {
   };
 
   function handleLogin() {
-    dispatch(fetchApiLogin({ email, password }))
-      .unwrap()
-      .then(response => {
-        const { token } = response;
-        if (token) {
-          setMessage(response.statusText);
-          navigate('/');
-        }
+    signin({ email, password })
+      .then(res => {
+        navigate('/');
       })
-      .catch(e => {
+      .catch(error => {
         setOpen(true);
-        setMessage(e.message);
+        setMessage(error.message);
       });
   }
   function linkCadastro() {

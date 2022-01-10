@@ -91,7 +91,7 @@ export default function TelaCadastro() {
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState('');
 
-  const handleClick = () => {
+  const handleCadastroUser = () => {
     setOpen(!open);
     dispatch(
       fetchApiCadastroUser({ name, email, password, passwordConfirmation }),
@@ -195,7 +195,7 @@ export default function TelaCadastro() {
           onChange={e => setPasswordConfirmation(e.target.value)}
         />
 
-        <Button variant="contained" onClick={() => handleClick()}>
+        <Button variant="contained" onClick={() => handleCadastroUser()}>
           Cadastrar
         </Button>
         <MuiButton

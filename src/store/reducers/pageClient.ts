@@ -34,34 +34,20 @@ const initialState = {
   },
   isLoadingg: false,
 } as PageClienteInterface;
-// testando aqui
+
 export const fetchApiPage = createAsyncThunk(
   'clients?page=&limit=/fetchApiPage',
   async (page: number | null) => {
-    const token = localStorage.getItem('token') as string;
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token ? token.replace(/^"(.*)"$/, '$1') : ''}`,
-        'content-type': 'application/json',
-      },
-    };
     const url = page === null ? 'clients' : `clients?page=${page}&limit=10`;
-    const response = await apiUser.get(url, config);
+    const response = await apiUser.get(url);
     return response.data;
   },
 );
-// finalizando teste aqui
+
 export const fetchApiSearch = createAsyncThunk(
   'clients?search=/fetchApiPage',
   async (search: string) => {
-    const token = localStorage.getItem('token') as string;
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token ? token.replace(/^"(.*)"$/, '$1') : ''}`,
-        'content-type': 'application/json',
-      },
-    };
-    const response = await apiUser.get(`clients?search=${search}`, config);
+    const response = await apiUser.get(`clients?search=${search}`);
     return response.data;
   },
 );
@@ -69,28 +55,14 @@ export const fetchApiSearch = createAsyncThunk(
 export const fetchApiPost = createAsyncThunk(
   'clients/fetchApiPost',
   async (client: Partial<ClientInterface>) => {
-    const token = localStorage.getItem('token') as string;
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token ? token.replace(/^"(.*)"$/, '$1') : ''}`,
-        'content-type': 'application/json',
-      },
-    };
-    const response = await apiUser.post('clients', client, config);
+    const response = await apiUser.post('clients', client);
     return response.data;
   },
 );
 export const fetchApiDelete = createAsyncThunk(
   'clients/id/fetchApiDelete',
   async (id: string) => {
-    const token = localStorage.getItem('token') as string;
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token ? token.replace(/^"(.*)"$/, '$1') : ''}`,
-        'content-type': 'application/json',
-      },
-    };
-    const response = await apiUser.delete(`clients/${id}`, config);
+    const response = await apiUser.delete(`clients/${id}`);
     return response.data;
   },
 );

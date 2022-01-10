@@ -26,7 +26,8 @@ const DeleteClient = ({ client }: Props) => {
         if (statusCode === 201) {
           dispatch(fetchApiPage(pageCliente.page));
         }
-      });
+      })
+      .catch(error => alert(error.message));
   };
   return (
     <Modal

@@ -4,13 +4,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider as ReduxProvider } from 'react-redux';
 import store from 'store';
+import AuthProvider from './contexts/loginContext';
 
 ReactDOM.render(
   <React.StrictMode>
     <ReduxProvider store={store}>
-      <ThemeProvider>
-        <App />
-      </ThemeProvider>
+      <AuthProvider>
+        <ThemeProvider>
+          <App />
+        </ThemeProvider>
+      </AuthProvider>
     </ReduxProvider>
   </React.StrictMode>,
   document.getElementById('root'),
