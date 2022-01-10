@@ -11,13 +11,17 @@ type Props = {
   ) => void;
 };
 export default function Search({ atualiza, onChange }: Props) {
-  const [v, setV] = useState('0');
+  const [v, setV] = useState('');
 
   const changeInput = (
     e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    setV(e.currentTarget.value);
-    onChange(e, e.currentTarget.value);
+    if (e.currentTarget.value !== '') {
+      setV(e.currentTarget.value);
+      onChange(e, e.currentTarget.value);
+    } else {
+      setV('');
+    }
   };
 
   useEffect(() => {
