@@ -1,5 +1,9 @@
 import React from 'react';
-import { TextField as MuiTextField, styled } from '@mui/material';
+import {
+  TextField as MuiTextField,
+  styled,
+  TextFieldProps,
+} from '@mui/material';
 
 const TextFieldStyle = styled(MuiTextField)(({ theme }) => ({
   margin: '5px',
@@ -17,39 +21,9 @@ const TextFieldStyle = styled(MuiTextField)(({ theme }) => ({
   },
 }));
 
-type Props = {
-  id: string;
-  label: string;
-  variant: 'filled' | 'outlined' | 'standard' | undefined;
-  value: string;
-  required: boolean;
-  onChange: (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => void;
-  sx?: Record<string, unknown> | undefined;
-};
-
 // componente para telas de login e cadastro de usuário
-const TextField = ({
-  id,
-  label,
-  variant,
-  value,
-  required,
-  onChange,
-  sx,
-}: Props) => {
-  return (
-    <TextFieldStyle
-      id={id}
-      label={label}
-      variant={variant}
-      required={required}
-      value={value}
-      onChange={onChange}
-      sx={{ ...sx }}
-    />
-  );
+const TextField = (props: TextFieldProps) => {
+  return <TextFieldStyle {...props} />;
 };
 
 export default TextField;

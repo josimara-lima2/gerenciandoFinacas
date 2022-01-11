@@ -2,7 +2,6 @@ import { Box, TextField as MuiTextField } from '@mui/material';
 import Modal from 'components/Modal/Modal';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'store';
-
 import {
   PageSelector,
   fetchApiPage,
@@ -11,7 +10,6 @@ import {
 } from 'store/reducers/pageClient';
 import { maskCpf } from 'utils/masks';
 import InputAdornment from '@mui/material/InputAdornment';
-import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import CallIcon from '@mui/icons-material/Call';
