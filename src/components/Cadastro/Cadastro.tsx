@@ -15,6 +15,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import CallIcon from '@mui/icons-material/Call';
+import TextField from 'components/TextField/TextField';
 
 export default function Cadastro() {
   const dispatch = useAppDispatch();
@@ -106,7 +107,7 @@ export default function Cadastro() {
           }}
           sx={styleTextField}
         />
-        <MuiTextField
+        <TextField
           id="cpf"
           label="Cpf"
           variant="outlined"

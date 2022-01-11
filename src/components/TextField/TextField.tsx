@@ -26,6 +26,7 @@ type Props = {
   onChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
+  sx?: Record<string, unknown> | undefined;
 };
 
 // componente para telas de login e cadastro de usuário
@@ -36,6 +37,7 @@ const TextField = ({
   value,
   required,
   onChange,
+  sx,
 }: Props) => {
   return (
     <TextFieldStyle
@@ -45,6 +47,7 @@ const TextField = ({
       required={required}
       value={value}
       onChange={onChange}
+      sx={{ ...sx }}
     />
   );
 };
