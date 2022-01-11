@@ -14,24 +14,10 @@ import { useAppDispatch } from 'store';
 import { useNavigate } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import CloseIcon from '@mui/icons-material/Close';
+import TextField from 'components/TextField/TextField';
 import { fetchApiCadastroUser } from '../store/reducers/user';
 import imgLogin from '../assets/images/login.png';
 
-const TextField = styled(MuiTextField)(({ theme }) => ({
-  margin: '5px',
-  width: '60%',
-  borderRadius: '20px',
-  color: theme.palette.mode === 'dark' ? '#000000' : '#fafafa',
-  [theme.breakpoints.down('xs')]: {
-    width: '100%',
-  },
-  [theme.breakpoints.down('md')]: {
-    width: '80%',
-  },
-  [theme.breakpoints.up('lg')]: {
-    width: '40%',
-  },
-}));
 const Box = styled(MuiBox)(({ theme }) => ({
   display: 'flex',
   padding: 0,

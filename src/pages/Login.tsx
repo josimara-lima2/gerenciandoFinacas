@@ -18,27 +18,12 @@ import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
 import Alerta from 'components/Alerta/Alerta';
 import useAuth from 'hooks/useAuth';
+import TextField from 'components/TextField/TextField';
 import imgLogin from '../assets/images/login.png';
 
 const FormControl = styled(MuiFormControl)(({ theme }) => ({
   m: 1,
   width: '60%',
-  [theme.breakpoints.down('xs')]: {
-    width: '100%',
-  },
-  [theme.breakpoints.down('md')]: {
-    width: '80%',
-  },
-  [theme.breakpoints.up('lg')]: {
-    width: '40%',
-  },
-}));
-
-const TextField = styled(MuiTextField)(({ theme }) => ({
-  margin: '5px',
-  width: '60%',
-  borderRadius: '20px',
-  color: theme.palette.mode === 'dark' ? '#000000' : '#fafafa',
   [theme.breakpoints.down('xs')]: {
     width: '100%',
   },
@@ -157,6 +142,7 @@ export default function Login() {
           Sign in
         </Typography>
         <TextField
+          id="email"
           variant="outlined"
           label="Email"
           required
