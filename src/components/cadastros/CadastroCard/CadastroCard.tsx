@@ -99,7 +99,7 @@ const CadastroCard = () => {
             label="Limite"
             onChange={e => setLimit(maskValue(e))}
             value={limit}
-            sx={{ marginRight: '5px' }}
+            sx={{ marginRight: '5%' }}
           />
           <TextFieldCadastro
             label="Limite_Disponivel"

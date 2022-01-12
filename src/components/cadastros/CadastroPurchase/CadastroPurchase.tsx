@@ -19,12 +19,13 @@ import {
 } from 'store/reducers/compras';
 
 import TextFieldCadastro from '../TextFieldCadastro';
+import SelectParceleOut from './SelectParceleOut';
+import Select from './Select';
 
 const styleTextField = {
   margin: '8px 0',
   width: '100%',
 };
-
 const CadastroPurchase = () => {
   const [description, setDescription] = useState('');
   const [value, setValue] = useState(0);
@@ -54,7 +55,9 @@ const CadastroPurchase = () => {
 
   const [inputValue, setInputValue] = useState('');
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     setClientId(event.target.value);
   };
 
@@ -75,7 +78,9 @@ const CadastroPurchase = () => {
     }
   };
 
-  const handleChangeCard = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeCard = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     setCreditCardId(event.target.value);
   };
 
@@ -120,22 +125,13 @@ const CadastroPurchase = () => {
           label="Valor"
           onChange={e => setValue(+e.target.value)}
           value={value}
-          sx={{ marginRight: '5px' }}
+          sx={{ marginRight: '5%' }}
         />
-        <FormControl sx={{ ...styleTextField }}>
-          <InputLabel htmlFor="select" id="parceleOut" />
-          <TextField
-            required
-            select
-            id="select"
-            value={inputValue}
-            label="Parcelar valor?"
-            onChange={e => handleChangeSelect(e)}
-          >
-            <MenuItem value={0}>nao</MenuItem>
-            <MenuItem value={1}>sim</MenuItem>
-          </TextField>
-        </FormControl>
+
+        <SelectParceleOut
+          value={inputValue}
+          onChange={e => handleChangeSelect(e)}
+        />
       </Box>
 
       {parceleOut === true && (
@@ -169,42 +165,21 @@ const CadastroPurchase = () => {
           justifyContent: 'center',
         }}
       >
-        <TextField
-          id="clientId"
-          select
-          label="Cliente"
+        <Select
           value={clientId}
-          onChange={handleChange}
-          helperText="Selecione o nome do cliente"
-          sx={{ ...styleTextField, marginRight: '5%' }}
-        >
-          {!isLoadingg &&
-            pageCliente.data.map(item => {
-              return (
-                <MenuItem key={item.id} value={item.id}>
-                  {item.name}
-                </MenuItem>
-              );
-            })}
-        </TextField>
-        <TextField
-          id="creditCardId"
-          select
-          label="Cartão"
+          onChange={e => handleChange(e)}
+          label="Cliente"
+          loading={isLoadingg}
+          dados={pageCliente.data}
+          sx={{ marginRight: '5%' }}
+        />
+        <Select
           value={creditCardId}
-          onChange={handleChangeCard}
-          helperText="Selecione o cartão de crédito"
-          sx={styleTextField}
-        >
-          {!loadingCard &&
-            pageCard.data.map(item => {
-              return (
-                <MenuItem key={item.id} value={item.id}>
-                  {item.name}
-                </MenuItem>
-              );
-            })}
-        </TextField>
+          onChange={e => handleChangeCard(e)}
+          label="Cartao"
+          loading={loadingCard}
+          dados={pageCard.data}
+        />
       </Box>
     </Modal>
   );
