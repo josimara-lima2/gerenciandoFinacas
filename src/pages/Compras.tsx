@@ -10,7 +10,7 @@ import {
   Pagination,
   styled,
 } from '@mui/material';
-import CadastroPurchase from 'components/Cadastros/CadastroPurchase/CadastroPurchase';
+import CadastroPurchase from 'components/cadastros/CadastroPurchase/CadastroPurchase';
 import Search from 'components/Search/Search';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'store';
