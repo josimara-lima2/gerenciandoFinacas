@@ -17,12 +17,12 @@ import {
   fetchApiPurchases,
   fetchApiPurchasesPost,
 } from 'store/reducers/compras';
-import Alerta from 'components/Alerta/Alerta';
+
+import TextFieldCadastro from '../TextFieldCadastro';
 
 const styleTextField = {
   margin: '8px 0',
   width: '100%',
-  borderRadius: '20px',
 };
 
 const CadastroPurchase = () => {
@@ -102,14 +102,10 @@ const CadastroPurchase = () => {
       buttonIcon={<AddShoppingCartIcon />}
       cadastrar={cadastrar}
     >
-      <TextField
-        id="description"
-        label="Descrição"
-        variant="outlined"
-        required
+      <TextFieldCadastro
+        label="Descricao"
         onChange={e => setDescription(e.target.value)}
         value={description}
-        sx={styleTextField}
       />
       <Box
         sx={{
@@ -120,14 +116,11 @@ const CadastroPurchase = () => {
           justifyContent: 'center',
         }}
       >
-        <TextField
-          id="value"
+        <TextFieldCadastro
           label="Valor"
-          variant="outlined"
-          required
           onChange={e => setValue(+e.target.value)}
           value={value}
-          sx={{ ...styleTextField, marginRight: '5%' }}
+          sx={{ marginRight: '5px' }}
         />
         <FormControl sx={{ ...styleTextField }}>
           <InputLabel htmlFor="select" id="parceleOut" />
@@ -146,42 +139,26 @@ const CadastroPurchase = () => {
       </Box>
 
       {parceleOut === true && (
-        <TextField
-          id="numberOfInstallments"
-          label="Número de parcelas"
-          variant="outlined"
-          required
+        <TextFieldCadastro
+          label="Numero_de_parcelas"
           onChange={e => setNumberOfInstallments(+e.target.value)}
           value={numberOfInstallments}
-          sx={styleTextField}
         />
       )}
-      <TextField
-        id="formOfPayment"
-        label="Forma de Pagamento"
-        variant="outlined"
-        required
+      <TextFieldCadastro
+        label="Forma_de_Pagamento"
         onChange={e => setFormOfPayment(e.target.value)}
         value={formOfPayment}
-        sx={styleTextField}
       />
-      <TextField
-        id="status"
+      <TextFieldCadastro
         label="Status"
-        variant="outlined"
-        required
         onChange={e => setStatus(e.target.value)}
         value={status}
-        sx={styleTextField}
       />
-      <TextField
-        id="paidInstallments"
-        label="Numero de parcelas pagas"
-        variant="outlined"
-        required
+      <TextFieldCadastro
+        label="parcelas_pagas"
         onChange={e => setPaidInstallments(+e.target.value)}
         value={paidInstallments}
-        sx={styleTextField}
       />
       <Box
         sx={{

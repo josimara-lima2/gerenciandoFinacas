@@ -1,4 +1,4 @@
-import Cadastro from 'components/Cadastro/Cadastro';
+import Cadastro from 'components/Cadastros/CadastroCliente/CadastroCliente';
 import {
   Box as MuiBox,
   Table,

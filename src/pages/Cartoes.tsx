@@ -16,7 +16,7 @@ import {
   fetchApiSearch,
 } from 'store/reducers/pageCard';
 import CreateIcon from '@mui/icons-material/Create';
-import CadastroCard from 'components/CadastroCard/CadastroCard';
+import CadastroCard from 'components/Cadastros/CadastroCard/CadastroCard';
 import Search from 'components/Search/Search';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
