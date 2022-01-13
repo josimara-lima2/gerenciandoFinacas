@@ -4,6 +4,7 @@ import {
   styled,
   TextFieldProps,
 } from '@mui/material';
+import { MuiTextFieldProps } from '@mui/lab/internal/pickers/PureDateInput';
 
 const TextFieldStyle = styled(MuiTextField)(({ theme }) => ({
   margin: '5px',
@@ -21,9 +22,26 @@ const TextFieldStyle = styled(MuiTextField)(({ theme }) => ({
   },
 }));
 
+type Props = {
+  onChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => void;
+  value: string;
+  label: string;
+};
+
 // componente para telas de login e cadastro de usuário
-const TextField = (props: TextFieldProps) => {
-  return <TextFieldStyle {...props} />;
+const TextField = ({ onChange, value, label }: Props) => {
+  return (
+    <TextFieldStyle
+      variant="outlined"
+      required
+      label={label}
+      id={label.toLowerCase()}
+      value={value}
+      onChange={onChange}
+    />
+  );
 };
 
 export default TextField;

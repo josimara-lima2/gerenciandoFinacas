@@ -1,71 +1,21 @@
-import {
-  styled,
-  TextField as MuiTextField,
-  Button as MuiButton,
-  Box as MuiBox,
-  Typography,
-  Divider,
-  Collapse,
-  Alert,
-  IconButton,
-} from '@mui/material';
+import { Typography } from '@mui/material';
 import { useState } from 'react';
 import { useAppDispatch } from 'store';
 import { useNavigate } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import CloseIcon from '@mui/icons-material/Close';
 import TextField from 'components/TextField/TextField';
+import Alerta from 'components/Alerta/Alerta';
 import { fetchApiCadastroUser } from '../store/reducers/user';
 import imgLogin from '../assets/images/login.png';
+import {
+  BoxContainer,
+  BoxForm,
+  BoxImagem,
+  Divider,
+  Button,
+  ButtonLink,
+} from './styledRegister_Login';
 
-const Box = styled(MuiBox)(({ theme }) => ({
-  display: 'flex',
-  padding: 0,
-  margin: 0,
-  [theme.breakpoints.down('md')]: {
-    flexDirection: 'column',
-    justifyContent: 'start',
-    alignItems: 'center',
-    height: '80%',
-    marginTop: theme.spacing(35),
-  },
-  [theme.breakpoints.up('md')]: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-    height: '100vh',
-  },
-}));
-
-const BoxImagem = styled(MuiBox)(({ theme }) => ({
-  width: '50%',
-  height: '80%',
-  display: 'flex',
-  alignItems: 'center',
-  [theme.breakpoints.down('md')]: {
-    display: 'none',
-  },
-}));
-
-const Button = styled(MuiButton)(({ theme }) => ({
-  margin: '15px',
-  border: '0.5px solid #1C86EE',
-  borderRadius: '5px',
-  backgroundColor: '#1C86EE',
-  width: '60%',
-  color: '#fafafa',
-  padding: '8px 0',
-  [theme.breakpoints.down('xs')]: {
-    width: '100%',
-  },
-  [theme.breakpoints.down('md')]: {
-    width: '80%',
-  },
-  [theme.breakpoints.up('lg')]: {
-    width: '40%',
-  },
-}));
 export default function TelaCadastro() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -87,6 +37,7 @@ export default function TelaCadastro() {
         navigate('/login');
       })
       .catch(e => {
+        setOpen(true);
         setMessage(e.message);
       });
   };
@@ -96,101 +47,48 @@ export default function TelaCadastro() {
   }
 
   return (
-    <Box>
-      <BoxImagem
-        sx={{
-          width: '50%',
-          height: '80%',
-
-          display: 'flex',
-          alignItems: 'center',
-        }}
-      >
+    <BoxContainer>
+      <BoxImagem>
         <img width="80%" src={imgLogin} alt="loginImg" />
       </BoxImagem>
-      <Divider
-        orientation="vertical"
-        sx={{
-          height: '70%',
-        }}
-      />
-      <MuiBox
-        sx={{
-          width: '50%',
-          height: '80%',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        <Collapse in={open}>
-          <Alert
-            severity="error"
-            color="error"
-            action={
-              <IconButton
-                aria-label="close"
-                size="small"
-                onClick={() => {
-                  setOpen(!open);
-                }}
-              >
-                <CloseIcon fontSize="inherit" />
-              </IconButton>
-            }
-            sx={{ mt: 10 }}
-          >
-            {message}
-          </Alert>
-        </Collapse>
+      <Divider orientation="vertical" />
+      <BoxForm>
+        <Alerta open={open} setOpen={setOpen} message={message} />
         <LockOutlinedIcon />
         <Typography variant="h6" sx={{ marginBottom: '16px' }}>
           Register
         </Typography>
         <TextField
-          id="name"
           label="Name"
-          variant="outlined"
           value={name}
-          required
           onChange={e => setName(e.target.value)}
         />
         <TextField
-          id="email"
           label="Email"
-          variant="outlined"
           value={email}
-          required
           onChange={e => setEmail(e.target.value)}
         />
         <TextField
-          id="password"
           label="Password"
-          variant="outlined"
           value={password}
-          required
           onChange={e => setPassword(e.target.value)}
         />
         <TextField
-          id="passwordConfirmation"
           label="Password_Confirmation"
-          variant="outlined"
           value={passwordConfirmation}
-          required
           onChange={e => setPasswordConfirmation(e.target.value)}
         />
 
         <Button variant="contained" onClick={() => handleCadastroUser()}>
           Cadastrar
         </Button>
-        <MuiButton
+        <ButtonLink
           sx={{ textDecoration: 'underline' }}
           onClick={() => linkLogin()}
         >
           Login
-        </MuiButton>
-      </MuiBox>
-    </Box>
+        </ButtonLink>
+      </BoxForm>
+    </BoxContainer>
   );
 }

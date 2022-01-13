@@ -1,13 +1,7 @@
 import {
-  styled,
-  TextField as MuiTextField,
-  Button as MuiButton,
-  Box as MuiBox,
   Typography,
-  Divider,
   IconButton,
   InputAdornment,
-  FormControl as MuiFormControl,
   InputLabel,
   OutlinedInput,
 } from '@mui/material';
@@ -20,69 +14,16 @@ import Alerta from 'components/Alerta/Alerta';
 import useAuth from 'hooks/useAuth';
 import TextField from 'components/TextField/TextField';
 import imgLogin from '../assets/images/login.png';
+import {
+  BoxContainer,
+  BoxForm,
+  BoxImagem,
+  Divider,
+  Button,
+  ButtonLink,
+  FormControl,
+} from './styledRegister_Login';
 
-const FormControl = styled(MuiFormControl)(({ theme }) => ({
-  m: 1,
-  width: '60%',
-  [theme.breakpoints.down('xs')]: {
-    width: '100%',
-  },
-  [theme.breakpoints.down('md')]: {
-    width: '80%',
-  },
-  [theme.breakpoints.up('lg')]: {
-    width: '40%',
-  },
-}));
-
-const Box = styled(MuiBox)(({ theme }) => ({
-  display: 'flex',
-  padding: 0,
-  margin: 0,
-  [theme.breakpoints.down('md')]: {
-    flexDirection: 'column',
-    justifyContent: 'start',
-    alignItems: 'center',
-    height: '80%',
-    marginTop: theme.spacing(35),
-  },
-  [theme.breakpoints.up('md')]: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-    height: '100vh',
-  },
-}));
-
-const BoxImagem = styled(MuiBox)(({ theme }) => ({
-  width: '50%',
-  height: '80%',
-  display: 'flex',
-  alignItems: 'center',
-  [theme.breakpoints.down('md')]: {
-    display: 'none',
-  },
-}));
-
-const Button = styled(MuiButton)(({ theme }) => ({
-  margin: '15px',
-  border: '0.5px solid #1C86EE',
-  borderRadius: '5px',
-  backgroundColor: '#1C86EE',
-  width: '60%',
-  color: '#fafafa',
-  padding: '8px 0',
-  [theme.breakpoints.down('xs')]: {
-    width: '100%',
-  },
-  [theme.breakpoints.down('md')]: {
-    width: '80%',
-  },
-  [theme.breakpoints.up('lg')]: {
-    width: '40%',
-  },
-}));
 export default function Login() {
   const navigate = useNavigate();
   const { signin } = useAuth();
@@ -114,38 +55,20 @@ export default function Login() {
   }
 
   return (
-    <Box>
+    <BoxContainer>
       <BoxImagem>
         <img width="80%" src={imgLogin} alt="loginImg" />
       </BoxImagem>
-      <Divider
-        orientation="vertical"
-        sx={{
-          height: '70%',
-        }}
-      />
-      {/* box de form */}
-      <MuiBox
-        sx={{
-          width: '50%',
-          height: '80%',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        <Alerta open={open} setOpen={setOpen} message={message} />
+      <Divider orientation="vertical" sx={{}} />
 
+      <BoxForm>
+        <Alerta open={open} setOpen={setOpen} message={message} />
         <LockOutlinedIcon />
         <Typography variant="h6" sx={{ marginBottom: '16px' }}>
           Sign in
         </Typography>
         <TextField
-          id="email"
-          variant="outlined"
           label="Email"
-          required
           value={email}
           onChange={e => setEmail(e.target.value)}
         />
@@ -176,13 +99,8 @@ export default function Login() {
         <Button variant="contained" onClick={() => handleLogin()}>
           Login
         </Button>
-        <MuiButton
-          sx={{ textDecoration: 'underline' }}
-          onClick={() => linkCadastro()}
-        >
-          Cadastre-se
-        </MuiButton>
-      </MuiBox>
-    </Box>
+        <ButtonLink onClick={() => linkCadastro()}>Cadastre-se</ButtonLink>
+      </BoxForm>
+    </BoxContainer>
   );
 }
