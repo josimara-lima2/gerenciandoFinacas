@@ -17,6 +17,7 @@ import {
 } from 'store/reducers/compras';
 import { DeleteOutline } from '@mui/icons-material';
 import ItemTable from 'components/ItemTable/ItemTable';
+import InfoCompra from 'components/InfoCompra/InfoCompra';
 import BoxTable from '../components/BoxTable/BoxTable';
 
 const BoxContainer = styled(MuiBox)(() => ({
@@ -81,12 +82,13 @@ export default function Compra() {
             <BoxTable key={item.description}>
               <ItemTable title="Description" item={item.description} />
               <ItemTable title="value" item={item.value} />
-              <ItemTable title="status" item={item.status} />
-              <ItemTable title="Forma de pagamento" item={item.formOfPayment} />
+              <ItemTable title="cliente" item={item.client.name} />
+              <ItemTable title="Cartao" item={item.creditCard.name} />
               <TypographyAcoes>
                 <IconButton>
                   <DeleteOutline />
                 </IconButton>
+                <InfoCompra compra={item} />
               </TypographyAcoes>
             </BoxTable>
           ))}

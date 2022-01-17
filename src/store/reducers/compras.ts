@@ -2,7 +2,8 @@ import { RootState } from 'store/rootReducer';
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { apiUser } from '../../services/apiUser';
 
-declare interface IPurchase {
+export declare interface IPurchase {
+  id: string;
   description: string;
   value: number;
   parceleOut: boolean;
@@ -10,8 +11,14 @@ declare interface IPurchase {
   formOfPayment: string;
   status: string;
   paidInstallments: number;
-  creditCardId: string;
-  clientId: string;
+  creditCard: {
+    id: string;
+    name: string;
+  };
+  client: {
+    id: string;
+    name: string;
+  };
 }
 export declare interface PagePurchases {
   totalCount: number;

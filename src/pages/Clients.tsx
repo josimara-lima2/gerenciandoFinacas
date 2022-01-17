@@ -17,6 +17,7 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import DeleteClient from 'components/DeleteClient/DeleteClient';
 import BoxTable from 'components/BoxTable/BoxTable';
+
 import ItemTable from '../components/ItemTable/ItemTable';
 import Search from '../components/Search/Search';
 

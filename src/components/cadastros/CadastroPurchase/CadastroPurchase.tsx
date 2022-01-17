@@ -37,7 +37,23 @@ const CadastroPurchase = () => {
   const [clientId, setClientId] = useState('');
   const [creditCardId, setCreditCardId] = useState('');
 
-  const newCard = {
+  const dispatch = useAppDispatch();
+  const { pageCliente, isLoadingg } = useAppSelector(PageSelector);
+  const { pageCard, loadingCard } = useAppSelector(PageCardSelector);
+  const [message, setMessage] = useState('');
+
+  const [inputValue, setInputValue] = useState('');
+
+  const clientSelect = pageCliente
+    ? pageCliente.data.find(item => item.id === clientId)
+    : { id: 'teste', name: 'teste' };
+
+  const cardSelect = pageCard
+    ? pageCard.data.find(item => item.id === creditCardId)
+    : { id: 'teste', name: 'teste' };
+
+  const newCompra = {
+    id: 'idTemp',
     description,
     value,
     parceleOut,
@@ -46,15 +62,15 @@ const CadastroPurchase = () => {
     status,
     paidInstallments,
     creditCardId,
-    clientId,
+    client: {
+      id: clientId,
+      name: clientSelect ? clientSelect.name : '',
+    },
+    creditCard: {
+      id: creditCardId,
+      name: cardSelect ? cardSelect.name : '',
+    },
   };
-  const dispatch = useAppDispatch();
-  const { pageCliente, isLoadingg } = useAppSelector(PageSelector);
-  const { pageCard, loadingCard } = useAppSelector(PageCardSelector);
-  const [message, setMessage] = useState('');
-
-  const [inputValue, setInputValue] = useState('');
-
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
@@ -90,12 +106,12 @@ const CadastroPurchase = () => {
   }, [dispatch]);
 
   const cadastrar = () => {
-    dispatch(fetchApiPurchasesPost(newCard))
+    dispatch(fetchApiPurchasesPost(newCompra))
       .unwrap()
       .then(response => {
         const { statusCode } = response;
         if (statusCode === 201) {
-          dispatch(addPurchase(newCard));
+          dispatch(addPurchase(newCompra));
         }
         dispatch(fetchApiPurchases(1));
       })
