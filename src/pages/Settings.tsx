@@ -1,13 +1,11 @@
 import {
   Avatar,
-  Box,
+  Box as MuiBox,
   Typography,
   Collapse,
   IconButton,
   Tooltip,
-  Card,
-  CardContent,
-  CardActions,
+  styled,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'store';
@@ -16,9 +14,21 @@ import FeedIcon from '@mui/icons-material/Feed';
 import { fetchApiPageCard, PageCardSelector } from 'store/reducers/pageCard';
 import { fetchApiPage, PageSelector } from 'store/reducers/pageClient';
 import { fetchApiPurchases, purchasesSelector } from 'store/reducers/compras';
-import { Link } from 'react-router-dom';
-import avatarImg from '../assets/images/avatar.png';
 
+import CardPersonalizado from 'components/Card/Card';
+import avatarImg from '../assets/images/avatar.png';
+import clientsImg from '../assets/images/clients.png';
+import comprasImg from '../assets/images/compras.png';
+import cardImg from '../assets/images/card.png';
+
+const BoxCard = styled(MuiBox)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  [theme.breakpoints.down('md')]: {
+    flexDirection: 'column',
+  },
+}));
 export default function Settings() {
   const dispatch = useAppDispatch();
   const { pageCard } = useAppSelector(PageCardSelector);
@@ -38,8 +48,8 @@ export default function Settings() {
   }, []);
 
   return (
-    <Box>
-      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+    <MuiBox>
+      <MuiBox sx={{ display: 'flex', alignItems: 'center' }}>
         <Avatar
           sx={{
             width: 36,
@@ -55,7 +65,7 @@ export default function Settings() {
         <Typography variant="h5" sx={{ marginTop: '10px', marginLeft: '5px' }}>
           Olá, {userLogado.name}!
         </Typography>
-      </Box>
+      </MuiBox>
       <Tooltip title={open ? 'esconder dados ' : 'ver dados'} placement="right">
         <IconButton onClick={() => setOpen(!open)} sx={{ marginTop: '30px' }}>
           <FeedIcon />
@@ -67,74 +77,34 @@ export default function Settings() {
         <Typography>AvatarURL: {userLogado.avatarUrl}</Typography>
         <Typography>ID: {userLogado.id}</Typography>
       </Collapse>
-      <Box
-        sx={{
-          display: 'flex',
+      <BoxCard>
+        <CardPersonalizado
+          title="Total de Clientes"
+          toLink="/clients"
+          img={clientsImg}
+        >
+          O sistema possui um total de {totalCliente} clientes. Para acessar
+          mais informações click no link abaixo.
+        </CardPersonalizado>
 
-          justifyContent: 'space-between',
-        }}
-      >
-        <Card sx={{ width: '300px' }}>
-          <CardContent
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-          >
-            <Typography>Cartões</Typography>
-            {totalCard}
-          </CardContent>
-          <CardActions>
-            <Link
-              style={{ textDecoration: 'none', color: '#1c83ff' }}
-              to="/credit-card"
-            >
-              Ver mais
-            </Link>
-          </CardActions>
-        </Card>
-        <Card sx={{ width: '300px' }}>
-          <CardContent
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-          >
-            <Typography>Compras</Typography>
-            {totalCompras}
-          </CardContent>
-          <CardActions>
-            <Link
-              style={{ textDecoration: 'none', color: '#1c83ff' }}
-              to="/purchases"
-            >
-              Ver mais
-            </Link>
-          </CardActions>
-        </Card>
-        <Card sx={{ width: '300px' }}>
-          <CardContent
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-          >
-            <Typography>Clientes</Typography>
-            {totalCliente}
-          </CardContent>
-          <CardActions>
-            <Link
-              style={{ textDecoration: 'none', color: '#1c83ff' }}
-              to="/clients"
-            >
-              Ver mais
-            </Link>
-          </CardActions>
-        </Card>
-      </Box>
-    </Box>
+        <CardPersonalizado
+          title="Total de Compras"
+          toLink="/purchases"
+          img={comprasImg}
+        >
+          O sistema possui um total de {totalCompras} Compras. Para acessar mais
+          informações click no link abaixo.
+        </CardPersonalizado>
+
+        <CardPersonalizado
+          title="Total de Cartões"
+          toLink="/credit-card"
+          img={cardImg}
+        >
+          O sistema possui um total de {totalCard} Cartões. Para acessar mais
+          informações click no link abaixo.
+        </CardPersonalizado>
+      </BoxCard>
+    </MuiBox>
   );
 }

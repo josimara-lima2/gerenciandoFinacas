@@ -1,10 +1,9 @@
 import Home from 'pages/Home';
 import Settings from 'pages/Settings';
 import Clients from 'pages/Clients';
-import TelaCadastro from 'pages/TelaCadastro';
 import { Route, Routes } from 'react-router-dom';
 import PrivateRouter from 'PrivateRoutes';
-import Login from 'pages/Login';
+import LoginRegister from 'pages/Login_Register';
 import Compra from 'pages/Compras';
 import Cartao from './pages/Cartoes';
 
@@ -51,9 +50,9 @@ export default function CustomRoutes() {
           </PrivateRouter>
         }
       />
-      <Route path="/cadastro" element={<TelaCadastro />} />
+
       <Route path="*" element={<Home />} />
-      <Route path="/login" element={<Login />} />
+      <Route path="/login" element={<LoginRegister />} />
     </Routes>
   );
 }

@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  TextField as MuiTextField,
-  styled,
-  TextFieldProps,
-} from '@mui/material';
-import { MuiTextFieldProps } from '@mui/lab/internal/pickers/PureDateInput';
+import { TextField as MuiTextField, styled } from '@mui/material';
 
 const TextFieldStyle = styled(MuiTextField)(({ theme }) => ({
   margin: '5px',

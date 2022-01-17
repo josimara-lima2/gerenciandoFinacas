@@ -13,12 +13,6 @@ import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined';
 import DateRangeOutlinedIcon from '@mui/icons-material/DateRangeOutlined';
 import TextFieldCadastro from '../TextFieldCadastro';
 
-const Box = styled(MuiBox)(() => ({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-}));
-
 const CadastroCard = () => {
   const dispatch = useAppDispatch();
   const { pageCard } = useAppSelector(PageCardSelector);
@@ -70,74 +64,72 @@ const CadastroCard = () => {
   };
 
   return (
-    <MuiBox component="form">
-      <Modal
-        title="Cadastre o cartão"
-        cadastrar={cadastrar}
-        buttonIcon={<AddCardIcon />}
-        tamanho="sm"
-      >
-        <TextFieldCadastro
-          onChange={e => setName(e.target.value)}
-          label="Nome"
-          value={name}
-        />
-        <TextFieldCadastro
-          label="Bandeira"
-          onChange={e => setFlag(e.target.value)}
-          value={flag}
-        />
+    <Modal
+      title="Cadastre o cartão"
+      cadastrar={cadastrar}
+      buttonIcon={<AddCardIcon />}
+      tamanho="sm"
+    >
+      <TextFieldCadastro
+        onChange={e => setName(e.target.value)}
+        label="Nome"
+        value={name}
+      />
+      <TextFieldCadastro
+        label="Bandeira"
+        onChange={e => setFlag(e.target.value)}
+        value={flag}
+      />
 
-        <TextFieldCadastro
-          label="Titular"
-          onChange={e => setCardHolderName(e.target.value)}
-          value={cardHolderName}
-        />
+      <TextFieldCadastro
+        label="Titular"
+        onChange={e => setCardHolderName(e.target.value)}
+        value={cardHolderName}
+      />
 
-        <MuiBox sx={{ display: 'flex', width: '100%' }}>
-          <TextFieldCadastro
-            label="Limite"
-            onChange={e => setLimit(maskValue(e))}
-            value={limit}
-            sx={{ marginRight: '5%' }}
-          />
-          <TextFieldCadastro
-            label="Limite_Disponivel"
-            onChange={e => setAvailableLimit(maskValue(e))}
-            value={availableLimit}
-          />
-        </MuiBox>
-
+      <MuiBox sx={{ display: 'flex', width: '100%' }}>
         <TextFieldCadastro
-          label="Vencimento"
-          placeholder="00/00/0000"
-          onChange={e => setDueDate(e.target.value)}
-          icon={<DateRangeOutlinedIcon />}
-          value={dueDate}
+          label="Limite"
+          onChange={e => setLimit(maskValue(e))}
+          value={limit}
+          sx={{ marginRight: '5%' }}
         />
-
         <TextFieldCadastro
-          label="Fatura"
-          onChange={e => setInvoiceClosing(maskFatura(e))}
-          value={invoiceClosing}
+          label="Limite_Disponivel"
+          onChange={e => setAvailableLimit(maskValue(e))}
+          value={availableLimit}
         />
+      </MuiBox>
 
-        <TextFieldCadastro
-          label="numero"
-          placeholder="9999 9999 9999 9999"
-          onChange={e => setNumber(maskNumber(e))}
-          icon={<CreditCardOutlinedIcon />}
-          value={number}
-        />
+      <TextFieldCadastro
+        label="Vencimento"
+        placeholder="00/00/0000"
+        onChange={e => setDueDate(e.target.value)}
+        icon={<DateRangeOutlinedIcon />}
+        value={dueDate}
+      />
 
-        <TextFieldCadastro
-          label="codigo"
-          placeholder="000"
-          onChange={e => setCode(maskCode(e))}
-          value={code}
-        />
-      </Modal>
-    </MuiBox>
+      <TextFieldCadastro
+        label="Fatura"
+        onChange={e => setInvoiceClosing(maskFatura(e))}
+        value={invoiceClosing}
+      />
+
+      <TextFieldCadastro
+        label="numero"
+        placeholder="9999 9999 9999 9999"
+        onChange={e => setNumber(maskNumber(e))}
+        icon={<CreditCardOutlinedIcon />}
+        value={number}
+      />
+
+      <TextFieldCadastro
+        label="codigo"
+        placeholder="000"
+        onChange={e => setCode(maskCode(e))}
+        value={code}
+      />
+    </Modal>
   );
 };
 

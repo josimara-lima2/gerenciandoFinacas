@@ -1,14 +1,10 @@
 import {
   Box as MuiBox,
-  Table,
-  TableRow,
-  TableHead,
-  TableCell,
-  TableBody,
   IconButton,
   Stack,
   Pagination,
   styled,
+  Typography as MuiTypography,
 } from '@mui/material';
 import CadastroPurchase from 'components/cadastros/CadastroPurchase/CadastroPurchase';
 import Search from 'components/Search/Search';
@@ -20,24 +16,30 @@ import {
   fetchApiSearch,
 } from 'store/reducers/compras';
 import { DeleteOutline } from '@mui/icons-material';
+import ItemTable from 'components/ItemTable/ItemTable';
+import BoxTable from '../components/BoxTable/BoxTable';
 
 const BoxContainer = styled(MuiBox)(() => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'space-between',
   justifyContent: 'center',
-}));
-
-const BoxTable = styled(MuiBox)(() => ({
-  marginTop: '4%',
-  maxHeight: '100vh',
-  overflow: 'auto',
+  zIndex: 0,
 }));
 
 const BoxFuncionalidades = styled(MuiBox)(() => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
+  marginBottom: '3%',
+}));
+
+const TypographyAcoes = styled(MuiTypography)(() => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'start',
+  padding: 0,
+  marginRight: '20px',
 }));
 export default function Compra() {
   const dispatch = useAppDispatch();
@@ -73,50 +75,26 @@ export default function Compra() {
         <Search atualiza={handleAtualiza} onChange={handleChange} />
       </BoxFuncionalidades>
 
-      <BoxTable>
-        <Stack>
-          <Table stickyHeader>
-            <TableHead>
-              <TableRow>
-                <TableCell>Descrição</TableCell>
-                <TableCell>Valor</TableCell>
-                <TableCell>Status</TableCell>
-                <TableCell>Forma de pagamento</TableCell>
-                <TableCell>Ações</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {!loadingPurchases &&
-                pagePurchases.data.map(item => {
-                  const id = Math.random();
-                  return (
-                    <TableRow key={id} sx={{ padding: 0 }}>
-                      <TableCell>{item.description}</TableCell>
-                      <TableCell>{item.value}</TableCell>
-                      <TableCell>{item.status}</TableCell>
-                      <TableCell>{item.formOfPayment}</TableCell>
-                      <TableCell
-                        sx={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'start',
-                        }}
-                      >
-                        <IconButton>
-                          <DeleteOutline />
-                        </IconButton>
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
-            </TableBody>
-          </Table>
-        </Stack>
+      <Stack spacing={1}>
+        {!loadingPurchases &&
+          pagePurchases.data.map(item => (
+            <BoxTable key={item.description}>
+              <ItemTable title="Description" item={item.description} />
+              <ItemTable title="value" item={item.value} />
+              <ItemTable title="status" item={item.status} />
+              <ItemTable title="Forma de pagamento" item={item.formOfPayment} />
+              <TypographyAcoes>
+                <IconButton>
+                  <DeleteOutline />
+                </IconButton>
+              </TypographyAcoes>
+            </BoxTable>
+          ))}
         <Pagination
           count={pagePurchases.totalPage || 1}
           onChange={handleChangePagination}
         />
-      </BoxTable>
+      </Stack>
     </BoxContainer>
   );
 }

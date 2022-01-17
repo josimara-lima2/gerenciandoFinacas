@@ -1,4 +1,3 @@
-import { Box } from '@mui/material';
 import Modal from 'components/Modal/Modal';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'store';

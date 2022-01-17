@@ -1,4 +1,4 @@
-import { Box, TextField as MuiTextField } from '@mui/material';
+import { TextField as MuiTextField } from '@mui/material';
 import Modal from 'components/Modal/Modal';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'store';

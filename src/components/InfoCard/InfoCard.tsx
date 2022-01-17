@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box as MuiBox, Typography, styled } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 import Modal from 'components/Modal/Modal';
 import chipImg from '../../assets/images/chip.png';
@@ -11,6 +11,37 @@ type Props = {
   dueDate: string;
   code: string;
 };
+
+const Box = styled(MuiBox)(() => ({
+  width: '400px',
+  height: '230px',
+  backgroundImage:
+    ' linear-gradient(90deg, rgba(0,0,139,1) 0%, rgba(0,0,128,1) 35%, rgba(25,25,112,1) 100%)',
+  border: '0.5px solid rgba(0,0,139,1)',
+  borderRadius: '30px',
+  color: '#fafafa',
+}));
+
+const BoxDateItem = styled(MuiBox)(() => ({
+  display: 'flex',
+  flexDirection: 'column',
+  marginRight: '40px',
+}));
+
+const BoxDate = styled(MuiBox)(() => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'start',
+  marginTop: '20px',
+  marginLeft: '20px',
+}));
+
+const BoxFlag = styled(MuiBox)(() => ({
+  display: 'flex',
+  margin: '10px 20px',
+  justifyContent: 'space-between',
+}));
+
 export default function InfoCard({
   flag,
   number,
@@ -19,78 +50,41 @@ export default function InfoCard({
   code,
 }: Props) {
   return (
-    <Box>
-      <Modal title="Credit Card" buttonIcon={<InfoIcon />} tamanho="sm">
-        <Box
-          sx={{
-            width: '400px',
-            height: '230px',
-            backgroundImage:
-              'linear-gradient(to left bottom, #1c86ee, #2084e5, #2582db, #2a7fd2, #2f7dc8, #367ec4, #3d7ebf, #437fbb, #4c83bb, #5588bb, #5d8cbb, #6590bb)',
-            border: '0.5px solid ',
-            borderRadius: '43px',
-          }}
-        >
-          <Box
-            sx={{
-              display: 'flex',
-              margin: '10px 20px',
-              justifyContent: 'space-between',
-            }}
-          >
-            <img
-              style={{ marginTop: '30px' }}
-              width={50}
-              src={chipImg}
-              alt="chip"
-            />
-            <Typography sx={{ marginRight: '10px', marginTop: '10px' }}>
-              {flag}
-            </Typography>
-          </Box>
-          <Typography
-            align="justify"
-            variant="h5"
-            sx={{ marginLeft: '20px', marginTop: '20px' }}
-          >
-            {number}
+    <Modal title="Credit Card" buttonIcon={<InfoIcon />} tamanho="sm">
+      <Box>
+        <BoxFlag>
+          <img
+            style={{ marginTop: '30px' }}
+            width={50}
+            src={chipImg}
+            alt="chip"
+          />
+          <Typography sx={{ marginRight: '10px', marginTop: '10px' }}>
+            {flag}
           </Typography>
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'start',
-              marginTop: '20px',
-              marginLeft: '20px',
-            }}
-          >
-            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-              <Typography variant="caption">Titular</Typography>
-              <Typography>{cardHolderName}</Typography>
-            </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                marginLeft: '40px',
-              }}
-            >
-              <Typography variant="caption">Vencimento</Typography>
-              <Typography>{dueDate}</Typography>
-            </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                marginLeft: '50px',
-              }}
-            >
-              <Typography variant="caption">CVV</Typography>
-              <Typography>{code}</Typography>
-            </Box>
-          </Box>
-        </Box>
-      </Modal>
-    </Box>
+        </BoxFlag>
+        <Typography
+          align="justify"
+          variant="h5"
+          sx={{ marginLeft: '20px', marginTop: '20px' }}
+        >
+          {number}
+        </Typography>
+        <BoxDate>
+          <BoxDateItem>
+            <Typography variant="caption">Titular</Typography>
+            <Typography>{cardHolderName}</Typography>
+          </BoxDateItem>
+          <BoxDateItem>
+            <Typography variant="caption">Vencimento</Typography>
+            <Typography>{dueDate}</Typography>
+          </BoxDateItem>
+          <BoxDateItem>
+            <Typography variant="caption">CVV</Typography>
+            <Typography>{code}</Typography>
+          </BoxDateItem>
+        </BoxDate>
+      </Box>
+    </Modal>
   );
 }
