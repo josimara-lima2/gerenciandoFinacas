@@ -1,7 +1,7 @@
 import { Box as MuiBox, styled } from '@mui/material';
 import React, { ReactNode } from 'react';
-import { useAppDispatch, useAppSelector } from 'store';
-import { UserLogadoSelector, fetchApiAuthMe } from 'store/reducers/userLogado';
+import { useAppDispatch } from 'store';
+import { fetchApiAuthMe } from 'store/reducers/userLogado';
 
 type MainProps = {
   children?: ReactNode;

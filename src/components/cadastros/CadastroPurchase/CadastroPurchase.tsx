@@ -1,11 +1,5 @@
-import {
-  TextField,
-  MenuItem,
-  Box,
-  FormControl,
-  InputLabel,
-} from '@mui/material';
-import Modal from 'components/Modal/Modal';
+import { Box } from '@mui/material';
+
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { useState, useEffect } from 'react';
 import * as React from 'react';
@@ -23,10 +17,6 @@ import TextFieldCadastro from '../TextFieldCadastro';
 import SelectParceleOut from './SelectParceleOut';
 import Select from './Select';
 
-const styleTextField = {
-  margin: '8px 0',
-  width: '100%',
-};
 const CadastroPurchase = () => {
   const [description, setDescription] = useState('');
   const [value, setValue] = useState(0);

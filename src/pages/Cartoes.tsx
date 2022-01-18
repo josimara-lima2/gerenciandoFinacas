@@ -4,7 +4,6 @@ import {
   IconButton,
   Typography,
   styled,
-  Grid,
 } from '@mui/material';
 import { useAppDispatch, useAppSelector } from 'store';
 import { useEffect, useState } from 'react';
@@ -115,6 +114,7 @@ export default function Cartao() {
 
                 <ItemTable title="Ações" xs={12} sm={12} md={2}>
                   <Typography
+                    component="div"
                     sx={{
                       display: 'flex',
                       alignItems: 'center',

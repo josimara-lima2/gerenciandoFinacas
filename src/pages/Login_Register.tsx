@@ -19,7 +19,6 @@ import Alerta from 'components/Alerta/Alerta';
 import useAuth from 'hooks/useAuth';
 import TextField from 'components/TextField/TextField';
 import { useAppDispatch } from 'store';
-import { couldStartTrivia } from 'typescript';
 import imgLogin from '../assets/images/login.png';
 import { fetchApiCadastroUser } from '../store/reducers/user';
 
@@ -119,11 +118,10 @@ export default function LoginRegister() {
   const [message, setMessage] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   useEffect(() => {
-    console.log(location.pathname === '/cadastro');
     if (location.pathname === '/cadastro') {
       setPageLoginSelect(false);
     }
-  }, [dispatch]);
+  }, [location]);
   const handleClickShowPassword = () => {
     setPassword(password);
     setShowPassword(!showPassword);

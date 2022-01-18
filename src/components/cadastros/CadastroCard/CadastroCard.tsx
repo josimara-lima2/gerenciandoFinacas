@@ -1,5 +1,4 @@
-import { Box as MuiBox, styled } from '@mui/material';
-import Modal from 'components/Modal/Modal';
+import { Box as MuiBox } from '@mui/material';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'store';
 import {

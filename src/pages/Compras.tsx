@@ -79,7 +79,7 @@ export default function Compra() {
       <Stack spacing={1}>
         {!loadingPurchases &&
           pagePurchases.data.map(item => (
-            <BoxTable key={item.description}>
+            <BoxTable key={item.id}>
               <ItemTable
                 title="Description"
                 item={item.description}

@@ -1,16 +1,16 @@
 import React from 'react';
-import { Box as MuiBox, Grid, styled } from '@mui/material';
+import { Grid as MuiGrid, styled } from '@mui/material';
 
 type Props = {
   children: React.ReactNode;
-  key?: string | number;
 };
 
-const Box = styled(MuiBox)(({ theme }) => ({
+const Grid = styled(MuiGrid)(({ theme }) => ({
   display: 'flex',
+  flexWrap: 'wrap',
   alignItems: 'center',
   justifyContent: 'space-around',
-  padding: '10px',
+  padding: '10px 20px',
   borderRadius: '5px',
   backgroundColor: theme.palette.background.paper,
   boxSizing: 'border-box',
@@ -21,28 +21,12 @@ const Box = styled(MuiBox)(({ theme }) => ({
   },
 }));
 
-const BoxTable = ({ children, key }: Props) => {
+const GridTable = ({ children }: Props) => {
   return (
-    <Grid
-      container
-      key={key}
-      boxShadow={2}
-      sx={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        alignItems: 'center',
-        justifyContent: 'space-around',
-        padding: '10px 20px',
-        borderRadius: '5px',
-        width: '100%',
-        boxSizing: 'border-box',
-        overflow: 'hidden',
-        zIndex: 1,
-      }}
-    >
+    <Grid container boxShadow={2}>
       {children}
     </Grid>
   );
 };
 
-export default BoxTable;
+export default GridTable;
