@@ -12,7 +12,7 @@ import {
   fetchApiPurchasesPost,
 } from 'store/reducers/compras';
 
-import ModalAdd from 'components/ModalAdd/ModalAdd';
+import ModalAdd from 'components/Register/ModalAdd/ModalAdd';
 import TextFieldCadastro from '../TextFieldCadastro';
 import SelectParceleOut from './SelectParceleOut';
 import Select from './Select';

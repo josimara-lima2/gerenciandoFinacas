@@ -100,7 +100,11 @@ export default function Header() {
 
   return (
     <Box>
-      <AppBar position="absolute" open={open}>
+      <AppBar
+        position="absolute"
+        open={open}
+        sx={{ backgroundColor: palette.background.paper }}
+      >
         <Toolbar
           sx={{
             pr: '24px', // keep right padding when drawer closed

@@ -4,6 +4,9 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import CreateIcon from '@mui/icons-material/Create';
+import InfoIcon from '@mui/icons-material/Info';
+
 import {
   Box as MuiBox,
   styled,
@@ -14,9 +17,9 @@ import {
 } from '@mui/material';
 
 type Props = {
-  title: string;
+  title: 'editar' | 'info';
   children: React.ReactNode;
-  buttonIcon?: React.ReactNode;
+
   cadastrar?: (id?: string) => void;
   tamanho?: false | Breakpoint | undefined;
 };
@@ -26,13 +29,7 @@ const Box = styled(MuiBox)(({ theme }) => ({
   marginTop: '5px',
 }));
 
-export default function Modal({
-  children,
-  title,
-  cadastrar,
-  buttonIcon,
-  tamanho,
-}: Props) {
+export default function Modal({ children, title, cadastrar, tamanho }: Props) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -49,10 +46,23 @@ export default function Modal({
     handleClose();
   };
 
+  const SelectIcon = () => {
+    switch (title) {
+      case 'info':
+        return <InfoIcon />;
+      case 'editar':
+        return <CreateIcon />;
+      default:
+        return <AddCircleIcon />;
+    }
+  };
   return (
     <Box>
-      <IconButton onClick={handleClickOpen}>
-        {buttonIcon || <AddCircleIcon />}
+      <IconButton
+        color={title === 'editar' ? 'primary' : 'warning'}
+        onClick={handleClickOpen}
+      >
+        {SelectIcon()}
       </IconButton>
       <Dialog
         open={open}

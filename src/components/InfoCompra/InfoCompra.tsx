@@ -11,7 +11,7 @@ type Props = {
 const InfoCompra = ({ compra }: Props) => {
   const [open, setOpen] = React.useState(false);
   return (
-    <Modal title={` ${compra.description}`} buttonIcon={<InfoIcon />}>
+    <Modal title="info">
       {compra.parceleOut && (
         <Box>
           <Typography>Compra parcelada</Typography>

@@ -8,8 +8,8 @@ import {
 import Box from '@mui/material/Box';
 import { Typography } from '@mui/material';
 import React from 'react';
-import ModalDelete from 'components/ModalDelete/ModalDelete';
-import imgDel from '../../assets/images/delete.png';
+import ModalDelete from 'components/Delete/ModalDelete/ModalDelete';
+import imgDel from '../../../assets/images/delete.png';
 
 type Props = {
   client: ClientInterface;

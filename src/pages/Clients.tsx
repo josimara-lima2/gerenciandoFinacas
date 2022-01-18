@@ -1,4 +1,4 @@
-import Cadastro from 'components/cadastros/CadastroCliente/CadastroCliente';
+import Cadastro from 'components/Register/CadastroCliente/CadastroCliente';
 import {
   Box as MuiBox,
   styled,
@@ -15,7 +15,7 @@ import Editar from 'components/Editar/Editar';
 import * as React from 'react';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-import DeleteClient from 'components/DeleteClient/DeleteClient';
+import DeleteClient from 'components/Delete/DeleteClient/DeleteClient';
 import BoxTable from 'components/BoxTable/BoxTable';
 
 import ItemTable from '../components/ItemTable/ItemTable';

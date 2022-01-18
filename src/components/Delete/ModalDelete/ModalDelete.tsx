@@ -48,7 +48,7 @@ export default function ModalDelete({
 
   return (
     <Box>
-      <IconButton onClick={handleClickOpen}>
+      <IconButton color="error" onClick={handleClickOpen}>
         <DeleteOutline />
       </IconButton>
       <Dialog

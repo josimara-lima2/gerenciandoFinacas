@@ -50,7 +50,7 @@ export default function InfoCard({
   code,
 }: Props) {
   return (
-    <Modal title="Credit Card" buttonIcon={<InfoIcon />} tamanho="sm">
+    <Modal title="info" tamanho="sm">
       <Box>
         <BoxFlag>
           <img

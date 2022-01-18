@@ -13,12 +13,12 @@ import {
   fetchApiSearch,
 } from 'store/reducers/pageCard';
 import CreateIcon from '@mui/icons-material/Create';
-import CadastroCard from 'components/cadastros/CadastroCard/CadastroCard';
+import CadastroCard from 'components/Register/CadastroCard/CadastroCard';
 import Search from 'components/Search/Search';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import InfoCard from 'components/InfoCard/InfoCard';
-import DeleteCard from 'components/DeleteCard/DeleteCard';
+import DeleteCard from 'components/Delete/DeleteCard/DeleteCard';
 import BoxTable from 'components/BoxTable/BoxTable';
 import ItemTable from 'components/ItemTable/ItemTable';
 
@@ -123,13 +123,12 @@ export default function Cartao() {
                       marginRight: '50px',
                     }}
                   >
-                    <DeleteCard card={item} />
                     <Tooltip title="Edit">
-                      <IconButton>
+                      <IconButton color="primary">
                         <CreateIcon />
                       </IconButton>
                     </Tooltip>
-
+                    <DeleteCard card={item} />
                     <InfoCard
                       flag={item.flag}
                       number={item.number}

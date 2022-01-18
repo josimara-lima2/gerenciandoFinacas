@@ -10,7 +10,7 @@ import AddCardIcon from '@mui/icons-material/AddCard';
 import { maskCode, maskNumber, maskValue, maskFatura } from 'utils/masks';
 import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined';
 import DateRangeOutlinedIcon from '@mui/icons-material/DateRangeOutlined';
-import ModalAdd from 'components/ModalAdd/ModalAdd';
+import ModalAdd from 'components/Register/ModalAdd/ModalAdd';
 import TextFieldCadastro from '../TextFieldCadastro';
 
 const CadastroCard = () => {

@@ -6,7 +6,7 @@ import {
   styled,
   Typography as MuiTypography,
 } from '@mui/material';
-import CadastroPurchase from 'components/cadastros/CadastroPurchase/CadastroPurchase';
+import CadastroPurchase from 'components/Register/CadastroPurchase/CadastroPurchase';
 import Search from 'components/Search/Search';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'store';
@@ -110,7 +110,7 @@ export default function Compra() {
               />
               <ItemTable title="Ações" xs={12} sm={12} md={1}>
                 <TypographyAcoes>
-                  <IconButton>
+                  <IconButton color="error">
                     <DeleteOutline />
                   </IconButton>
                   <InfoCompra compra={item} />

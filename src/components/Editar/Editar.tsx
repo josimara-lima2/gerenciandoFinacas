@@ -41,12 +41,7 @@ export default function Editar({ client }: Props) {
     borderRadius: '20px',
   };
   return (
-    <Modal
-      title="Cadastre-se"
-      buttonIcon={<CreateIcon />}
-      cadastrar={() => handleClick(client.id)}
-      tamanho="xs"
-    >
+    <Modal title="editar" cadastrar={() => handleClick(client.id)} tamanho="xs">
       <MuiTextField
         id="nome"
         label="Nome"
