@@ -1,26 +1,21 @@
 import React from 'react';
-import { styled, Tooltip, Typography as MuiTypography } from '@mui/material';
+import { Grid, Tooltip } from '@mui/material';
 import Zoom from '@mui/material/Zoom';
-
-const Typography = styled(MuiTypography)(({ theme }) => ({
-  width: '25%',
-  [theme.breakpoints.up('xs')]: {
-    marginLeft: 0,
-    width: '40%',
-  },
-  [theme.breakpoints.up('md')]: {
-    marginLeft: '5%',
-  },
-}));
 
 type Props = {
   title: string;
-  item: string | number;
+  children?: React.ReactNode;
+  item?: string | number;
+  md: number;
+  xs: number;
+  sm: number;
 };
-const ItemTable = ({ title, item }: Props) => {
+const ItemTable = ({ title, item, md, xs, sm, children }: Props) => {
   return (
     <Tooltip title={title} TransitionComponent={Zoom} placement="top-start">
-      <Typography>{item}</Typography>
+      <Grid item md={md} xs={xs} sm={sm}>
+        {children || item}
+      </Grid>
     </Tooltip>
   );
 };

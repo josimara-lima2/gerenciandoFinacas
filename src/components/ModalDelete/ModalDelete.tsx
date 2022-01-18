@@ -3,7 +3,9 @@ import Button from '@mui/material/Button';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
+
+import { DeleteOutline } from '@mui/icons-material';
+
 import {
   Box as MuiBox,
   styled,
@@ -16,8 +18,8 @@ import {
 type Props = {
   title: string;
   children: React.ReactNode;
-  buttonIcon?: React.ReactNode;
-  cadastrar?: (id?: string) => void;
+
+  deleteProps: () => void;
   tamanho?: false | Breakpoint | undefined;
 };
 const Box = styled(MuiBox)(({ theme }) => ({
@@ -26,11 +28,11 @@ const Box = styled(MuiBox)(({ theme }) => ({
   marginTop: '5px',
 }));
 
-export default function Modal({
+export default function ModalDelete({
   children,
   title,
-  cadastrar,
-  buttonIcon,
+  deleteProps,
+
   tamanho,
 }: Props) {
   const [open, setOpen] = React.useState(false);
@@ -40,19 +42,14 @@ export default function Modal({
   };
 
   const handleClose = () => {
+    deleteProps();
     setOpen(false);
-  };
-  const handleCloseCadastro = () => {
-    if (cadastrar) {
-      cadastrar();
-    }
-    handleClose();
   };
 
   return (
     <Box>
       <IconButton onClick={handleClickOpen}>
-        {buttonIcon || <AddCircleIcon />}
+        <DeleteOutline />
       </IconButton>
       <Dialog
         open={open}
@@ -74,36 +71,29 @@ export default function Modal({
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-around',
-            width: '100%',
-            padding: '16px',
+            paddingBottom: '16px',
           }}
         >
           <Button
+            color="primary"
+            variant="contained"
             sx={{
               width: '64px',
-              padding: '0 48px',
               height: '32px',
+              padding: '8px 48px',
             }}
-            variant="outlined"
-            color="error"
             onClick={handleClose}
           >
-            <Typography>{cadastrar ? 'Cancelar' : 'Fechar'}</Typography>
+            <Typography>Cancelar</Typography>
           </Button>
-          {cadastrar && (
-            <Button
-              sx={{
-                width: '64px',
-                padding: '8px 48px',
-                height: '32px',
-              }}
-              variant="contained"
-              color="primary"
-              onClick={handleCloseCadastro}
-            >
-              <Typography>Salvar</Typography>
-            </Button>
-          )}
+          <Button
+            variant="outlined"
+            color="error"
+            sx={{ width: '64px', padding: '8px 48px', height: '32px' }}
+            onClick={handleClose}
+          >
+            <Typography>Excluir</Typography>
+          </Button>
         </DialogActions>
       </Dialog>
     </Box>

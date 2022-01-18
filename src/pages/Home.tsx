@@ -1,4 +1,5 @@
 import { Box } from '@mui/material';
+
 import welcome from '../assets/images/welcome.png';
 
 export default function Home() {

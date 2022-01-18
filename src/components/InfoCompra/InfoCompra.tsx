@@ -37,11 +37,13 @@ const InfoCompra = ({ compra }: Props) => {
         </IconButton>
       </Tooltip>
       <Collapse in={open}>
-        <Typography>
-          Id da compra: {compra.id} <br />
-          Id do cliente: {compra.client.id} <br />
-          Id fo cartão: {compra.creditCard.id} <br />
-        </Typography>
+        {compra.client && compra.creditCard && (
+          <Typography>
+            Id da compra: {compra.id} <br />
+            Id do cliente: {compra.client.id} <br />
+            Id fo cartão: {compra.creditCard.id} <br />
+          </Typography>
+        )}
       </Collapse>
     </Modal>
   );

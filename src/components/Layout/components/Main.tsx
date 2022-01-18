@@ -1,5 +1,7 @@
 import { Box as MuiBox, styled } from '@mui/material';
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
+import { useAppDispatch, useAppSelector } from 'store';
+import { UserLogadoSelector, fetchApiAuthMe } from 'store/reducers/userLogado';
 
 type MainProps = {
   children?: ReactNode;
@@ -15,5 +17,10 @@ const Box = styled(MuiBox)(({ theme }) => ({
 }));
 
 export default function Main({ children }: MainProps) {
+  const dispatch = useAppDispatch();
+
+  React.useEffect(() => {
+    dispatch(fetchApiAuthMe());
+  }, [dispatch]);
   return <Box component="main">{children}</Box>;
 }

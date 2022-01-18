@@ -4,6 +4,7 @@ import {
   IconButton,
   Typography,
   styled,
+  Grid,
 } from '@mui/material';
 import { useAppDispatch, useAppSelector } from 'store';
 import { useEffect, useState } from 'react';
@@ -45,10 +46,6 @@ export default function Cartao() {
     dispatch(fetchApiPageCard(page));
   }, [dispatch, page]);
 
-  const handleAtualiza = () => {
-    dispatch(fetchApiPageCard(1));
-  };
-
   const handleChangePagination = (
     e: React.ChangeEvent<unknown>,
     value: number,
@@ -59,14 +56,18 @@ export default function Cartao() {
     e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
     value: string,
   ) => {
-    dispatch(fetchApiSearch(value));
+    if (value === '') {
+      dispatch(fetchApiPageCard(1));
+    } else {
+      dispatch(fetchApiSearch(value));
+    }
   };
   return (
     <BoxContainer>
       <BoxFuncionalidades>
         <CadastroCard />
 
-        <Search atualiza={handleAtualiza} onChange={handleChange} />
+        <Search onChange={handleChange} />
       </BoxFuncionalidades>
 
       <Stack spacing={1}>
@@ -74,45 +75,70 @@ export default function Cartao() {
           pageCard.data.map(item => {
             return (
               <BoxTable key={item.number}>
-                <ItemTable title="Nome" item={item.name} />
-                <ItemTable title="Bandeira" item={item.flag} />
+                <ItemTable title="Nome" item={item.name} xs={6} sm={4} md={1} />
+                <ItemTable
+                  title="Bandeira"
+                  item={item.flag}
+                  xs={12}
+                  sm={4}
+                  md={2}
+                />
                 <ItemTable
                   title="Titular do cartão"
                   item={item.cardHolderName}
+                  xs={12}
+                  sm={4}
+                  md={2}
                 />
-                <ItemTable title="Limite" item={item.limit} />
+                <ItemTable
+                  title="Limite"
+                  item={item.limit}
+                  xs={12}
+                  sm={2}
+                  md={1}
+                />
 
                 <ItemTable
                   title="Limite Disponível"
                   item={item.availableLimit}
+                  xs={12}
+                  sm={2}
+                  md={1}
                 />
-                <ItemTable title="Numero do cartão" item={item.number} />
+                <ItemTable
+                  title="Numero do cartão"
+                  item={item.number}
+                  xs={12}
+                  sm={8}
+                  md={3}
+                />
 
-                <Typography
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'start',
-                    padding: 0,
-                    marginLeft: '30px',
-                    marginRight: '20px',
-                  }}
-                >
-                  <DeleteCard card={item} />
-                  <Tooltip title="Edit">
-                    <IconButton>
-                      <CreateIcon />
-                    </IconButton>
-                  </Tooltip>
+                <ItemTable title="Ações" xs={12} sm={12} md={2}>
+                  <Typography
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'start',
+                      padding: 0,
+                      marginRight: '50px',
+                    }}
+                  >
+                    <DeleteCard card={item} />
+                    <Tooltip title="Edit">
+                      <IconButton>
+                        <CreateIcon />
+                      </IconButton>
+                    </Tooltip>
 
-                  <InfoCard
-                    flag={item.flag}
-                    number={item.number}
-                    code={item.code}
-                    dueDate={item.dueDate}
-                    cardHolderName={item.cardHolderName}
-                  />
-                </Typography>
+                    <InfoCard
+                      flag={item.flag}
+                      number={item.number}
+                      code={item.code}
+                      dueDate={item.dueDate}
+                      cardHolderName={item.cardHolderName}
+                    />
+                  </Typography>
+                </ItemTable>
               </BoxTable>
             );
           })}
@@ -120,6 +146,7 @@ export default function Cartao() {
         <Pagination
           count={pageCard.totalPage || 1}
           onChange={handleChangePagination}
+          color="primary"
         />
       </Stack>
     </BoxContainer>

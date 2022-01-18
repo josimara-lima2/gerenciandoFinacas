@@ -9,7 +9,6 @@ import {
   styled,
   Dialog,
   Typography,
-  IconButton,
   Breakpoint,
 } from '@mui/material';
 
@@ -26,7 +25,7 @@ const Box = styled(MuiBox)(({ theme }) => ({
   marginTop: '5px',
 }));
 
-export default function Modal({
+export default function ModalAdd({
   children,
   title,
   cadastrar,
@@ -51,9 +50,10 @@ export default function Modal({
 
   return (
     <Box>
-      <IconButton onClick={handleClickOpen}>
+      <Button variant="outlined" onClick={handleClickOpen}>
         {buttonIcon || <AddCircleIcon />}
-      </IconButton>
+        <Typography sx={{ marginLeft: '5px' }}>Add {title}</Typography>
+      </Button>
       <Dialog
         open={open}
         onClose={handleClose}

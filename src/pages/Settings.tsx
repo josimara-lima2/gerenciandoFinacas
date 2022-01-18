@@ -1,22 +1,11 @@
-import {
-  Avatar,
-  Box as MuiBox,
-  Typography,
-  Collapse,
-  IconButton,
-  Tooltip,
-  styled,
-} from '@mui/material';
-import { useEffect, useState } from 'react';
+import { Box as MuiBox, styled } from '@mui/material';
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from 'store';
-import { UserLogadoSelector, fetchApiAuthMe } from 'store/reducers/userLogado';
-import FeedIcon from '@mui/icons-material/Feed';
+import { fetchApiAuthMe } from 'store/reducers/userLogado';
 import { fetchApiPageCard, PageCardSelector } from 'store/reducers/pageCard';
 import { fetchApiPage, PageSelector } from 'store/reducers/pageClient';
 import { fetchApiPurchases, purchasesSelector } from 'store/reducers/compras';
-
 import CardPersonalizado from 'components/Card/Card';
-import avatarImg from '../assets/images/avatar.png';
 import clientsImg from '../assets/images/clients.png';
 import comprasImg from '../assets/images/compras.png';
 import cardImg from '../assets/images/card.png';
@@ -25,17 +14,18 @@ const BoxCard = styled(MuiBox)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  [theme.breakpoints.down('md')]: {
+  marginTop: theme.spacing(2),
+  [theme.breakpoints.down('lg')]: {
     flexDirection: 'column',
+    marginBottom: theme.spacing(2),
   },
 }));
+
 export default function Settings() {
   const dispatch = useAppDispatch();
   const { pageCard } = useAppSelector(PageCardSelector);
   const { pageCliente } = useAppSelector(PageSelector);
   const { pagePurchases } = useAppSelector(purchasesSelector);
-  const { userLogado } = useAppSelector(UserLogadoSelector);
-  const [open, setOpen] = useState(false);
 
   const totalCard = pageCard.totalCount;
   const totalCliente = pageCliente.totalCount;
@@ -45,38 +35,19 @@ export default function Settings() {
     dispatch(fetchApiPage(null));
     dispatch(fetchApiPageCard(null));
     dispatch(fetchApiPurchases(null));
-  }, []);
+  }, [dispatch]);
 
   return (
     <MuiBox>
-      <MuiBox sx={{ display: 'flex', alignItems: 'center' }}>
-        <Avatar
-          sx={{
-            width: 36,
-            height: 36,
-            padding: '5px',
-            border: '1px solid #000000',
-            backgroundColor: '#fafafa',
-            marginTop: '15px',
-          }}
-          alt={userLogado.name}
-          src={userLogado.avatarUrl !== null ? userLogado.avatarUrl : avatarImg}
-        />
-        <Typography variant="h5" sx={{ marginTop: '10px', marginLeft: '5px' }}>
-          Olá, {userLogado.name}!
-        </Typography>
-      </MuiBox>
-      <Tooltip title={open ? 'esconder dados ' : 'ver dados'} placement="right">
-        <IconButton onClick={() => setOpen(!open)} sx={{ marginTop: '30px' }}>
-          <FeedIcon />
-        </IconButton>
-      </Tooltip>
-      <Collapse in={open} sx={{ marginTop: '30px' }}>
-        <Typography>Name: {userLogado.name}</Typography>
-        <Typography>Email: {userLogado.email}</Typography>
-        <Typography>AvatarURL: {userLogado.avatarUrl}</Typography>
-        <Typography>ID: {userLogado.id}</Typography>
-      </Collapse>
+      <MuiBox
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'flex-end',
+          alignItems: 'flex-end',
+        }}
+      />
+
       <BoxCard>
         <CardPersonalizado
           title="Total de Clientes"

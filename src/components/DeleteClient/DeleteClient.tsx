@@ -1,5 +1,3 @@
-import Modal from 'components/Modal/Modal';
-import { DeleteOutline } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from 'store';
 import {
   fetchApiDelete,
@@ -9,6 +7,8 @@ import {
 } from 'store/reducers/pageClient';
 import Box from '@mui/material/Box';
 import { Typography } from '@mui/material';
+import React from 'react';
+import ModalDelete from 'components/ModalDelete/ModalDelete';
 import imgDel from '../../assets/images/delete.png';
 
 type Props = {
@@ -16,8 +16,10 @@ type Props = {
 };
 
 const DeleteClient = ({ client }: Props) => {
+  const [message, setMessage] = React.useState('');
   const dispatch = useAppDispatch();
   const { pageCliente } = useAppSelector(PageSelector);
+
   const handleDelete = (id: string) => {
     dispatch(fetchApiDelete(id))
       .unwrap()
@@ -27,16 +29,14 @@ const DeleteClient = ({ client }: Props) => {
           dispatch(fetchApiPage(pageCliente.page));
         }
       })
-      .catch(error => alert(error.message));
+      .catch(error => setMessage(error.message));
+  };
+
+  const deleteProps = () => {
+    handleDelete(client.id);
   };
   return (
-    <Modal
-      title=""
-      buttonIcon={<DeleteOutline />}
-      cadastrar={() => handleDelete(client.id)}
-      deletar
-      tamanho="xs"
-    >
+    <ModalDelete title="" deleteProps={deleteProps} tamanho="xs">
       <Box
         sx={{
           display: 'flex',
@@ -53,7 +53,7 @@ const DeleteClient = ({ client }: Props) => {
         <Typography variant="subtitle2">Essa ação é irreversível!</Typography>
         <img width="100px" src={imgDel} alt="delete img" />
       </Box>
-    </Modal>
+    </ModalDelete>
   );
 };
 

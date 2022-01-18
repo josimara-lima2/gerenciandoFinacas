@@ -60,22 +60,22 @@ export default function Clients() {
     setPage(value);
   };
 
-  const handleAtualiza = () => {
-    dispatch(fetchApiPage(1));
-  };
-
   const handleChange = (
     e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
     value: string,
   ) => {
-    dispatch(fetchApiSearch(value));
+    if (value === '') {
+      dispatch(fetchApiPage(1));
+    } else {
+      dispatch(fetchApiSearch(value));
+    }
   };
 
   return (
     <BoxContainer>
       <BoxFuncionalidades>
         <Cadastro />
-        <Search atualiza={handleAtualiza} onChange={handleChange} />
+        <Search onChange={handleChange} />
       </BoxFuncionalidades>
 
       <Stack spacing={1}>
@@ -83,21 +83,42 @@ export default function Clients() {
           pageCliente.data.map(item => {
             return (
               <BoxTable key={item.cpf}>
-                <ItemTable title="Nome" item={item.name} />
-                <ItemTable title="Email" item={item.email} />
-                <ItemTable title="Cpf" item={item.cpf} />
-                <ItemTable title="Telefone" item={item.telephone} />
+                <ItemTable
+                  title="Nome"
+                  item={item.name}
+                  xs={12}
+                  sm={6}
+                  md={2}
+                />
+                <ItemTable
+                  title="Email"
+                  item={item.email}
+                  xs={12}
+                  sm={6}
+                  md={4}
+                />
+                <ItemTable title="Cpf" item={item.cpf} xs={12} sm={6} md={3} />
+                <ItemTable
+                  title="Telefone"
+                  item={item.telephone}
+                  xs={12}
+                  sm={6}
+                  md={2}
+                />
 
-                <TypographyAcoes>
-                  <Editar client={item} />
-                  <DeleteClient client={item} />
-                </TypographyAcoes>
+                <ItemTable title="Ações" xs={12} sm={12} md={1}>
+                  <TypographyAcoes>
+                    <Editar client={item} />
+                    <DeleteClient client={item} />
+                  </TypographyAcoes>
+                </ItemTable>
               </BoxTable>
             );
           })}
         <Pagination
           count={pageCliente.totalPage || 1}
           onChange={handleChangePagination}
+          color="primary"
         />
       </Stack>
     </BoxContainer>

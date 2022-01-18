@@ -4,29 +4,17 @@ import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 
 type Props = {
-  atualiza: () => void;
   onChange: (
     e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
     value: string,
   ) => void;
 };
-export default function Search({ atualiza, onChange }: Props) {
-  const [v, setV] = useState('');
-
+export default function Search({ onChange }: Props) {
   const changeInput = (
     e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    if (e.currentTarget.value !== '') {
-      setV(e.currentTarget.value);
-      onChange(e, e.currentTarget.value);
-    } else {
-      setV('');
-    }
+    onChange(e, e.currentTarget.value);
   };
-
-  useEffect(() => {
-    atualiza();
-  }, [v === '']);
 
   return (
     <MuiBox
@@ -48,7 +36,7 @@ export default function Search({ atualiza, onChange }: Props) {
           sx={{ borderRadius: '10px' }}
           onChange={e => changeInput(e)}
           endAdornment={
-            <InputAdornment position="start">
+            <InputAdornment position="start" sx={{ color: '#1c86ee' }}>
               <SearchIcon />
             </InputAdornment>
           }

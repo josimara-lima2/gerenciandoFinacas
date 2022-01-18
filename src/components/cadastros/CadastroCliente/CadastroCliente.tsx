@@ -11,6 +11,7 @@ import { maskCpf } from 'utils/masks';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import CallIcon from '@mui/icons-material/Call';
+import ModalAdd from 'components/ModalAdd/ModalAdd';
 import TextFieldCadastro from '../TextFieldCadastro';
 
 export default function Cadastro() {
@@ -41,7 +42,7 @@ export default function Cadastro() {
   };
 
   return (
-    <Modal title="Cadastre-se" cadastrar={handleClick} tamanho="sm">
+    <ModalAdd title="cliente" cadastrar={handleClick} tamanho="sm">
       <TextFieldCadastro
         label="Nome"
         value={name}
@@ -65,6 +66,6 @@ export default function Cadastro() {
         value={cpf}
         onChange={e => setCpf(maskCpf(e))}
       />
-    </Modal>
+    </ModalAdd>
   );
 }

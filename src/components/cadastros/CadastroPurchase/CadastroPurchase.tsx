@@ -18,6 +18,7 @@ import {
   fetchApiPurchasesPost,
 } from 'store/reducers/compras';
 
+import ModalAdd from 'components/ModalAdd/ModalAdd';
 import TextFieldCadastro from '../TextFieldCadastro';
 import SelectParceleOut from './SelectParceleOut';
 import Select from './Select';
@@ -118,7 +119,7 @@ const CadastroPurchase = () => {
       .catch(error => setMessage(error.message));
   };
   return (
-    <Modal
+    <ModalAdd
       title="Purchase"
       buttonIcon={<AddShoppingCartIcon />}
       cadastrar={cadastrar}
@@ -197,7 +198,7 @@ const CadastroPurchase = () => {
           dados={pageCard.data}
         />
       </Box>
-    </Modal>
+    </ModalAdd>
   );
 };
 

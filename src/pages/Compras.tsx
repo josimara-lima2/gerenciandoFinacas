@@ -58,43 +58,70 @@ export default function Compra() {
     setPage(value);
   };
 
-  const handleAtualiza = () => {
-    dispatch(fetchApiPurchases(1));
-  };
-
   const handleChange = (
     e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
     value: string,
   ) => {
-    dispatch(fetchApiSearch(value));
+    if (value === '') {
+      dispatch(fetchApiPurchases(1));
+    } else {
+      dispatch(fetchApiSearch(value));
+    }
   };
 
   return (
     <BoxContainer>
       <BoxFuncionalidades>
         <CadastroPurchase />
-        <Search atualiza={handleAtualiza} onChange={handleChange} />
+        <Search onChange={handleChange} />
       </BoxFuncionalidades>
 
       <Stack spacing={1}>
         {!loadingPurchases &&
           pagePurchases.data.map(item => (
             <BoxTable key={item.description}>
-              <ItemTable title="Description" item={item.description} />
-              <ItemTable title="value" item={item.value} />
-              <ItemTable title="cliente" item={item.client.name} />
-              <ItemTable title="Cartao" item={item.creditCard.name} />
-              <TypographyAcoes>
-                <IconButton>
-                  <DeleteOutline />
-                </IconButton>
-                <InfoCompra compra={item} />
-              </TypographyAcoes>
+              <ItemTable
+                title="Description"
+                item={item.description}
+                xs={12}
+                sm={12}
+                md={2}
+              />
+              <ItemTable
+                title="value"
+                item={item.value}
+                xs={12}
+                sm={12}
+                md={4}
+              />
+              <ItemTable
+                title="cliente"
+                item={item.client ? item.client.name : 'error'}
+                xs={12}
+                sm={12}
+                md={3}
+              />
+              <ItemTable
+                title="Cartao"
+                item={item.creditCard ? item.creditCard.name : 'error'}
+                xs={12}
+                sm={12}
+                md={2}
+              />
+              <ItemTable title="Ações" xs={12} sm={12} md={1}>
+                <TypographyAcoes>
+                  <IconButton>
+                    <DeleteOutline />
+                  </IconButton>
+                  <InfoCompra compra={item} />
+                </TypographyAcoes>
+              </ItemTable>
             </BoxTable>
           ))}
         <Pagination
           count={pagePurchases.totalPage || 1}
           onChange={handleChangePagination}
+          color="primary"
         />
       </Stack>
     </BoxContainer>

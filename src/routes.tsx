@@ -50,7 +50,7 @@ export default function CustomRoutes() {
           </PrivateRouter>
         }
       />
-
+      <Route path="/cadastro" element={<LoginRegister />} />
       <Route path="*" element={<Home />} />
       <Route path="/login" element={<LoginRegister />} />
     </Routes>

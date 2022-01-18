@@ -1,5 +1,3 @@
-import Modal from 'components/Modal/Modal';
-import { DeleteOutline } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from 'store';
 import {
   fetchApiDelete,
@@ -9,6 +7,7 @@ import {
 } from 'store/reducers/pageCard';
 import Box from '@mui/material/Box';
 import { Typography } from '@mui/material';
+import ModalDelete from 'components/ModalDelete/ModalDelete';
 import imgDel from '../../assets/images/delete.png';
 
 type Props = {
@@ -36,14 +35,12 @@ const DeleteCard = ({ card }: Props) => {
         });
     }
   };
+
+  const deleteProps = () => {
+    deleteCardId(card.code);
+  };
   return (
-    <Modal
-      title=""
-      buttonIcon={<DeleteOutline />}
-      cadastrar={() => deleteCardId(card.code)}
-      deletar
-      tamanho="xs"
-    >
+    <ModalDelete title="" deleteProps={deleteProps} tamanho="xs">
       <Box
         sx={{
           display: 'flex',
@@ -60,7 +57,7 @@ const DeleteCard = ({ card }: Props) => {
         <Typography variant="subtitle2">Essa ação é irreversível!</Typography>
         <img width="100px" src={imgDel} alt="delete img" />
       </Box>
-    </Modal>
+    </ModalDelete>
   );
 };
 

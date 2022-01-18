@@ -10,8 +10,8 @@ import {
   Divider as MuiDivider,
   FormControl as MuiFormControl,
 } from '@mui/material';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
@@ -19,6 +19,7 @@ import Alerta from 'components/Alerta/Alerta';
 import useAuth from 'hooks/useAuth';
 import TextField from 'components/TextField/TextField';
 import { useAppDispatch } from 'store';
+import { couldStartTrivia } from 'typescript';
 import imgLogin from '../assets/images/login.png';
 import { fetchApiCadastroUser } from '../store/reducers/user';
 
@@ -106,6 +107,7 @@ export default function LoginRegister() {
   const navigate = useNavigate();
   const { signin } = useAuth();
   const dispatch = useAppDispatch();
+  const location = useLocation();
 
   const [pageLoginSelect, setPageLoginSelect] = useState(true);
 
@@ -116,7 +118,12 @@ export default function LoginRegister() {
   const [openAlerta, setOpenAlerta] = useState(false);
   const [message, setMessage] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
-
+  useEffect(() => {
+    console.log(location.pathname === '/cadastro');
+    if (location.pathname === '/cadastro') {
+      setPageLoginSelect(false);
+    }
+  }, [dispatch]);
   const handleClickShowPassword = () => {
     setPassword(password);
     setShowPassword(!showPassword);
@@ -130,6 +137,8 @@ export default function LoginRegister() {
     )
       .unwrap()
       .then(response => {
+        setPageLoginSelect(true);
+        setMessage(response.message);
         navigate('/login');
       })
       .catch(e => {
@@ -140,7 +149,7 @@ export default function LoginRegister() {
 
   function handleLogin() {
     signin({ email, password })
-      .then(res => {
+      .then(() => {
         navigate('/');
       })
       .catch(error => {
@@ -153,10 +162,12 @@ export default function LoginRegister() {
     setPageLoginSelect(false);
     setEmail('');
     setPassword('');
+    navigate('/cadastro');
   }
 
   function linkLogin() {
     setPageLoginSelect(true);
+    navigate('/login');
   }
 
   return (
@@ -165,6 +176,7 @@ export default function LoginRegister() {
         <img width="80%" src={imgLogin} alt="loginImg" />
       </BoxImagem>
       <Divider orientation="vertical" sx={{}} />
+
       {pageLoginSelect && (
         <BoxForm>
           <Alerta open={openAlerta} setOpen={setOpenAlerta} message={message} />

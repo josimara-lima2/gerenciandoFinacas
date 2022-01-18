@@ -11,6 +11,7 @@ import AddCardIcon from '@mui/icons-material/AddCard';
 import { maskCode, maskNumber, maskValue, maskFatura } from 'utils/masks';
 import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined';
 import DateRangeOutlinedIcon from '@mui/icons-material/DateRangeOutlined';
+import ModalAdd from 'components/ModalAdd/ModalAdd';
 import TextFieldCadastro from '../TextFieldCadastro';
 
 const CadastroCard = () => {
@@ -64,8 +65,8 @@ const CadastroCard = () => {
   };
 
   return (
-    <Modal
-      title="Cadastre o cartão"
+    <ModalAdd
+      title="cartão"
       cadastrar={cadastrar}
       buttonIcon={<AddCardIcon />}
       tamanho="sm"
@@ -129,7 +130,7 @@ const CadastroCard = () => {
         onChange={e => setCode(maskCode(e))}
         value={code}
       />
-    </Modal>
+    </ModalAdd>
   );
 };
 

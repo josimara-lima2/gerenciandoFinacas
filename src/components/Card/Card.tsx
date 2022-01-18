@@ -1,5 +1,4 @@
 import {
-  Box,
   Card as MuiCard,
   CardActions,
   CardContent,
@@ -20,6 +19,7 @@ type Props = {
 
 const Card = styled(MuiCard)(({ theme }) => ({
   maxWidth: 445,
+  marginBottom: theme.spacing(1),
   marginRight: theme.spacing(2),
   [theme.breakpoints.down('md')]: {
     marginBottom: theme.spacing(2),

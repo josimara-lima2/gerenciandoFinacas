@@ -18,8 +18,10 @@ import { useAppDispatch } from 'store';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import MenuIcon from '@mui/icons-material/Menu';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
+
 import { logout } from '../../../store/reducers/user';
 import Sidebar from './Sidebar';
+import AccountMenu from '../../AccountMenu/AccountMenu';
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
@@ -124,10 +126,11 @@ export default function Header() {
           >
             Finanças
           </Typography>
-          <IconButton onClick={toggleTheme} sx={{ marginRight: '10px' }}>
+          <IconButton onClick={toggleTheme} sx={{ marginRight: '8px' }}>
             {mode === 'light' ? <LightModeIcon /> : <DarkModeIcon />}
           </IconButton>
-          <IconButton onClick={handleLogout}>
+          <AccountMenu />
+          <IconButton onClick={handleLogout} sx={{ marginLeft: '20px' }}>
             <LogoutIcon />
           </IconButton>
         </Toolbar>

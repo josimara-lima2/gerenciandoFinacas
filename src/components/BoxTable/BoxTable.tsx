@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box as MuiBox, styled } from '@mui/material';
+import { Box as MuiBox, Grid, styled } from '@mui/material';
 
 type Props = {
   children: React.ReactNode;
@@ -23,9 +23,25 @@ const Box = styled(MuiBox)(({ theme }) => ({
 
 const BoxTable = ({ children, key }: Props) => {
   return (
-    <Box key={key} boxShadow={2}>
+    <Grid
+      container
+      key={key}
+      boxShadow={2}
+      sx={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        padding: '10px 20px',
+        borderRadius: '5px',
+        width: '100%',
+        boxSizing: 'border-box',
+        overflow: 'hidden',
+        zIndex: 1,
+      }}
+    >
       {children}
-    </Box>
+    </Grid>
   );
 };
 
