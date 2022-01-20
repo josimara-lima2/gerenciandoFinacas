@@ -21,7 +21,7 @@ import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 
 import { logout } from '../../../store/reducers/user';
 import Sidebar from './Sidebar';
-import AccountMenu from '../../AccountMenu/AccountMenu';
+import AccountMenu from '../../AccountMenu';
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;

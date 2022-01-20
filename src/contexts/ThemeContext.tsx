@@ -1,4 +1,4 @@
-import { CssBaseline } from '@mui/material';
+import { CssBaseline, Button } from '@mui/material';
 import {
   createTheme,
   responsiveFontSizes,
@@ -6,6 +6,11 @@ import {
 } from '@mui/material/styles';
 import { useMemo, createContext, Dispatch, useReducer, ReactNode } from 'react';
 
+declare module '@mui/material/Button' {
+  interface ButtonPropsVariantOverrides {
+    modalBtn: true;
+  }
+}
 type ThemeProviderProps = {
   children: ReactNode;
 };
@@ -57,9 +62,24 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
           },
         },
         MuiButton: {
-          styleOverrides: {
-            // ...
-          },
+          styleOverrides: {},
+          variants: [
+            {
+              props: { variant: 'modalBtn' },
+              style: {
+                width: '64px',
+                padding: '8px 48px',
+                height: '32px',
+                backgroundColor: '#1c83ee',
+              },
+            },
+            {
+              props: { variant: 'modalBtn', color: 'error' },
+              style: {
+                backgroundColor: 'red',
+              },
+            },
+          ],
         },
         MuiDialog: {
           // ...

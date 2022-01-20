@@ -5,13 +5,13 @@ import {
   fetchApiPost,
   PageCardSelector,
   fetchApiPageCard,
-} from 'store/reducers/pageCard';
+} from 'store/reducers/cartoes';
 import AddCardIcon from '@mui/icons-material/AddCard';
 import { maskCode, maskNumber, maskValue, maskFatura } from 'utils/masks';
 import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined';
 import DateRangeOutlinedIcon from '@mui/icons-material/DateRangeOutlined';
-import ModalAdd from 'components/Register/ModalAdd/ModalAdd';
-import TextFieldCadastro from '../TextFieldCadastro';
+import ModalAdd from './ModalAdd';
+import TextFieldCadastro from './TextFieldCadastro';
 
 const CadastroCard = () => {
   const dispatch = useAppDispatch();

@@ -1,6 +1,5 @@
-import Modal from 'components/Modal/Modal';
+import Modal from 'components/Modal';
 import React from 'react';
-import InfoIcon from '@mui/icons-material/Info';
 import { IPurchase } from 'store/reducers/compras';
 import { Box, Collapse, IconButton, Tooltip, Typography } from '@mui/material';
 import VpnKeyOutlinedIcon from '@mui/icons-material/VpnKeyOutlined';

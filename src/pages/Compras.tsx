@@ -6,8 +6,7 @@ import {
   styled,
   Typography as MuiTypography,
 } from '@mui/material';
-import CadastroPurchase from 'components/Register/CadastroPurchase/CadastroPurchase';
-import Search from 'components/Search/Search';
+import Search from 'components/Search';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'store';
 import {
@@ -16,9 +15,10 @@ import {
   fetchApiSearch,
 } from 'store/reducers/compras';
 import { DeleteOutline } from '@mui/icons-material';
-import ItemTable from 'components/ItemTable/ItemTable';
-import InfoCompra from 'components/InfoCompra/InfoCompra';
-import BoxTable from '../components/BoxTable/BoxTable';
+import ItemTable from 'components/ItemTable';
+import InfoCompra from 'components/InfoCompra';
+import CadastroPurchase from '../components/CadastroPurchase/index';
+import BoxTable from '../components/BoxTable';
 
 const BoxContainer = styled(MuiBox)(() => ({
   display: 'flex',

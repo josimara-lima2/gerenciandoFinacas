@@ -1,7 +1,7 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import userReducer from './reducers/user';
-import pageReducer from './reducers/pageClient';
-import pagesCardReducer from './reducers/pageCard';
+import pageReducer from './reducers/clientes';
+import pagesCardReducer from './reducers/cartoes';
 import purchasesReducer from './reducers/compras';
 import userLogadoReducer from './reducers/userLogado';
 

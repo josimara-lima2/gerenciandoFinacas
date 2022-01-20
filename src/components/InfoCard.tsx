@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Box as MuiBox, Typography, styled } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
-import Modal from 'components/Modal/Modal';
-import chipImg from '../../assets/images/chip.png';
+import Modal from 'components/Modal';
+import chipImg from '../assets/images/chip.png';
 
 type Props = {
   flag: string;

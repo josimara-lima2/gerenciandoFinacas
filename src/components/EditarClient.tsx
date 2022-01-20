@@ -1,21 +1,21 @@
 import { TextField as MuiTextField } from '@mui/material';
-import Modal from 'components/Modal/Modal';
+import Modal from 'components/Modal';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'store';
-import CreateIcon from '@mui/icons-material/Create';
+
 import {
   PageSelector,
   fetchApiPage,
   fetchApiPut,
   ClientInterface,
-} from 'store/reducers/pageClient';
+} from 'store/reducers/clientes';
 import { maskCpf } from 'utils/masks';
 
 type Props = {
   client: ClientInterface;
 };
 
-export default function Editar({ client }: Props) {
+export default function EditarClient({ client }: Props) {
   const dispatch = useAppDispatch();
   const { pageCliente } = useAppSelector(PageSelector);
 
@@ -40,6 +40,7 @@ export default function Editar({ client }: Props) {
     width: '100%',
     borderRadius: '20px',
   };
+
   return (
     <Modal title="editar" cadastrar={() => handleClick(client.id)} tamanho="xs">
       <MuiTextField

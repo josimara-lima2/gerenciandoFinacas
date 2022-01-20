@@ -5,7 +5,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import ItemMenuSidebar from 'components/Layout/components/ItemMenuSidebar/ItemMenuSidebar';
+import ItemMenuSidebar from 'components/Layout/components/ItemMenuSidebar';
 
 const Box = styled(MuiBox)(({ theme }) => ({
   // spacing de 1 corresponde a 8px

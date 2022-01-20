@@ -5,13 +5,13 @@ import {
   fetchApiPage,
   addClient,
   fetchApiPost,
-} from 'store/reducers/pageClient';
+} from 'store/reducers/clientes';
 import { maskCpf } from 'utils/masks';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import CallIcon from '@mui/icons-material/Call';
-import ModalAdd from 'components/Register/ModalAdd/ModalAdd';
-import TextFieldCadastro from '../TextFieldCadastro';
+import ModalAdd from './ModalAdd';
+import TextFieldCadastro from './TextFieldCadastro';
 
 export default function Cadastro() {
   const dispatch = useAppDispatch();

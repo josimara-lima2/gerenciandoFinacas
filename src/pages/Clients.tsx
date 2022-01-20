@@ -1,4 +1,4 @@
-import Cadastro from 'components/Register/CadastroCliente/CadastroCliente';
+import Cadastro from 'components/CadastroCliente';
 import {
   Box as MuiBox,
   styled,
@@ -10,16 +10,17 @@ import {
   fetchApiPage,
   PageSelector,
   fetchApiSearch,
-} from 'store/reducers/pageClient';
-import Editar from 'components/Editar/Editar';
+} from 'store/reducers/clientes';
+
 import * as React from 'react';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-import DeleteClient from 'components/Delete/DeleteClient/DeleteClient';
-import BoxTable from 'components/BoxTable/BoxTable';
+import DeleteClient from 'components/DeleteClient';
+import BoxTable from 'components/BoxTable';
 
-import ItemTable from '../components/ItemTable/ItemTable';
-import Search from '../components/Search/Search';
+import EditarClient from 'components/EditarClient';
+import ItemTable from '../components/ItemTable';
+import Search from '../components/Search';
 
 const BoxContainer = styled(MuiBox)(() => ({
   display: 'flex',
@@ -108,7 +109,7 @@ export default function Clients() {
 
                 <ItemTable title="Ações" xs={12} sm={12} md={1}>
                   <TypographyAcoes>
-                    <Editar client={item} />
+                    <EditarClient client={item} />
                     <DeleteClient client={item} />
                   </TypographyAcoes>
                 </ItemTable>

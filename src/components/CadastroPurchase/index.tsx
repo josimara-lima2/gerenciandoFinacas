@@ -4,18 +4,18 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { useState, useEffect } from 'react';
 import * as React from 'react';
 import { useAppDispatch, useAppSelector } from 'store';
-import { fetchApiPage, PageSelector } from 'store/reducers/pageClient';
-import { fetchApiPageCard, PageCardSelector } from 'store/reducers/pageCard';
+import { fetchApiPage, PageSelector } from 'store/reducers/clientes';
+import { fetchApiPageCard, PageCardSelector } from 'store/reducers/cartoes';
 import {
   addPurchase,
   fetchApiPurchases,
   fetchApiPurchasesPost,
 } from 'store/reducers/compras';
 
-import ModalAdd from 'components/Register/ModalAdd/ModalAdd';
+import ModalAdd from '../ModalAdd';
 import TextFieldCadastro from '../TextFieldCadastro';
-import SelectParceleOut from './SelectParceleOut';
-import Select from './Select';
+import SelectParceleOut from './components/SelectParceleOut';
+import Select from './components/Select';
 
 const CadastroPurchase = () => {
   const [description, setDescription] = useState('');

@@ -1,7 +1,7 @@
 import React from 'react';
 import { TextField, MenuItem } from '@mui/material';
-import { ClientInterface } from 'store/reducers/pageClient';
-import { CardInterface } from 'store/reducers/pageCard';
+import { ClientInterface } from 'store/reducers/clientes';
+import { CardInterface } from 'store/reducers/cartoes';
 
 const styleTextField = {
   margin: '8px 0',

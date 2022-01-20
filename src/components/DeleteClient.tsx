@@ -4,12 +4,12 @@ import {
   ClientInterface,
   fetchApiPage,
   PageSelector,
-} from 'store/reducers/pageClient';
+} from 'store/reducers/clientes';
 import Box from '@mui/material/Box';
 import { Typography } from '@mui/material';
 import React from 'react';
-import ModalDelete from 'components/Delete/ModalDelete/ModalDelete';
-import imgDel from '../../../assets/images/delete.png';
+import ModalDelete from 'components/ModalDelete';
+import imgDel from '../assets/images/delete.png';
 
 type Props = {
   client: ClientInterface;
@@ -35,26 +35,7 @@ const DeleteClient = ({ client }: Props) => {
   const deleteProps = () => {
     handleDelete(client.id);
   };
-  return (
-    <ModalDelete title="" deleteProps={deleteProps} tamanho="xs">
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'start',
-          margin: 0,
-        }}
-      >
-        <Typography variant="h6">Excluir cliente</Typography>
-        <Typography variant="subtitle2">
-          Deseja excluir {client.name} de sua lista?
-        </Typography>
-        <Typography variant="subtitle2">Essa ação é irreversível!</Typography>
-        <img width="100px" src={imgDel} alt="delete img" />
-      </Box>
-    </ModalDelete>
-  );
+  return <ModalDelete title="" deleteProps={deleteProps} name={client.name} />;
 };
 
 export default DeleteClient;

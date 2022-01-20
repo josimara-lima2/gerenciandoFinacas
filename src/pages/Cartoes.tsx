@@ -11,16 +11,16 @@ import {
   fetchApiPageCard,
   PageCardSelector,
   fetchApiSearch,
-} from 'store/reducers/pageCard';
+} from 'store/reducers/cartoes';
 import CreateIcon from '@mui/icons-material/Create';
-import CadastroCard from 'components/Register/CadastroCard/CadastroCard';
-import Search from 'components/Search/Search';
+import CadastroCard from 'components/CadastroCard';
+import Search from 'components/Search';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-import InfoCard from 'components/InfoCard/InfoCard';
-import DeleteCard from 'components/Delete/DeleteCard/DeleteCard';
-import BoxTable from 'components/BoxTable/BoxTable';
-import ItemTable from 'components/ItemTable/ItemTable';
+import InfoCard from 'components/InfoCard';
+import DeleteCard from 'components/DeleteCard';
+import BoxTable from 'components/BoxTable';
+import ItemTable from 'components/ItemTable';
 
 const BoxContainer = styled(MuiBox)(() => ({
   display: 'flex',

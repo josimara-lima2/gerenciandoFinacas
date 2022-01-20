@@ -4,11 +4,11 @@ import {
   CardInterface,
   fetchApiPageCard,
   PageCardSelector,
-} from 'store/reducers/pageCard';
+} from 'store/reducers/cartoes';
 import Box from '@mui/material/Box';
 import { Typography } from '@mui/material';
-import ModalDelete from 'components/Delete/ModalDelete/ModalDelete';
-import imgDel from '../../../assets/images/delete.png';
+import ModalDelete from 'components/ModalDelete';
+import imgDel from '../assets/images/delete.png';
 
 type Props = {
   card: CardInterface;
@@ -39,26 +39,7 @@ const DeleteCard = ({ card }: Props) => {
   const deleteProps = () => {
     deleteCardId(card.code);
   };
-  return (
-    <ModalDelete title="" deleteProps={deleteProps} tamanho="xs">
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'start',
-          margin: 0,
-        }}
-      >
-        <Typography variant="h6">Excluir Cartão</Typography>
-        <Typography variant="subtitle2">
-          Deseja excluir {card.name} de sua lista?
-        </Typography>
-        <Typography variant="subtitle2">Essa ação é irreversível!</Typography>
-        <img width="100px" src={imgDel} alt="delete img" />
-      </Box>
-    </ModalDelete>
-  );
+  return <ModalDelete title="" deleteProps={deleteProps} name={card.name} />;
 };
 
 export default DeleteCard;
