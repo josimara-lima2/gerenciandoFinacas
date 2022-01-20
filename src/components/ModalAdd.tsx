@@ -19,12 +19,26 @@ type Props = {
   cadastrar?: (id?: string) => void;
   tamanho?: false | Breakpoint | undefined;
 };
-const Box = styled(MuiBox)(({ theme }) => ({
+const StyledBox = styled(MuiBox)(({ theme }) => ({
   display: 'flex',
   backgroundColor: theme.palette.background.paper,
   marginTop: '5px',
 }));
 
+const StyledDialog = styled(Dialog)(() => ({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+}));
+
+const StyledDialogActions = styled(DialogActions)(() => ({
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'space-around',
+  width: '100%',
+  padding: '16px',
+}));
 export default function ModalAdd({
   children,
   title,
@@ -49,63 +63,31 @@ export default function ModalAdd({
   };
 
   return (
-    <Box>
+    <StyledBox>
       <Button variant="outlined" onClick={handleClickOpen}>
         {buttonIcon || <AddCircleIcon />}
         <Typography sx={{ marginLeft: '5px' }}>Add {title}</Typography>
       </Button>
-      <Dialog
+      <StyledDialog
         open={open}
         onClose={handleClose}
         fullWidth
         maxWidth={tamanho}
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
       >
         <DialogTitle>{title}</DialogTitle>
         <DialogContent>{children}</DialogContent>
 
-        <DialogActions
-          sx={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-around',
-            width: '100%',
-            padding: '16px',
-          }}
-        >
-          <Button
-            sx={{
-              width: '64px',
-              padding: '0 48px',
-              height: '32px',
-            }}
-            variant="outlined"
-            color="error"
-            onClick={handleClose}
-          >
+        <StyledDialogActions>
+          <Button variant="modalBtn" color="error" onClick={handleClose}>
             <Typography>{cadastrar ? 'Cancelar' : 'Fechar'}</Typography>
           </Button>
           {cadastrar && (
-            <Button
-              sx={{
-                width: '64px',
-                padding: '8px 48px',
-                height: '32px',
-              }}
-              variant="contained"
-              color="primary"
-              onClick={handleCloseCadastro}
-            >
+            <Button variant="modalBtn" onClick={handleCloseCadastro}>
               <Typography>Salvar</Typography>
             </Button>
           )}
-        </DialogActions>
-      </Dialog>
-    </Box>
+        </StyledDialogActions>
+      </StyledDialog>
+    </StyledBox>
   );
 }

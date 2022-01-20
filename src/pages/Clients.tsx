@@ -84,30 +84,12 @@ export default function Clients() {
           pageCliente.data.map(item => {
             return (
               <BoxTable key={item.cpf}>
-                <ItemTable
-                  title="Nome"
-                  item={item.name}
-                  xs={12}
-                  sm={6}
-                  md={2}
-                />
-                <ItemTable
-                  title="Email"
-                  item={item.email}
-                  xs={12}
-                  sm={6}
-                  md={4}
-                />
-                <ItemTable title="Cpf" item={item.cpf} xs={12} sm={6} md={3} />
-                <ItemTable
-                  title="Telefone"
-                  item={item.telephone}
-                  xs={12}
-                  sm={6}
-                  md={2}
-                />
+                <ItemTable title="Nome" item={item.name} md={2} />
+                <ItemTable title="Email" item={item.email} md={4} />
+                <ItemTable title="Cpf" item={item.cpf} md={3} />
+                <ItemTable title="Telefone" item={item.telephone} md={2} />
 
-                <ItemTable title="Ações" xs={12} sm={12} md={1}>
+                <ItemTable title="Ações" md={1}>
                   <TypographyAcoes>
                     <EditarClient client={item} />
                     <DeleteClient client={item} />

@@ -74,45 +74,23 @@ export default function Cartao() {
           pageCard.data.map(item => {
             return (
               <BoxTable key={item.number}>
-                <ItemTable title="Nome" item={item.name} xs={6} sm={4} md={1} />
-                <ItemTable
-                  title="Bandeira"
-                  item={item.flag}
-                  xs={12}
-                  sm={4}
-                  md={2}
-                />
+                <ItemTable title="Nome" item={item.name} md={1} />
+                <ItemTable title="Bandeira" item={item.flag} md={2} />
                 <ItemTable
                   title="Titular do cartão"
                   item={item.cardHolderName}
-                  xs={12}
-                  sm={4}
                   md={2}
                 />
-                <ItemTable
-                  title="Limite"
-                  item={item.limit}
-                  xs={12}
-                  sm={2}
-                  md={1}
-                />
+                <ItemTable title="Limite" item={item.limit} md={1} />
 
                 <ItemTable
                   title="Limite Disponível"
                   item={item.availableLimit}
-                  xs={12}
-                  sm={2}
                   md={1}
                 />
-                <ItemTable
-                  title="Numero do cartão"
-                  item={item.number}
-                  xs={12}
-                  sm={8}
-                  md={3}
-                />
+                <ItemTable title="Numero do cartão" item={item.number} md={3} />
 
-                <ItemTable title="Ações" xs={12} sm={12} md={2}>
+                <ItemTable title="Ações" md={2}>
                   <Typography
                     component="div"
                     sx={{

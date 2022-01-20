@@ -5,7 +5,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import ItemMenuSidebar from 'components/Layout/components/ItemMenuSidebar';
+import ItemMenuSidebar from 'components/Layout/components/ItemMenuNavbar';
 
 const Box = styled(MuiBox)(({ theme }) => ({
   // spacing de 1 corresponde a 8px
@@ -15,7 +15,7 @@ const Box = styled(MuiBox)(({ theme }) => ({
   height: `calc(100vh - 65px)`,
 }));
 
-export default function Sidebar() {
+export default function Navbar() {
   const rota = useLocation();
 
   return (

@@ -68,9 +68,9 @@ export const BoxImagem = styled(MuiBox)(({ theme }) => ({
 
 export const Button = styled(MuiButton)(({ theme }) => ({
   margin: '15px',
-  border: '0.5px solid #1C86EE',
+  border: `0.5px solid ${theme.palette.primary}`,
   borderRadius: '5px',
-  backgroundColor: '#1C86EE',
+  backgroundColor: `${theme.palette.primary}`,
   width: '60%',
   color: '#fafafa',
   padding: '8px 0',
@@ -117,6 +117,7 @@ export default function LoginRegister() {
   const [openAlerta, setOpenAlerta] = useState(false);
   const [message, setMessage] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
+
   useEffect(() => {
     if (location.pathname === '/cadastro') {
       setPageLoginSelect(false);

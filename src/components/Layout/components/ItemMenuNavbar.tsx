@@ -38,7 +38,7 @@ type Props = {
   title: string;
 };
 
-const ItemMenuSidebar = ({ pathname, to, Icon, title }: Props) => {
+const ItemMenuNavbar = ({ pathname, to, Icon, title }: Props) => {
   return (
     <Link to={to} sx={{ backgroundColor: pathname === to ? '#1C86EE' : '' }}>
       <ListItemIcon>{Icon}</ListItemIcon>
@@ -47,4 +47,4 @@ const ItemMenuSidebar = ({ pathname, to, Icon, title }: Props) => {
   );
 };
 
-export default ItemMenuSidebar;
+export default ItemMenuNavbar;

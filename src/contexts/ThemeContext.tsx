@@ -98,6 +98,9 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
           paper: paletteType === 'dark' ? '#36393f' : '#fff',
           default: paletteType === 'dark' ? '#2f3136' : '#f2f3f5',
         },
+        primary: {
+          main: '#1c86ee',
+        },
         // ...
       },
       typography: {

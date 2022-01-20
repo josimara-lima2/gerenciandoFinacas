@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box as MuiBox, FormControl, Input } from '@mui/material';
+import { Box as MuiBox, FormControl, Input, styled } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 
@@ -9,6 +9,14 @@ type Props = {
     value: string,
   ) => void;
 };
+
+const StyledFormControl = styled(FormControl)(() => ({
+  display: 'flex',
+  flexDirection: 'row',
+  marginRight: '30px',
+  marginTop: '10px',
+}));
+
 export default function Search({ onChange }: Props) {
   const changeInput = (
     e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -23,14 +31,7 @@ export default function Search({ onChange }: Props) {
       noValidate
       sx={{ marginTop: '15px', display: 'flex' }}
     >
-      <FormControl
-        sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          marginRight: '30px',
-          marginTop: '10px',
-        }}
-      >
+      <StyledFormControl>
         <Input
           placeholder="Search"
           sx={{ borderRadius: '10px' }}
@@ -41,7 +42,7 @@ export default function Search({ onChange }: Props) {
             </InputAdornment>
           }
         />
-      </FormControl>
+      </StyledFormControl>
     </MuiBox>
   );
 }

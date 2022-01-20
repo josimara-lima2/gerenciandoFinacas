@@ -7,13 +7,11 @@ type Props = {
   children?: React.ReactNode;
   item?: string | number;
   md: number;
-  xs: number;
-  sm: number;
 };
-const ItemTable = ({ title, item, md, xs, sm, children }: Props) => {
+const ItemTable = ({ title, item, md, children }: Props) => {
   return (
     <Tooltip title={title} TransitionComponent={Zoom} placement="top-start">
-      <Grid item md={md} xs={xs} sm={sm}>
+      <Grid item md={md} xs={12} sm={12}>
         {children || item}
       </Grid>
     </Tooltip>

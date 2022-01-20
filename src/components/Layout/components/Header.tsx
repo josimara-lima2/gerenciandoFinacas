@@ -20,7 +20,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 
 import { logout } from '../../../store/reducers/user';
-import Sidebar from './Sidebar';
+import Sidebar from './Navbar';
 import AccountMenu from '../../AccountMenu';
 
 interface AppBarProps extends MuiAppBarProps {

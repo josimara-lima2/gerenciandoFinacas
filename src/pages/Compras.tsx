@@ -80,35 +80,19 @@ export default function Compra() {
         {!loadingPurchases &&
           pagePurchases.data.map(item => (
             <BoxTable key={item.id}>
-              <ItemTable
-                title="Description"
-                item={item.description}
-                xs={12}
-                sm={12}
-                md={2}
-              />
-              <ItemTable
-                title="value"
-                item={item.value}
-                xs={12}
-                sm={12}
-                md={4}
-              />
+              <ItemTable title="Description" item={item.description} md={2} />
+              <ItemTable title="value" item={item.value} md={4} />
               <ItemTable
                 title="cliente"
                 item={item.client ? item.client.name : 'error'}
-                xs={12}
-                sm={12}
                 md={3}
               />
               <ItemTable
                 title="Cartao"
                 item={item.creditCard ? item.creditCard.name : 'error'}
-                xs={12}
-                sm={12}
                 md={2}
               />
-              <ItemTable title="Ações" xs={12} sm={12} md={1}>
+              <ItemTable title="Ações" md={1}>
                 <TypographyAcoes>
                   <IconButton color="error">
                     <DeleteOutline />
