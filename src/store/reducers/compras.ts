@@ -11,14 +11,9 @@ export declare interface IPurchase {
   formOfPayment: string;
   status: string;
   paidInstallments: number;
-  creditCard: {
-    id: string;
-    name: string;
-  };
-  client: {
-    id: string;
-    name: string;
-  };
+  creditCardId: string;
+
+  clientId: string;
 }
 export declare interface PagePurchases {
   totalCount: number;
@@ -65,6 +60,7 @@ export const fetchApiSearch = createAsyncThunk(
   'purchases?search=/fetchApiSearch',
   async (search: string) => {
     const response = await apiUser.get(`purchases?search=${search}`);
+
     return response.data;
   },
 );

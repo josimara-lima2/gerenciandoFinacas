@@ -1,7 +1,13 @@
 import * as React from 'react';
-import { Box as MuiBox, Typography, styled } from '@mui/material';
+import {
+  Box as MuiBox,
+  Typography,
+  styled,
+  Modal,
+  IconButton,
+} from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
-import Modal from 'components/Modal';
+
 import chipImg from '../assets/images/chip.png';
 
 type Props = {
@@ -33,12 +39,11 @@ const BoxDate = styled(MuiBox)(() => ({
   alignItems: 'center',
   justifyContent: 'start',
   marginTop: '20px',
-  marginLeft: '20px',
 }));
 
 const BoxFlag = styled(MuiBox)(() => ({
   display: 'flex',
-  margin: '10px 20px',
+  margin: '10px',
   justifyContent: 'space-between',
 }));
 
@@ -49,42 +54,61 @@ export default function InfoCard({
   dueDate,
   code,
 }: Props) {
+  const [open, setOpen] = React.useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
-    <Modal title="info">
-      <Box>
-        <BoxFlag>
-          <img
-            style={{ marginTop: '30px' }}
-            width={50}
-            src={chipImg}
-            alt="chip"
-          />
-          <Typography sx={{ marginRight: '10px', marginTop: '10px' }}>
-            {flag}
-          </Typography>
-        </BoxFlag>
-        <Typography
-          align="justify"
-          variant="h5"
-          sx={{ marginLeft: '20px', marginTop: '20px' }}
+    <>
+      <IconButton onClick={handleClickOpen} color="warning">
+        <InfoIcon />
+      </IconButton>
+      <Modal title="info" open={open} onClose={handleClose}>
+        <Box
+          sx={{
+            position: 'absolute' as const,
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 400,
+            bgcolor: 'background.paper',
+            border: '1px solid background.paper',
+            boxShadow: 24,
+            p: 4,
+          }}
         >
-          {number}
-        </Typography>
-        <BoxDate>
-          <BoxDateItem>
-            <Typography variant="caption">Titular</Typography>
-            <Typography>{cardHolderName}</Typography>
-          </BoxDateItem>
-          <BoxDateItem>
-            <Typography variant="caption">Vencimento</Typography>
-            <Typography>{dueDate}</Typography>
-          </BoxDateItem>
-          <BoxDateItem>
-            <Typography variant="caption">CVV</Typography>
-            <Typography>{code}</Typography>
-          </BoxDateItem>
-        </BoxDate>
-      </Box>
-    </Modal>
+          <BoxFlag>
+            <img
+              width={50}
+              src={chipImg}
+              alt="chip"
+              style={{ marginLeft: '-15px' }}
+            />
+            <Typography sx={{ marginRight: '10px' }}>{flag}</Typography>
+          </BoxFlag>
+          <Typography align="justify" variant="h5" sx={{ marginTop: '20px' }}>
+            {number}
+          </Typography>
+          <BoxDate>
+            <BoxDateItem>
+              <Typography variant="caption">Titular</Typography>
+              <Typography>{cardHolderName}</Typography>
+            </BoxDateItem>
+            <BoxDateItem>
+              <Typography variant="caption">Vencimento</Typography>
+              <Typography>{dueDate}</Typography>
+            </BoxDateItem>
+            <BoxDateItem>
+              <Typography variant="caption">CVV</Typography>
+              <Typography>{code}</Typography>
+            </BoxDateItem>
+          </BoxDate>
+        </Box>
+      </Modal>
+    </>
   );
 }

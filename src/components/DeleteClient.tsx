@@ -5,11 +5,9 @@ import {
   fetchApiPage,
   PageSelector,
 } from 'store/reducers/clientes';
-import Box from '@mui/material/Box';
-import { Typography } from '@mui/material';
+
 import React from 'react';
 import ModalDelete from 'components/ModalDelete';
-import imgDel from '../assets/images/delete.png';
 
 type Props = {
   client: ClientInterface;

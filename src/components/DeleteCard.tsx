@@ -5,10 +5,8 @@ import {
   fetchApiPageCard,
   PageCardSelector,
 } from 'store/reducers/cartoes';
-import Box from '@mui/material/Box';
-import { Typography } from '@mui/material';
+
 import ModalDelete from 'components/ModalDelete';
-import imgDel from '../assets/images/delete.png';
 
 type Props = {
   card: CardInterface;

@@ -16,7 +16,7 @@ import {
 } from 'store/reducers/compras';
 import { DeleteOutline } from '@mui/icons-material';
 import ItemTable from 'components/ItemTable';
-import InfoCompra from 'components/InfoCompra';
+import ModalCompra from 'components/ModalCompra';
 import CadastroPurchase from '../components/CadastroPurchase/index';
 import BoxTable from '../components/BoxTable';
 
@@ -35,7 +35,7 @@ const StyledBoxFuncionalidades = styled(MuiBox)(() => ({
   marginBottom: '3%',
 }));
 
-const StyledTypographyAcoes = styled(MuiTypography)(() => ({
+const StyledBoxAcoes = styled(MuiBox)(() => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'start',
@@ -66,6 +66,7 @@ export default function Compra() {
       dispatch(fetchApiPurchases(1));
     } else {
       dispatch(fetchApiSearch(value));
+      console.log(pagePurchases);
     }
   };
 
@@ -82,23 +83,19 @@ export default function Compra() {
             <BoxTable key={item.id}>
               <ItemTable title="Description" item={item.description} md={2} />
               <ItemTable title="value" item={item.value} md={4} />
+              <ItemTable title="status" item={item.status} md={3} />
               <ItemTable
-                title="cliente"
-                item={item.client ? item.client.name : 'error'}
-                md={3}
-              />
-              <ItemTable
-                title="Cartao"
-                item={item.creditCard ? item.creditCard.name : 'error'}
+                title="Forma de pagamento"
+                item={item.formOfPayment}
                 md={2}
               />
               <ItemTable title="Ações" md={1}>
-                <StyledTypographyAcoes>
+                <StyledBoxAcoes>
                   <IconButton color="error">
                     <DeleteOutline />
                   </IconButton>
-                  <InfoCompra compra={item} />
-                </StyledTypographyAcoes>
+                  <ModalCompra compra={item} />
+                </StyledBoxAcoes>
               </ItemTable>
             </BoxTable>
           ))}

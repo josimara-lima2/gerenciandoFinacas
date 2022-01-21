@@ -1,5 +1,4 @@
 import { Box } from '@mui/material';
-
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { useState, useEffect } from 'react';
 import * as React from 'react';
@@ -31,17 +30,9 @@ const CadastroPurchase = () => {
   const dispatch = useAppDispatch();
   const { pageCliente, isLoadingg } = useAppSelector(PageSelector);
   const { pageCard, loadingCard } = useAppSelector(PageCardSelector);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState<string | null>(null);
 
   const [inputValue, setInputValue] = useState('');
-
-  const clientSelect = pageCliente
-    ? pageCliente.data.find(item => item.id === clientId)
-    : { id: 'teste', name: 'teste' };
-
-  const cardSelect = pageCard
-    ? pageCard.data.find(item => item.id === creditCardId)
-    : { id: 'teste', name: 'teste' };
 
   const newCompra = {
     id: 'idTemp',
@@ -53,14 +44,7 @@ const CadastroPurchase = () => {
     status,
     paidInstallments,
     creditCardId,
-    client: {
-      id: clientId,
-      name: clientSelect ? clientSelect.name : '',
-    },
-    creditCard: {
-      id: creditCardId,
-      name: cardSelect ? cardSelect.name : '',
-    },
+    clientId,
   };
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -106,7 +90,10 @@ const CadastroPurchase = () => {
         }
         dispatch(fetchApiPurchases(1));
       })
-      .catch(error => setMessage(error.message));
+      .catch(error => {
+        setMessage(error.message);
+        alert(message);
+      });
   };
   return (
     <ModalAdd
