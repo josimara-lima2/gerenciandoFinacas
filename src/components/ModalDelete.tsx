@@ -36,6 +36,7 @@ const StyledDialogActions = styled(DialogActions)(() => ({
   flexDirection: 'row',
   alignItems: 'center',
   justifyContent: 'space-around',
+  width: '100%',
   paddingBottom: '16px',
 }));
 

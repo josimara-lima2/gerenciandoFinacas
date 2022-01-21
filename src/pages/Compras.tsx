@@ -20,7 +20,7 @@ import InfoCompra from 'components/InfoCompra';
 import CadastroPurchase from '../components/CadastroPurchase/index';
 import BoxTable from '../components/BoxTable';
 
-const BoxContainer = styled(MuiBox)(() => ({
+const StyledBoxContainer = styled(MuiBox)(() => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'space-between',
@@ -28,14 +28,14 @@ const BoxContainer = styled(MuiBox)(() => ({
   zIndex: 0,
 }));
 
-const BoxFuncionalidades = styled(MuiBox)(() => ({
+const StyledBoxFuncionalidades = styled(MuiBox)(() => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
   marginBottom: '3%',
 }));
 
-const TypographyAcoes = styled(MuiTypography)(() => ({
+const StyledTypographyAcoes = styled(MuiTypography)(() => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'start',
@@ -70,11 +70,11 @@ export default function Compra() {
   };
 
   return (
-    <BoxContainer>
-      <BoxFuncionalidades>
+    <StyledBoxContainer>
+      <StyledBoxFuncionalidades>
         <CadastroPurchase />
         <Search onChange={handleChange} />
-      </BoxFuncionalidades>
+      </StyledBoxFuncionalidades>
 
       <Stack spacing={1}>
         {!loadingPurchases &&
@@ -93,12 +93,12 @@ export default function Compra() {
                 md={2}
               />
               <ItemTable title="Ações" md={1}>
-                <TypographyAcoes>
+                <StyledTypographyAcoes>
                   <IconButton color="error">
                     <DeleteOutline />
                   </IconButton>
                   <InfoCompra compra={item} />
-                </TypographyAcoes>
+                </StyledTypographyAcoes>
               </ItemTable>
             </BoxTable>
           ))}
@@ -108,6 +108,6 @@ export default function Compra() {
           color="primary"
         />
       </Stack>
-    </BoxContainer>
+    </StyledBoxContainer>
   );
 }

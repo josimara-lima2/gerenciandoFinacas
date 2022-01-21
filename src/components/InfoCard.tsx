@@ -50,7 +50,7 @@ export default function InfoCard({
   code,
 }: Props) {
   return (
-    <Modal title="info" tamanho="sm">
+    <Modal title="info">
       <Box>
         <BoxFlag>
           <img

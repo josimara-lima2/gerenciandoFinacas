@@ -28,9 +28,9 @@ const TextFieldCadastro = ({
       variant="outlined"
       required
       onChange={onChange}
-      placeholder={placeholder || ''}
+      placeholder={placeholder || label}
       value={value}
-      sx={{ ...sx, marginTop: '8px', marginBottom: '8px', width: '100%' }}
+      sx={{ marginTop: '8px', marginBottom: '8px', width: '100%', ...sx }}
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">{icon}</InputAdornment>

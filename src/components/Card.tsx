@@ -9,6 +9,7 @@ import {
 import { Link } from 'react-router-dom';
 import * as React from 'react';
 import CardMedia from '@mui/material/CardMedia';
+import useColorBlue from 'hooks/useColorBlue';
 
 type Props = {
   title: string;
@@ -27,9 +28,10 @@ const Card = styled(MuiCard)(({ theme }) => ({
 }));
 
 function CardPersonalizado({ title, toLink, children, img }: Props) {
+  const { color } = useColorBlue();
   return (
     <Card>
-      <CardActionArea>
+      <CardActionArea sx={{ cursor: 'default' }}>
         <CardMedia component="img" height="350" image={img} alt="imagem card" />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
@@ -41,7 +43,7 @@ function CardPersonalizado({ title, toLink, children, img }: Props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Link style={{ textDecoration: 'none', color: '#1c83ee' }} to={toLink}>
+        <Link style={{ textDecoration: 'none', color }} to={toLink}>
           Ver mais
         </Link>
       </CardActions>

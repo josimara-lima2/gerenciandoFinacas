@@ -5,6 +5,7 @@ import {
   Typography,
   ListItemIcon as MuiListItemIcon,
 } from '@mui/material';
+import useColorBlue from 'hooks/useColorBlue';
 
 const Link = styled(MuiLink)(({ theme }) => ({
   width: '100%',
@@ -39,8 +40,9 @@ type Props = {
 };
 
 const ItemMenuNavbar = ({ pathname, to, Icon, title }: Props) => {
+  const { color } = useColorBlue();
   return (
-    <Link to={to} sx={{ backgroundColor: pathname === to ? '#1C86EE' : '' }}>
+    <Link to={to} sx={{ backgroundColor: pathname === to ? color : '' }}>
       <ListItemIcon>{Icon}</ListItemIcon>
       <Typography>{title}</Typography>
     </Link>

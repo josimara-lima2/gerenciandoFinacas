@@ -15,10 +15,16 @@ import { logout } from 'store/reducers/user';
 import { useNavigate } from 'react-router-dom';
 import useColorBlue from 'hooks/useColorBlue';
 
-export const StyledAvatar = styled(MuiAvatar)(({ theme }) => ({
+export const StyledAvatar = styled(MuiAvatar)(() => ({
   width: 32,
   height: 32,
-  backgroundColor: `${theme.palette.primary}`,
+}));
+
+const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
+  '&:hover': {
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.primary.light,
+  },
 }));
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -26,6 +32,7 @@ export default function AccountMenu() {
   const navigate = useNavigate();
   const { userLogado } = useAppSelector(UserLogadoSelector);
   const open = Boolean(anchorEl);
+  const { color } = useColorBlue();
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -37,6 +44,10 @@ export default function AccountMenu() {
   const handleLogout = () => {
     dispatch(logout());
     navigate('/login');
+  };
+
+  const handleSettings = () => {
+    navigate('/settings');
   };
 
   const addConta = () => {
@@ -54,7 +65,9 @@ export default function AccountMenu() {
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
         >
-          <StyledAvatar>{userLogado.name.charAt(0).toUpperCase()}</StyledAvatar>
+          <StyledAvatar sx={{ backgroundColor: color }}>
+            {userLogado.name.charAt(0).toUpperCase()}
+          </StyledAvatar>
         </IconButton>
       </Box>
       <Menu
@@ -92,28 +105,28 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem>
+        <StyledMenuItem>
           <MuiAvatar /> Meus dados
-        </MenuItem>
+        </StyledMenuItem>
         <Divider />
-        <MenuItem onClick={addConta}>
+        <StyledMenuItem onClick={addConta}>
           <ListItemIcon>
             <PersonAdd fontSize="small" />
           </ListItemIcon>
           Adicionar conta
-        </MenuItem>
-        <MenuItem>
+        </StyledMenuItem>
+        <StyledMenuItem onClick={handleSettings}>
           <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>
           Configurações
-        </MenuItem>
-        <MenuItem onClick={handleLogout}>
+        </StyledMenuItem>
+        <StyledMenuItem onClick={handleLogout}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
           Sair
-        </MenuItem>
+        </StyledMenuItem>
       </Menu>
     </>
   );

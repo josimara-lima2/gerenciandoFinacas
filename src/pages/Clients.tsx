@@ -22,7 +22,7 @@ import EditarClient from 'components/EditarClient';
 import ItemTable from '../components/ItemTable';
 import Search from '../components/Search';
 
-const BoxContainer = styled(MuiBox)(() => ({
+const StyledBoxContainer = styled(MuiBox)(() => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'space-between',
@@ -30,14 +30,14 @@ const BoxContainer = styled(MuiBox)(() => ({
   zIndex: 0,
 }));
 
-const BoxFuncionalidades = styled(MuiBox)(() => ({
+const StyledBoxFuncionalidades = styled(MuiBox)(() => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
   marginBottom: '3%',
 }));
 
-const TypographyAcoes = styled(MuiTypography)(() => ({
+const StyledTypographyAcoes = styled(MuiTypography)(() => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'start',
@@ -73,11 +73,11 @@ export default function Clients() {
   };
 
   return (
-    <BoxContainer>
-      <BoxFuncionalidades>
+    <StyledBoxContainer>
+      <StyledBoxFuncionalidades>
         <Cadastro />
         <Search onChange={handleChange} />
-      </BoxFuncionalidades>
+      </StyledBoxFuncionalidades>
 
       <Stack spacing={1}>
         {!isLoadingg &&
@@ -90,10 +90,10 @@ export default function Clients() {
                 <ItemTable title="Telefone" item={item.telephone} md={2} />
 
                 <ItemTable title="Ações" md={1}>
-                  <TypographyAcoes>
+                  <StyledTypographyAcoes>
                     <EditarClient client={item} />
                     <DeleteClient client={item} />
-                  </TypographyAcoes>
+                  </StyledTypographyAcoes>
                 </ItemTable>
               </BoxTable>
             );
@@ -104,6 +104,6 @@ export default function Clients() {
           color="primary"
         />
       </Stack>
-    </BoxContainer>
+    </StyledBoxContainer>
   );
 }

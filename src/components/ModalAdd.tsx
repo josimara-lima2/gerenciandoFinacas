@@ -7,7 +7,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import {
   Box as MuiBox,
   styled,
-  Dialog,
+  Dialog as MuiDialog,
   Typography,
   Breakpoint,
 } from '@mui/material';
@@ -25,7 +25,7 @@ const StyledBox = styled(MuiBox)(({ theme }) => ({
   marginTop: '5px',
 }));
 
-const StyledDialog = styled(Dialog)(() => ({
+const StyledDialog = styled(MuiDialog)(() => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',

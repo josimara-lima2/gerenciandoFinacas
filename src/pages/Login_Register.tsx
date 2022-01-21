@@ -22,7 +22,7 @@ import { useAppDispatch } from 'store';
 import imgLogin from '../assets/images/login.png';
 import { fetchApiCadastroUser } from '../store/reducers/user';
 
-export const FormControl = styled(MuiFormControl)(({ theme }) => ({
+const StyledFormControl = styled(MuiFormControl)(({ theme }) => ({
   m: 1,
   width: '60%',
   [theme.breakpoints.down('xs')]: {
@@ -36,7 +36,7 @@ export const FormControl = styled(MuiFormControl)(({ theme }) => ({
   },
 }));
 
-export const BoxContainer = styled(MuiBox)(({ theme }) => ({
+const StyledBoxContainer = styled(MuiBox)(({ theme }) => ({
   display: 'flex',
   padding: 0,
   margin: 0,
@@ -56,7 +56,7 @@ export const BoxContainer = styled(MuiBox)(({ theme }) => ({
   },
 }));
 
-export const BoxImagem = styled(MuiBox)(({ theme }) => ({
+const StyledBoxImagem = styled(MuiBox)(({ theme }) => ({
   width: '50%',
   height: '80%',
   display: 'flex',
@@ -66,7 +66,7 @@ export const BoxImagem = styled(MuiBox)(({ theme }) => ({
   },
 }));
 
-export const Button = styled(MuiButton)(({ theme }) => ({
+const StyledButton = styled(MuiButton)(({ theme }) => ({
   margin: '15px',
   border: `0.5px solid ${theme.palette.primary}`,
   borderRadius: '5px',
@@ -85,7 +85,7 @@ export const Button = styled(MuiButton)(({ theme }) => ({
   },
 }));
 
-export const BoxForm = styled(MuiBox)(() => ({
+const StyledBoxForm = styled(MuiBox)(() => ({
   width: '50%',
   height: '80%',
   display: 'flex',
@@ -94,11 +94,11 @@ export const BoxForm = styled(MuiBox)(() => ({
   justifyContent: 'center',
 }));
 
-export const Divider = styled(MuiDivider)(() => ({
+const Divider = styled(MuiDivider)(() => ({
   height: '70%',
 }));
 
-export const ButtonLink = styled(MuiButton)(() => ({
+const ButtonLink = styled(MuiButton)(() => ({
   textDecoration: 'underline',
 }));
 
@@ -170,14 +170,14 @@ export default function LoginRegister() {
   }
 
   return (
-    <BoxContainer>
-      <BoxImagem>
+    <StyledBoxContainer>
+      <StyledBoxImagem>
         <img width="80%" src={imgLogin} alt="loginImg" />
-      </BoxImagem>
+      </StyledBoxImagem>
       <Divider orientation="vertical" sx={{}} />
 
       {pageLoginSelect && (
-        <BoxForm>
+        <StyledBoxForm>
           <Alerta open={openAlerta} setOpen={setOpenAlerta} message={message} />
           <LockOutlinedIcon />
           <Typography variant="h6" sx={{ marginBottom: '16px' }}>
@@ -188,7 +188,7 @@ export default function LoginRegister() {
             value={email}
             onChange={e => setEmail(e.target.value)}
           />
-          <FormControl sx={{ m: 1, width: '60%' }} variant="outlined">
+          <StyledFormControl sx={{ m: 1, width: '60%' }} variant="outlined">
             <InputLabel required htmlFor="password">
               Password
             </InputLabel>
@@ -211,15 +211,15 @@ export default function LoginRegister() {
               }
               label="Password"
             />
-          </FormControl>
-          <Button variant="contained" onClick={() => handleLogin()}>
+          </StyledFormControl>
+          <StyledButton variant="contained" onClick={() => handleLogin()}>
             Login
-          </Button>
+          </StyledButton>
           <ButtonLink onClick={() => linkCadastro()}>Cadastre-se</ButtonLink>
-        </BoxForm>
+        </StyledBoxForm>
       )}
       {!pageLoginSelect && (
-        <BoxForm>
+        <StyledBoxForm>
           <Alerta open={openAlerta} setOpen={setOpenAlerta} message={message} />
           <LockOutlinedIcon />
           <Typography variant="h6" sx={{ marginBottom: '16px' }}>
@@ -246,17 +246,20 @@ export default function LoginRegister() {
             onChange={e => setPasswordConfirmation(e.target.value)}
           />
 
-          <Button variant="contained" onClick={() => handleCadastroUser()}>
+          <StyledButton
+            variant="contained"
+            onClick={() => handleCadastroUser()}
+          >
             Cadastrar
-          </Button>
+          </StyledButton>
           <ButtonLink
             sx={{ textDecoration: 'underline' }}
             onClick={() => linkLogin()}
           >
             Login
           </ButtonLink>
-        </BoxForm>
+        </StyledBoxForm>
       )}
-    </BoxContainer>
+    </StyledBoxContainer>
   );
 }

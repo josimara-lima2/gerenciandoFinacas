@@ -13,14 +13,12 @@ import {
   Dialog,
   Typography,
   IconButton,
-  Breakpoint,
 } from '@mui/material';
 
 type Props = {
   title: 'editar' | 'info';
   children: React.ReactNode;
   cadastrar?: (id?: string) => void;
-  tamanho?: false | Breakpoint | undefined;
 };
 const StyledBox = styled(MuiBox)(({ theme }) => ({
   display: 'flex',
@@ -43,7 +41,7 @@ const StyledDialog = styled(Dialog)(() => ({
   alignItems: 'center',
 }));
 
-export default function Modal({ children, title, cadastrar, tamanho }: Props) {
+export default function Modal({ children, title, cadastrar }: Props) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -78,12 +76,7 @@ export default function Modal({ children, title, cadastrar, tamanho }: Props) {
       >
         {SelectIcon()}
       </IconButton>
-      <StyledDialog
-        open={open}
-        onClose={handleClose}
-        fullWidth
-        maxWidth={tamanho}
-      >
+      <StyledDialog open={open} onClose={handleClose} fullWidth>
         <DialogTitle>{title}</DialogTitle>
         <DialogContent>{children}</DialogContent>
 

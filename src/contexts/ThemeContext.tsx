@@ -63,6 +63,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
         },
         MuiButton: {
           styleOverrides: {},
+
           variants: [
             {
               props: { variant: 'modalBtn' },
@@ -71,12 +72,21 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
                 padding: '8px 48px',
                 height: '32px',
                 backgroundColor: '#1c83ee',
+                color: '#fafafa',
+                '&.MuiButton-root:hover': {
+                  backgroundColor: '#1c83eecc',
+                },
               },
             },
             {
               props: { variant: 'modalBtn', color: 'error' },
               style: {
-                backgroundColor: 'red',
+                backgroundColor: 'transparent',
+                color: '#d32f2fcc',
+                border: '1px solid #d32f2fcc',
+                '&.MuiButton-root:hover': {
+                  backgroundColor: 'transparent',
+                },
               },
             },
           ],
@@ -100,6 +110,8 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
         },
         primary: {
           main: '#1c86ee',
+          dark: '#000000',
+          light: '#fafafa',
         },
         // ...
       },

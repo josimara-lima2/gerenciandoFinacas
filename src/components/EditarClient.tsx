@@ -10,6 +10,7 @@ import {
   ClientInterface,
 } from 'store/reducers/clientes';
 import { maskCpf } from 'utils/masks';
+import TextFieldCadastro from './TextFieldCadastro';
 
 type Props = {
   client: ClientInterface;
@@ -35,51 +36,31 @@ export default function EditarClient({ client }: Props) {
       })
       .catch(e => e.message);
   };
-  const styleTextField = {
-    margin: '5px',
-    width: '100%',
-    borderRadius: '20px',
-  };
 
   return (
-    <Modal title="editar" cadastrar={() => handleClick(client.id)} tamanho="xs">
-      <MuiTextField
-        id="nome"
+    <Modal title="editar" cadastrar={() => handleClick(client.id)}>
+      <TextFieldCadastro
         label="Nome"
-        variant="outlined"
-        required
         value={name}
         onChange={e => {
           setName(e.target.value);
         }}
-        sx={styleTextField}
       />
-      <MuiTextField
-        id="email"
+      <TextFieldCadastro
         label="Email"
-        variant="outlined"
-        required
         value={email}
         onChange={e => setEmail(e.target.value)}
-        sx={styleTextField}
       />
-      <MuiTextField
-        id="telephone"
+      <TextFieldCadastro
         label="Telephone"
-        variant="outlined"
-        required
         value={telephone}
         onChange={e => setTelephone(e.target.value)}
-        sx={styleTextField}
       />
-      <MuiTextField
-        id="cpf"
-        label="Cpf"
-        variant="outlined"
-        required
-        value={cpf}
+
+      <TextFieldCadastro
         onChange={e => setCpf(maskCpf(e))}
-        sx={styleTextField}
+        label="Cpf"
+        value={cpf}
       />
     </Modal>
   );

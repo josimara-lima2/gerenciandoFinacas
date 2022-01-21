@@ -38,44 +38,33 @@ export default function Settings() {
   }, [dispatch]);
 
   return (
-    <MuiBox>
-      <MuiBox
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'flex-end',
-          alignItems: 'flex-end',
-        }}
-      />
+    <BoxCard>
+      <CardPersonalizado
+        title="Total de Clientes"
+        toLink="/clients"
+        img={clientsImg}
+      >
+        O sistema possui um total de {totalCliente} clientes. Para acessar mais
+        informações click no link abaixo.
+      </CardPersonalizado>
 
-      <BoxCard>
-        <CardPersonalizado
-          title="Total de Clientes"
-          toLink="/clients"
-          img={clientsImg}
-        >
-          O sistema possui um total de {totalCliente} clientes. Para acessar
-          mais informações click no link abaixo.
-        </CardPersonalizado>
+      <CardPersonalizado
+        title="Total de Compras"
+        toLink="/purchases"
+        img={comprasImg}
+      >
+        O sistema possui um total de {totalCompras} Compras. Para acessar mais
+        informações click no link abaixo.
+      </CardPersonalizado>
 
-        <CardPersonalizado
-          title="Total de Compras"
-          toLink="/purchases"
-          img={comprasImg}
-        >
-          O sistema possui um total de {totalCompras} Compras. Para acessar mais
-          informações click no link abaixo.
-        </CardPersonalizado>
-
-        <CardPersonalizado
-          title="Total de Cartões"
-          toLink="/credit-card"
-          img={cardImg}
-        >
-          O sistema possui um total de {totalCard} Cartões. Para acessar mais
-          informações click no link abaixo.
-        </CardPersonalizado>
-      </BoxCard>
-    </MuiBox>
+      <CardPersonalizado
+        title="Total de Cartões"
+        toLink="/credit-card"
+        img={cardImg}
+      >
+        O sistema possui um total de {totalCard} Cartões. Para acessar mais
+        informações click no link abaixo.
+      </CardPersonalizado>
+    </BoxCard>
   );
 }

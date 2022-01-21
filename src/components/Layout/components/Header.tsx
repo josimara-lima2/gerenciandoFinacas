@@ -19,6 +19,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import MenuIcon from '@mui/icons-material/Menu';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 
+import useColorBlue from 'hooks/useColorBlue';
 import { logout } from '../../../store/reducers/user';
 import Sidebar from './Navbar';
 import AccountMenu from '../../AccountMenu';
@@ -76,6 +77,13 @@ const Drawer = styled(MuiDrawer, {
   },
 }));
 
+const StyledToolbar = styled(Toolbar)(() => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-end',
+  px: [1],
+}));
+
 export default function Header() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -83,6 +91,7 @@ export default function Header() {
   const changeTheme = useChangeTheme();
   const { mode } = palette;
   const [open, setOpen] = React.useState(true);
+  const { color } = useColorBlue();
 
   const toggleDrawer = () => {
     setOpen(!open);
@@ -126,7 +135,7 @@ export default function Header() {
             variant="h6"
             noWrap
             sx={{ flexGrow: 1 }}
-            color={mode === 'light' ? '#2f3136' : 'fafafa'}
+            color={mode === 'light' ? '#2f3136' : '#fafafa'}
           >
             Finanças
           </Typography>
@@ -134,24 +143,17 @@ export default function Header() {
             {mode === 'light' ? <LightModeIcon /> : <DarkModeIcon />}
           </IconButton>
           <AccountMenu />
-          <IconButton onClick={handleLogout} sx={{ marginLeft: '20px' }}>
+          <IconButton onClick={handleLogout} sx={{ marginLeft: '20px', color }}>
             <LogoutIcon />
           </IconButton>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
-        <Toolbar
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'flex-end',
-            px: [1],
-          }}
-        >
+        <StyledToolbar>
           <IconButton onClick={toggleDrawer}>
             <ChevronLeftIcon />
           </IconButton>
-        </Toolbar>
+        </StyledToolbar>
         <Divider />
 
         <Sidebar />

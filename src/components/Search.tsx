@@ -2,6 +2,7 @@ import React from 'react';
 import { Box as MuiBox, FormControl, Input, styled } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
+import useColorBlue from 'hooks/useColorBlue';
 
 type Props = {
   onChange: (
@@ -18,6 +19,8 @@ const StyledFormControl = styled(FormControl)(() => ({
 }));
 
 export default function Search({ onChange }: Props) {
+  const { color } = useColorBlue();
+
   const changeInput = (
     e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
@@ -37,7 +40,7 @@ export default function Search({ onChange }: Props) {
           sx={{ borderRadius: '10px' }}
           onChange={e => changeInput(e)}
           endAdornment={
-            <InputAdornment position="start" sx={{ color: '#1c86ee' }}>
+            <InputAdornment position="start" sx={{ color }}>
               <SearchIcon />
             </InputAdornment>
           }
