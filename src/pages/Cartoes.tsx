@@ -30,11 +30,17 @@ const BoxContainer = styled(MuiBox)(() => ({
   zIndex: 0,
 }));
 
-const BoxFuncionalidades = styled(MuiBox)(() => ({
+const BoxFuncionalidades = styled(MuiBox)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
   marginBottom: '3%',
+  [theme.breakpoints.down('md')]: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'start',
+    padding: '10px 0px',
+  },
 }));
 export default function Cartao() {
   const dispatch = useAppDispatch();

@@ -70,10 +70,11 @@ const StyledButton = styled(MuiButton)(({ theme }) => ({
   margin: '15px',
   border: `0.5px solid ${theme.palette.primary}`,
   borderRadius: '5px',
-  backgroundColor: `${theme.palette.primary}`,
+  backgroundColor: `${theme.palette.primary.main}`,
   width: '60%',
   color: '#fafafa',
   padding: '8px 0',
+  opacity: 1,
   [theme.breakpoints.down('xs')]: {
     width: '100%',
   },
@@ -82,6 +83,10 @@ const StyledButton = styled(MuiButton)(({ theme }) => ({
   },
   [theme.breakpoints.up('lg')]: {
     width: '40%',
+  },
+  '&.MuiButton-root:hover': {
+    backgroundColor: `${theme.palette.primary.main}`,
+    opacity: 0.8,
   },
 }));
 
