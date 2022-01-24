@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField } from '@mui/material';
+import { TextField, SxProps } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
   ) => void;
   value: string | number;
   label: string;
-  sx?: any;
+  sx?: SxProps;
   placeholder?: string;
   icon?: React.ReactNode;
 };
@@ -28,7 +28,7 @@ const TextFieldCadastro = ({
       variant="outlined"
       required
       onChange={onChange}
-      placeholder={placeholder || label}
+      placeholder={placeholder || ''}
       value={value}
       sx={{ marginTop: '8px', marginBottom: '8px', width: '100%', ...sx }}
       InputProps={{

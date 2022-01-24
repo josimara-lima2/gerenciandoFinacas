@@ -1,9 +1,5 @@
 import Cadastro from 'components/CadastroCliente';
-import {
-  Box as MuiBox,
-  styled,
-  Typography as MuiTypography,
-} from '@mui/material';
+import { Box as MuiBox, styled } from '@mui/material';
 import { useAppDispatch, useAppSelector } from 'store';
 import { useEffect } from 'react';
 import {
@@ -43,7 +39,7 @@ const StyledBoxFuncionalidades = styled(MuiBox)(({ theme }) => ({
   },
 }));
 
-const StyledTypographyAcoes = styled(MuiTypography)(() => ({
+const StyledBoxAcoes = styled(MuiBox)(() => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'start',
@@ -96,10 +92,10 @@ export default function Clients() {
                 <ItemTable title="Telefone" item={item.telephone} md={2} />
 
                 <ItemTable title="Ações" md={1}>
-                  <StyledTypographyAcoes>
+                  <StyledBoxAcoes>
                     <EditarClient client={item} />
                     <DeleteClient client={item} />
-                  </StyledTypographyAcoes>
+                  </StyledBoxAcoes>
                 </ItemTable>
               </BoxTable>
             );

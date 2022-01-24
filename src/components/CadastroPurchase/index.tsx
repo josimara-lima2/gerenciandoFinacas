@@ -1,12 +1,4 @@
-import {
-  MenuItem,
-  Box,
-  SelectChangeEvent,
-  InputLabel,
-  FormControl,
-  Select as MuiSelect,
-  TextField,
-} from '@mui/material';
+import { MenuItem, Box, TextField } from '@mui/material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { useState, useEffect } from 'react';
 import * as React from 'react';
@@ -54,6 +46,18 @@ const CadastroPurchase = () => {
     creditCardId,
     clientId,
   };
+  const reseteValues = () => {
+    setDescription('');
+    setValue(0);
+    setParceleOut(false);
+    setNumberOfInstallments(0);
+    setFormOfPayment('');
+    setStatus('');
+    setPaidInstallments(0);
+    setClientId('');
+    setCreditCardId('');
+  };
+
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
@@ -91,6 +95,7 @@ const CadastroPurchase = () => {
           dispatch(addPurchase(newCompra));
         }
         dispatch(fetchApiPurchases(1));
+        reseteValues();
       })
       .catch(error => {
         setMessage(error.message);
@@ -154,11 +159,13 @@ const CadastroPurchase = () => {
         onChange={e => setStatus(e.target.value)}
         value={status}
       />
-      <TextFieldCadastro
-        label="parcelas_pagas"
-        onChange={e => setPaidInstallments(+e.target.value)}
-        value={paidInstallments}
-      />
+      {parceleOut && (
+        <TextFieldCadastro
+          label="parcelas_pagas"
+          onChange={e => setPaidInstallments(+e.target.value)}
+          value={paidInstallments}
+        />
+      )}
       <Box
         sx={{
           display: 'flex',
