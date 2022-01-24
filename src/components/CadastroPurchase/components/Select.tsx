@@ -1,5 +1,12 @@
 import React from 'react';
-import { TextField, MenuItem } from '@mui/material';
+import {
+  TextField,
+  MenuItem,
+  Select as MuiSelect,
+  FormControl,
+  InputLabel,
+  SelectChangeEvent,
+} from '@mui/material';
 import { ClientInterface } from 'store/reducers/clientes';
 import { CardInterface } from 'store/reducers/cartoes';
 

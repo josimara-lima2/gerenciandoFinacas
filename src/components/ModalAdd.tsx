@@ -64,9 +64,12 @@ export default function ModalAdd({
 
   return (
     <StyledBox>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        {buttonIcon || <AddCircleIcon />}
-        <Typography sx={{ marginLeft: '5px' }}>Add {title}</Typography>
+      <Button
+        variant="outlined"
+        onClick={handleClickOpen}
+        startIcon={buttonIcon || <AddCircleIcon />}
+      >
+        Add {title}
       </Button>
       <StyledDialog
         open={open}

@@ -1,4 +1,12 @@
-import { Box } from '@mui/material';
+import {
+  MenuItem,
+  Box,
+  SelectChangeEvent,
+  InputLabel,
+  FormControl,
+  Select as MuiSelect,
+  TextField,
+} from '@mui/material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { useState, useEffect } from 'react';
 import * as React from 'react';
@@ -13,7 +21,7 @@ import {
 
 import ModalAdd from '../ModalAdd';
 import TextFieldCadastro from '../TextFieldCadastro';
-import SelectParceleOut from './components/SelectParceleOut';
+
 import Select from './components/Select';
 
 const CadastroPurchase = () => {
@@ -52,23 +60,17 @@ const CadastroPurchase = () => {
     setClientId(event.target.value);
   };
 
-  const handleChangeSelect = (
+  const handleSelect = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    setInputValue(event.target.value as string);
+    setInputValue(event.target.value);
 
-    switch (+event.target.value) {
-      case 1:
-        setParceleOut(true);
-        break;
-      case 0:
-        setParceleOut(false);
-        break;
-      default:
-        break;
+    if (+event.target.value === 0) {
+      setParceleOut(false);
+    } else {
+      setParceleOut(true);
     }
   };
-
   const handleChangeCard = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
@@ -92,7 +94,6 @@ const CadastroPurchase = () => {
       })
       .catch(error => {
         setMessage(error.message);
-        alert(message);
       });
   };
   return (
@@ -122,10 +123,18 @@ const CadastroPurchase = () => {
           sx={{ marginRight: '5%' }}
         />
 
-        <SelectParceleOut
+        <TextField
+          select
+          id="select"
+          variant="outlined"
+          label="Valor parcelado?"
           value={inputValue}
-          onChange={e => handleChangeSelect(e)}
-        />
+          onChange={handleSelect}
+          sx={{ width: '50%' }}
+        >
+          <MenuItem value={1}>Sim</MenuItem>
+          <MenuItem value={0}>Nao</MenuItem>
+        </TextField>
       </Box>
 
       {parceleOut === true && (
