@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import { Provider as ReduxProvider } from 'react-redux';
 import store from 'store';
 import AuthProvider from './contexts/LoginContext';
+import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>

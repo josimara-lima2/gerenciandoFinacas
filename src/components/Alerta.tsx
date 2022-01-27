@@ -23,7 +23,7 @@ const Alerta = ({ open, setOpen, message }: Props) => {
             <CloseIcon fontSize="inherit" />
           </IconButton>
         }
-        sx={{ mt: 10 }}
+        sx={{ mt: 0 }}
       >
         {message}
       </Alert>

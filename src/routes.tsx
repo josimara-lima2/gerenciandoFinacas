@@ -3,9 +3,10 @@ import Settings from 'pages/Settings';
 import Clients from 'pages/Clients';
 import { Route, Routes } from 'react-router-dom';
 import PrivateRouter from 'PrivateRoutes';
-import LoginRegister from 'pages/Login_Register';
+import LoginRegister from 'pages/Login/Login_Register';
 import Compra from 'pages/Compras';
 import Error from 'pages/Error';
+
 import Cartao from './pages/Cartoes';
 
 export default function CustomRoutes() {
@@ -61,6 +62,7 @@ export default function CustomRoutes() {
         }
       />
       <Route path="/login" element={<LoginRegister />} />
+
       <Route path="/login/*" element={<Error />} />
     </Routes>
   );

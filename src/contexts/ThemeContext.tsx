@@ -105,18 +105,22 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
       palette: {
         mode: paletteType,
         background: {
-          paper: paletteType === 'dark' ? '#36393f' : '#fff',
-          default: paletteType === 'dark' ? '#2f3136' : '#f2f3f5',
+          paper: paletteType === 'dark' ? '#36393f' : '#E5E5E5',
+          default: paletteType === 'dark' ? '#2f3136' : '#E5E5E5',
         },
         primary: {
           main: '#1c86ee',
           dark: '#000000',
           light: '#fafafa',
         },
+        secondary: {
+          main: '#1664B8',
+        },
         // ...
       },
       typography: {
         // ...
+        //  fontFamily: ['Poppins', 'sans-serif'].join(','),
       },
     });
 

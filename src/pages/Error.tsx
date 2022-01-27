@@ -1,4 +1,5 @@
 import { Typography, Box, Button } from '@mui/material';
+
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import error from '../assets/images/error404.png';
