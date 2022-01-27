@@ -52,8 +52,16 @@ export default function CustomRoutes() {
         }
       />
       <Route path="/cadastro" element={<LoginRegister />} />
-      <Route path="*" element={<Error />} />
+      <Route
+        path="*"
+        element={
+          <PrivateRouter>
+            <Error />
+          </PrivateRouter>
+        }
+      />
       <Route path="/login" element={<LoginRegister />} />
+      <Route path="/login/*" element={<Error />} />
     </Routes>
   );
 }
