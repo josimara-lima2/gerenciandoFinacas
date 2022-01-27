@@ -20,7 +20,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 
 import useColorBlue from 'hooks/useColorBlue';
-import { logout } from '../../../store/reducers/user';
+import useAuth from 'hooks/useAuth';
+
 import Sidebar from './Navbar';
 import AccountMenu from '../../AccountMenu';
 
@@ -89,6 +90,7 @@ export default function Header() {
   const navigate = useNavigate();
   const { palette } = useTheme();
   const changeTheme = useChangeTheme();
+  const { logout } = useAuth();
   const { mode } = palette;
   const [open, setOpen] = React.useState(true);
   const { color } = useColorBlue();
@@ -103,7 +105,7 @@ export default function Header() {
   };
 
   const handleLogout = () => {
-    dispatch(logout());
+    logout();
     navigate('/login');
   };
 

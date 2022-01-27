@@ -1,5 +1,5 @@
 import { Box as MuiBox, styled } from '@mui/material';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'store';
 import { fetchApiAuthMe } from 'store/reducers/userLogado';
 import { fetchApiPageCard, PageCardSelector } from 'store/reducers/cartoes';
@@ -30,6 +30,7 @@ export default function Settings() {
   const totalCard = pageCard.totalCount;
   const totalCliente = pageCliente.totalCount;
   const totalCompras = pagePurchases.totalCount;
+
   useEffect(() => {
     dispatch(fetchApiAuthMe());
     dispatch(fetchApiPage(null));

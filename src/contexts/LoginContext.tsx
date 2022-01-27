@@ -10,6 +10,7 @@ type Login = {
 };
 interface AuthContextInterface {
   signin: ({ email, password }: Login) => Promise<void>;
+  logout: () => void;
 }
 
 export const AuthContext = createContext({} as AuthContextInterface);
@@ -32,8 +33,13 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     addTokenInApi(response.data.token);
     return response.data;
   };
+  const logout = () => {
+    localStorage.removeItem('token');
+  };
 
   return (
-    <AuthContext.Provider value={{ signin }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ signin, logout }}>
+      {children}
+    </AuthContext.Provider>
   );
 }

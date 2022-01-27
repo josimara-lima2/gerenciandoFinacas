@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 import PrivateRouter from 'PrivateRoutes';
 import LoginRegister from 'pages/Login_Register';
 import Compra from 'pages/Compras';
+import Error from 'pages/Error';
 import Cartao from './pages/Cartoes';
 
 export default function CustomRoutes() {
@@ -51,7 +52,7 @@ export default function CustomRoutes() {
         }
       />
       <Route path="/cadastro" element={<LoginRegister />} />
-      <Route path="*" element={<Home />} />
+      <Route path="*" element={<Error />} />
       <Route path="/login" element={<LoginRegister />} />
     </Routes>
   );
