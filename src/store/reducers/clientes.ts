@@ -25,7 +25,7 @@ export declare interface PageClienteInterface {
 }
 const initialState = {
   pageCliente: {
-    totalCount: 1,
+    totalCount: 0,
     page: 1,
     limite: 3,
     totalPage: 1,
