@@ -78,7 +78,16 @@ export default function Home() {
   // console.log(pageCard.data);
   // console.log(data);
   const user = useAppSelector(UserLogadoSelector);
+
   const date = new Date();
+  // nova forma de tratar as datas
+  console.log(
+    date.toLocaleDateString('pt-br', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    }),
+  );
 
   const dia = days[date.getDay()];
   const dd = date.getDate();
